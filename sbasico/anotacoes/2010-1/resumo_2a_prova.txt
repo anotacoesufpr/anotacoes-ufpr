@@ -1,0 +1,233 @@
+Compiladores: Compiladores são programas que convertem arquivos que contém pro-
+gramas escritos em linguagens de alto nível (formato texto) para formato objeto.
+
+Montadores: Montadores são programas que convertem arquivos que contém programas
+em linguagem assembly (formato texto) para o formato de código objeto.
+
+Ligadores: são programas convertem arquivos em formato objeto para formato
+executável.
+
+Carregadores : Carregam os arquivos que contém formato executável para a
+execução. Para isto ele lê partes dos arquivos objeto e copia estas partes para
+a memória.
+
+FLUXOGRAMA:
+
+LINGUAGEM DE ALTO NIVEL > |COMPILADOR| > PROGRAMA NO FORMATO OBJETO > |LIGADOR|
+> PROGRAMA NO FORMATO EXECUTAVEL > |CARREGADOR| 
+
+LINGUAGEM EM BAIXO NIVEL > |MONTADOR| > PROGRAMA NO FORMATO OBJETO > |LIGADOR|
+> PROGRAMA NO FORMATO EXECUTAVEL > |CARREGADOR| 
+
+--
+
+linux: formato ELF (executable and linking format)
+
+--
+
+carregador:
+1. identifica as seções de um arquivo executável;
+2. solicita uma nova entrada na tabela de processos do SO;
+3. aloca espaço na memória para que o programa seja lá colocado;
+4. termina sua ação.
+
+
+tipos: carregadores absolutos e relocaveis
+
+absolutos: sempre alocam a mesma porcao de memoria iniciada em um mesmo local.
+problema: outor aplicativo pode estar rodando.  solucao: swap de aplicativos ou
+aplicativo nao roda
+
+relocaveis: pode ser alocado em qualquer espaco da memoria problema: calcular os
+novos enderecos para ajustar linhas que contenham referenciamento de memoria; os
+programas executados nao podem ser maiores que a memoria disponivel; memoria
+ocupada? swap de aplicativos.  solucao: calcular e reajustar os enderecos para o
+problema de enderecos.  quem faz: sistema operacional e/ou cpu
+
+SOLUCOES PARA PROBLEMAS DE MEMORIA:
+1) JOGAR O PROBLEMA PARA O USUARIO
+2) JOGAR O PROBLEMA PARA O PROGRAMADOR
+3) S.O. EH O RESPONSAVEL POR ISSO
+
+##############################################
+FORMATOS DE PROGRAMA
+- nada interessante para a prova
+##############################################
+  LINGUAGEM DE MAQUINA
+- o formato do arquivo executavel eh definido pelo sistema operacional (elf,
+  portable executable file format etc).
+- .com > carregador absoluto
+- .exe > carregador relocavel
+- dois tipos de arquivo ELF: 1) os que armazenam codigo objeto 2) os que
+  armazenam codigo executavel (obvio)
+#############################################
+ARQUIVOS OBJETO:
+> modularizar o programa facilitar manutencao de codigo
+
+BIBLIOTECAS:
+> contem uma serie de objetos que sao funcoes implementadas economia de memoria
+> e espaco em disco
+
+BIBLIOTECAS ESTATICAS:
+> "tudo em um"
+ar -rc libMyLib.a a.o b.o c.o d.o gcc -o main -lMylib -L.
+
+O programa "ar" simplesmente concatena os arquivos indicados e coloca alguma
+informação adicional (para facilitar o acesso às funções) no cabeçalho do
+arquivo "libMyLib.a".  -lMyLib : diz ao compilador que o codigo das funções que
+nao forem encontradas em main.c podem ser encontradas na biblioteca libMyLib.a
+-L. : Quando houver necessidade, o compilador (mais especificamente o ligador)
+irá procurar pela biblioteca em alguns diretorios padrão (/usr/lib,
+/usr/local/lib, etc),
+
+PROBLEMA: Mau uso da memoria!  SOLUCAO:
+
+BIBLIOTECAS COMPARTILHADAS: ideia: ao inves de todo mundo carregar a funcao
+printf, vamos compartilha-la na memoria e no disco.
+
+A sequencia de comandos para gerar uma biblioteca compartilhada para os arquivos
+objeto "a.c" e "b.c" é a seguinte:
+> gcc -fPIC -c -Wall a.c -o a.o gcc -fPIC -c -Wall b.c -o b.o ld -shared -o
+> libMyLib.so a.o b.o gcc -o main main.c -lMyLib -L.
+
+A opcao -fPIC gera um codigo objeto relocavel, assim o endereco de print podera
+ser referenciado pelo sistema operacional. -Wall pede para informar todos os
+avisos de erro e ld -shared geral a biblioteca compartilhada.
+
+PROBLEMAS: Mesmo economizando memoria, pode ser que a biblioteca compartilhada
+esteja sendo muito pouco usada pelo aplicativo, o que a torna um gasto
+desnecessario de memoria.
+
+exemplo: DLLs, Dynamic Link Libraries
+
+Para chamar uma biblioteca dinamica:
+Se quiser entender como funciona: SB.pdf, paginas: 84, 85 e 86.
+Recomendo dar foco para o exemplo (pag 86), mais facil de entender.
+
+Para criar uma biblioteca dinamica:
+Suponha que temos dois arquivos fonte (a.c e b.c) com os quais deve ser criada a
+biblioteca libMyDynamicLib.so. Para criar a biblioteca e para gerar o programa
+executável, deve ser digitada a seguinte seqüência de comandos:
+
+		gcc -fPIC -o a.o -c a.c
+		gcc -fPIC -o b.o -c b.c
+		ld -shared -o libMyDynamic.so a.o b.o
+		gcc -o main main.c -L. -lMyDynamic -ldl
+
+Observe que a única diferença com relação ao processo de compilação de
+bibliotecas compartilhadas é a inclusão da biblioteca -ldl", que contém as
+funções "dl*" e que foram incluidas estaticamente.
+###########################################
+O PROGRAMA LIGADOR
+> recebe uma serie de arquivos objetos e gera um unico arquivo executavel.
+> concatenacao entre os arquivos objetos: espacos entre eles na memoria
+motivo: necessidade dos enderecos serem multiplos de 4, pois o alinhamento
+ocorre de 4 em 4 bytes*
+*isso eh um problema de arquitetura de computadores; quando se usa paginacoes de
+4k, entao as secoes devem ser multiplicas de 4k; E assim vai...
+> as referencias aos procedimentos entre os objetos sao substituidas por novas
+> referencias dentro de um unico executavel; devido a isso, o arquivo objeto
+deve armazenar esta informacao em uma tabela de enderecos relocaveis
+> Os novos enderecos apos a fusao dos arquivos objetos ja sao os enderecos virtuais do executavel
+###########################################
+ARQUIVOS OBJETOS COM MAIS DE UM SEGMENTO
+> o ligador deve concatenar os segmentos equivalentes de cada arquivo objeto em um unico segmento no arquivo executavel; Isso decorrer porque arquivos objetos e executaveis sao compostos de varios segmentos (ver figura 8.3 na pagina 93 do SB.pdf para compreender melhor)
+##########################################
+LIGADORES PARA OBJETOS COMPARTILHADOS
+> como ja comentado, objetos podem se tornar repetidos em disco e na memoria,
+entao foram criadas os objetos compartilhados e os dinamicos
+> no caso dos compartilhados, o S.O. eh quem gerencia-os;
+
+LIGADORES PARA OBJETOS DINAMICOS
+> motivacao: melhor uso da memoria;
+> ele devera incluir uma biblioteca estatica que permita carregar e descarregar
+bibliotecas em tempo de execucao
+
+##########################################
+O PROGRAMA CARREGADOR
+funcao:
+trazer o programa para a memoria e coloca-lo em execucao
+
+tipos:
+TIPO I) CARREGADOR SEM RELOCACAO
+TIPO II) CARREGADOR COM RELOCACAO
+TIPO III) CARREGADORES QUE USAM MEMORIA VIRTUAL
+
+TIPO I:
+exemplo: formato COM do M$-DOS
+inicia sempre no mesmo endereco: 0x0100
+
+problemas ja citados: monotarefa, monousuario
+
+TIPO II)
+exemplo: formato EXE do M$-DOS 2.0
+motivacao: multi-tarefa com a possibilidade de relocar referencias de memoria
+problema grave: toda a area da memoria era valida para execucao
+
+TIPO III)
+exemplo: modelo ELF
+motivacao: mapeamento direto na memoria fisica pode permitir inumeros problemas
+solucao: capa programa tem a sua caixa de areia, 4gb no modelo elf, e soh pode
+mexer nela. Havera um mapeamento da memoria virtual para a memoria fisica, e o
+processo soh tera acesso ao seu mapeamento feito na memoria fisica.
+###################################################
+MAIS SOBRE O TIPO III, MODELO QUE USA MEMORIA VIRTUAL
+
+EXECUTAVEIS COM BIBLIOTECAS ESTATICAS
+-> ligador gera enderecos virtuais fixos, sem relocacao
+-> carregador trabalha como nos arquivos do tipo COM, mas em memoria virtual
+
+EXECUTAVEIS COM BIBLIOTECAS COMPARTILHADAS
+-> carregador 'carrega' o executavel e as bibliotecas compartilhadas para a
+memoria virtual e faz a relocacoes de referencias de memoria, atribuindo entao
+os enderecos corretos
+
+problema: lista-se todos os enderecos que devem ser relocados e espera o
+carregador determinar os novos enderecos; Isso eh ineficiente.
+
+solucao: tabela de relocacao, adotada pelo ELF sob o nome de "plt" (procedure
+linkage table); Assim, o executavel chama procedimentos da tabela plt que por
+sua vez ira desviar o fluxo para as bibliotecas compartilhadas que forem
+carregadas.
+
+vantagem da plt: nao alterar nada na secao text, apenas alterar os enderecos
+contidos nessa tabela.
+
+EXECUTAVEIS COM BIBLIOTECAS DINAMICAS
+- nada na apostila SB.pdf
+
+###################################################
+CONCEITOS:
+
+EMULADOR:
+Um emulador é capaz de duplicar o comportamento das funções de um
+sistema “A” em um sistema “B” de tal forma que o sistema “B” se comporte
+exatamente como se fosse o sistema “A”.
+
+INTEPRETADOR:
+Um interpretador é um sistema capaz de executar instruções de uma
+linguagem interpretada (kkkkkkkkkkk).
+##################################################
+
+EMULADORES:
+exemplo: wine, sob o ponto de vista de software basico
+
+o que ele faz: le COM, EXE ou PE e converte para o modelo ELF, alem de tornar
+compativeis as chamadas ao sistema (syscalls, nesse caso win32 para POSIX)
+
+win 32 do wine > versao livre baseada em engenharia reversa
+
+problema grave: programas que acessam hardware sem chamadas ao sistema
+
+#######################################################
+INTERPRETADORES
+
+Um interpretador é um programa que interpreta instruções. Para tal, ele deve ser invocado e deve ser dito para ele qual o programa que ele deve executar.
+
+exemplo: JAVA
+
+COMPILADOR JAVA transforma programacao de ALTO NIVEL em BAIXO NIVEL, um assembly
+chamado "bytecode" e que esta no formato ELF e deve ser processado por uma CPU
+especifica. O INTERPRETADOR le o bytecode e executa-o. Existem diversos
+INTERPRETADORES, um para cada S.O., tornando o seu bytecode PORTAVEL,
+MULTIPLATAFORMA.

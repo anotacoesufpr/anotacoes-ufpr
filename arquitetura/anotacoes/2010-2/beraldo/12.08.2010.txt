@@ -1,0 +1,10 @@
+ABI -> Application Binary Interface
+
+Instruçoes Unisgned
+
+	usadas para calculo de endereços
+	nao gera execeçao de overflow
+
+	
+Alinhamento
+Big end e little end

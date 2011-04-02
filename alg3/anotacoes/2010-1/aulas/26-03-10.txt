@@ -1,0 +1,192 @@
+ARVORE RUbro-Negra (RN)
+
+- A altura de uma arvore RN com n nodos tem altura <= 2*log(n+1)
+
+DEF: "altura preta" de um nodo n hp(n) eh a quantidade de
+nodos pretos de n(exclusive) ateh um nodo externo.
+
+Dado um nodo n, a quantidade de nodos internos de uma subarvore de n eh
+<= [2^(hp(n)) -1]
+
+Prova por inducao:
+se hp(n) = 1
+	#nodo=2^(hp(n)) -1 = 1
+hp(n) > 1
+	#nodo <= 2^(h(n) -1) + 2^(hp(n) -1)
+		= 2^(hp(n)) - 1
+
+OBS.: hp(n)>=h(n)/2
+	#nodos >= 2^(h(n)/2) -1
+
+log( #nodos+1) >= log(2^(h(n)/2)
+2+log(#nodos+1) >= h(n
+
+custo de remocao ou insercao: log(n))
+
+--
+
+INSERCAO NA ARVORE RUBRO NEGRA
+
+		       11
+		      /  \
+		     2*   14
+		    /  \    \
+		   1    7   15*
+		       / \
+		      5*  8*
+
+Inserir novo nodo como vermelho, e se encontrar um vermelho, faz as rotacoes
+para que o problema seja jogado "pra cima"
+
+Inserindo 0 e depois 4:
+Passo 1:
+                       11
+                      /  \
+                     2*   14
+                    /  \    \
+                   1    7   15*
+	          /    / \
+                 0*   5*   8*t
+		     /
+                    4*
+t=tio vermelho
+
+Passo 2:
+
+                       11
+                      /  \
+                     2*   14t
+                    /  \    \
+                   1    7*   15*
+                  /    / \
+                 0*   5   8
+                     /
+                    4*
+Faz uma rotacao a esquerda para colocar os dois vermelhos aa esquerda
+e depois uma rotacao direita para intercalar vermelho e preto
+
+rotacao esquerda:
+                       11
+                      /  \
+                     7*   14
+                    /  \    \
+                   2*   8   15*
+                  / \
+                 1   5
+                /     \
+               0       4*
+
+rotacao a direita:
+                         7
+                      /     \
+                     2*      11*
+                    /  \    /  \
+                   1    5  8   14
+                  /    /         \
+                 0*   4*          15*  
+
+----
+
+EXEMPLO 2:
+Inserir 30:
+                       11
+                      /  \
+                     2*   14
+                    /  \    \
+                   1    7   15*
+                  /    / \    \
+                 0*   5*  8*t  30*
+Neste caso apenas uma rotacao aa esquerda resolvera.
+                         11
+                      /      \
+                     2*       15
+                    /  \     /  \
+                   1    7  14*   30*
+                  /    / \ 
+                 0*   5*  8*t 
+
+Inserindo 28:
+                         11
+                      /      \
+                     2*       15
+                    /  \     /  \
+                   1    7  14*   30*
+                  /    / \       /    
+                 0*   5*  8*t   28*
+
+Apenas uma troca de cores eh necessaria:
+                         11
+                      /      \
+                     2*       15*
+                    /  \     /  \
+                   1    7  14    30
+                  /    / \       / 
+                 0*   5*  8*t   28*
+Agora inserindo 3:
+                         11
+                      /      \
+                     2*       15*
+                    /  \     /  \
+                   1    7  14    30
+                  /    / \       /
+                 0*   5*  8*t   28*
+                     /
+                    3*
+Jogo de cores (tio eh vermelho):
+                         11
+                      /      \
+                     2*       15*t
+                    /  \     /  \
+                   1    7*  14    30
+                  /    / \       /
+                 0*   5   8*   28*
+                     /
+                    3*
+troca cores:
+                         11*
+                      /      \
+                     2       15*t
+                    /  \     /  \
+                   1    7*  14    30
+                  /    / \       /
+                 0*   5   8    28*
+                     /
+                    3*
+Mas sempre pressupomos que a raiz eh sempre preta, entao muda a cor dela
+para preta:
+                         11
+                      /      \
+                     2       15*t
+                    /  \     /  \
+                   1    7*  14    30
+                  /    / \       /
+                 0*   5   8    28*
+                     /
+                    3*
+
+Pseudocodigo:
+
+Insere (Apontador raiz, Registro r) /* raiz eh apontador pra apontador */
+	x=InsereArvBin(raiz,r)
+	x->cor=VERM
+	enquanto(n =! raiz e x->cor == VERM)
+		se pai(x) == esq(pai(pai(x)))
+			t=direita(pai(pai(x)))
+		Se t->cor == VERM
+			t->cor = PRETO
+			pai(x)->cor = PRETO
+			pai(pai(x))-cor = VERM
+			X=pai(pai(x))
+		Se nao
+			Se x=dir(pai(x))
+				RotEsq(pai(x))
+				x=pai(x)
+			pai(x)->cor = PRETA
+			pai(pai(x)->cor = VERM
+			RotDir(pai(pai(x)))
+			x=pai(X)
+raiz->cor = PRETO
+
+/* o que foi feito acima foi a insercao da direita do avo
+para a esquerda, repete o codigo e tudo que eh direita vira esquerda
+e vice-versa */

@@ -1,0 +1,12 @@
+10.
+
+a = x[ 10 ] + x[ y[ 3 ] ];
+
+# a = $s0, x = $s1, y = $s2
+
+lw $t0, 40($s0) # t0 = x[ 10 ]
+lw $t1, 12($s2) # t1 = y[ 3 ]
+srl $t1, $t1, 2 # shift right logical
+add $t1, $t1, $s1 # soma o índice y[3] com o endereço base de x
+lw $t2, 0($t1) # t2 = x[ y[ 3 ] ]
+add $s0, $t0, $t2 # s0 = a = x[ 10 ] + x[ y[ 3 ] ]

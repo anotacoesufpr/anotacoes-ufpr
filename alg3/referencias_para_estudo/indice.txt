@@ -1,0 +1,79 @@
+applets.txt
+> visualizacao de varias arvores em applets JAVA
+
+SeminarioArtigo.ppt
+> casamento de padroes ()
+
+hashing07.pdf e hashing.pdf
+> guias para tabela hash e tratamento de colisao
+
+cap4.pdf
+> - Ordenação interna e externa
+
+codificacao de huffman:
+> compact.pdf
+
+ArvoreDigital.pdf
+> patricia, digitais
+
+Trie:
+http://pt.wikipedia.org/wiki/Trie
+
+Patricia:
+ED2_06_Trie_Patricia.pdf
+
+- arvore 2-3-4
+http://www.ufpa.br/sampaio/curso_de_estdados_1/arvores/arvore_234/divisaoraiz.htm 
+
+- arvore simples, binaria e AVL com algoritmos e desenhos
+(definicoes e remocao)
+http://equipe.nce.ufrj.br/adriano/c/apostila/arvore.htm
+
+- outro bom pdf para entender avl e rotacoes simples/dupla
+ARVORESAVL.pdf
+
+- remocao binaria (3 casos)
+http://www.lcad.icmc.usp.br/~nonato/ED/Arvore_Binaria/node66.html
+
+- arvore AVL e rebalanceamento
+(facil entendimento, com exemplos)
+http://www.icmc.usp.br/~sce182/arvbinrb.html
+
+- mais exemplos de insercao em avl
+(atencao para a diferenca de convencao de sinais do fator de balanceamento)
+http://www.ucb.br/prg/professores/giovanni/disciplinas/2005-1/eda/material/avl.html
+
+- mais exemplos de remocao em avl
+http://www.lcad.icmc.usp.br/~nonato/ED/AVL/remocao.html
+
+- arvore rubro-negra insercao (muito bom)
+08rb.pdf
+
+- livro Cormen, pagina 220, 2nd, arvore rubro-negra (muito bom)
+
+- pdf que esclarece a ideia do Cormen de insercao de rubro-negra:
+http://www.ulbra-to.br/DownloadArquivo.aspx?idArquivo=5d16832c-1435-449e-969e-7a89ab
+
+- boa explicacao sobre remocao em arvore rubro-negra
+www2.dc.ufscar.br/~ednaldo/ORI_seminario_5.ppt
+
+- insercao em arvore B, facil, simples e completo:
+http://www.lcad.icmc.usp.br/~nonato/ED/B_arvore/btreeinsercao.htm
+
+- arvore b+: definicao, insercao e remocao
+www.cos.ufrj.br/~azevedo/OrgDadoII_ArvoreB3.pdf
+OrgDadoII_ArvoreB3.pdf
+
+- arvore b: definicao, insercao e remocao
+www.cos.ufrj.br/~azevedo/OrgDadoII_ArvoreB1.pdf
+OrgDadoII_ArvoreB1.pdf
+
+- arvore b#/b*: definicao, insercao e remocao
+www.cos.ufrj.br/~azevedo/OrgDadoII_ArvoreB2.pdf
+OrgDadoII_ArvoreB2.pdf
+-------------------
+videos:
+- arvores binarias x arvores avl (~3min)
+http://www.youtube.com/watch?v=imNl_qg6ILw&feature=related
+-------------------
+

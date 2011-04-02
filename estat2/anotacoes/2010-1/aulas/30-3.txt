@@ -1,0 +1,48 @@
+---------------------------------------------
+VARIAVEIS ALEATORIAS
+EX.:
+
+X   | 0     1     2      3     4
+-------------------------------------
+P(X)|0.2   0.45  0.25   0.09   0.01
+
+caso discreto: e(x) = 1.26
+V(X) = 2.42 - 1.26^2 = 0.8324
+deesvio padrao = raiz(v(x)) = sqrt(0.8324)
+
+dados estariam entre -dp + e(x)  e   e(x) + dp
+----------------------------------------------
+ESPERANCA MATEMATICA (media esperada)
+E(x) = somatoria i->n p(Xi).Xi -> caso discreto
+E(X) = integral de - infinito ateh + infinito de f(x).x.dx (caso continuo)
+----------------------------------------------
+VARIANCIA -> dispersao da variavel aleatoria
+V(X) = E(X²) - [E(X)]^2
+
+----------------------------------------------
+DISTRIBUICAO BINOMIAL
+X ~ B(epslon)
+P(X=x) = ( n )
+	 ( x ) p^x . q^(n-x)
+
+E(X)=n.p
+V(X)=n.p.q
+----------------------------------------------
+DISTRIBUICAO POISSON 
+X ~ P(lambda)
+
+P(X=x) = [e^(-x) . lambda^x]/x!
+
+E(X)=V(X)=lambda
+----------------------------------------------
+DISTRIBUICAO NORMAL
+X ~ N(mi,sigma^2)
+
+f(x) = integral de 0 ateh 2 de { [2]/[(2.pi.sigma)^(1/2)] }  exp {[(x-mi)^2]/2.sigma^2)}
+
+E(X)=mi  V(X) = sigma^2
+
+(x-mi)/sigma = z
+
+z ~ N(0,1)
+----------------------------------------------

@@ -1,0 +1,2 @@
+- a chamada do procedimento ja coloca os parametros na pilha
+- 

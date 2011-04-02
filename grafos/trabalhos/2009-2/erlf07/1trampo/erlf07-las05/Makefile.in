@@ -1,0 +1,60 @@
+# Compiler
+CC = @CC@
+
+# Executable
+EXEC = grafo
+
+# Object files
+OBJS=gr.o alghandler.o graph.o geometry.o draw.o rw.o list.o algorithms.o\
+     rc.o iface/iface.o iface/factory.o iface/callbacks.o\
+     plugins.o pgin.o color.o step.o
+
+# Directories
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+bindir = @bindir@
+
+# Gtk
+GTK_CFLAGS = `pkg-config --cflags gtk+-2.0` @GTKGL_CFLAGS@
+GTK_LIBS = `pkg-config --libs gtk+-2.0`
+
+# Flags
+PATHS = $(GTK_CFLAGS)\
+        -I/usr/X11R6/include -I. -L/usr/X11R6/lib -L/usr/local/lib 
+DEBUGF = #-g -O0
+PFLAGS = -Wall -W -Wpointer-arith -Wbad-function-cast\
+         -Wcast-qual -Wcast-align -Wmissing-prototypes\
+         -Wmissing-declarations -Wnested-externs\
+         -Wl,-export-dynamic\
+         -Winline $(PATHS) $(DEBUGF) \
+         #-Wshadow\
+
+
+# Libraries
+LIBS = $(GTK_LIBS) @LIBS@
+
+
+# Make rules
+%.o : %.c
+	$(CC) -c $< -o $@ $(PFLAGS) $(CFLAGS)
+
+all: $(OBJS)
+	$(CC) -o $(EXEC) $(OBJS) $(PFLAGS) $(CFLAGS) $(LIBS) 
+
+oclean: 
+	rm -f $(OBJS)
+
+clean: oclean
+	rm -f $(EXEC) core
+
+distclean: clean
+	rm -f Makefile config.cache config.status config.log config.h
+
+install:
+	cp $(EXEC) $(bindir)
+
+user_install:
+	cp $(EXEC) $(HOME)/bin
+
+
+# Dependencies

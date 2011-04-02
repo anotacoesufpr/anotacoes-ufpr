@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# Compila um latex com BibTex
+
+pdflatex $1".tex"
+
+if [ $? -ne 0 ]
+then
+	# ocorreu erro
+	exit
+fi
+
+bibtex $1
+
+if [ $? -ne 0 ]
+then
+	# ocorreu erro
+	exit
+fi
+
+pdflatex $1".tex"
+
+if [ $? -ne 0 ]
+then
+	# ocorreu erro
+	exit
+fi
+
+pdflatex $1".tex"
+
+if [ $? -ne 0 ]
+then
+	# ocorreu erro
+	exit
+fi
+
+evince $1".pdf" &

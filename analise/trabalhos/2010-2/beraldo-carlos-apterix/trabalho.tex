@@ -1,0 +1,296 @@
+\documentclass{book}
+
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage[pdftex,pagebackref=true,colorlinks=true,linkcolor=blue,unicode]{hyperref}
+\usepackage[paper=a4paper,lmargin=2.0cm, rmargin=2.0cm, tmargin=2.0cm, bmargin=2.0cm]{geometry}
+\usepackage{graphicx}
+\usepackage{makeidx}
+
+\title{Trabalho de Análise e Projeto de Sistemas}
+\author{Carlos Augusto Ligmanowski \\
+		Francisco Panis Kaseker \\
+		Leandro José Machado Vargas \\
+		Roberto Beraldo Chaiben
+}
+
+\date{2010-2}
+
+\makeindex
+
+\begin{document}
+
+
+\maketitle
+\tableofcontents
+
+
+%====================================================
+
+
+\chapter{Introdução}
+
+\section{Sobre este documento}
+
+Trabalho desenvolvido para a disciplina de Análise e Projeto de Sistemas, Profª. Laura Sánchez García, no segundo semestre de 2010. \\
+
+
+O trabalho consiste na análise do sistema eletrônico de gestão da graduação do Departamento de Informática\footnote{http://www.inf.ufpr.br} da Universidade Federal do Paraná.
+
+
+\section{Sobre os autores}
+
+Os autores deste trabalho são alunos do curso de Bacharelado em Ciência de Computação\footnote{http://www.inf.ufpr.br/bcc}, na Universidade Federal do Paraná\footnote{http://www.ufpr.br}.\\
+
+\begin{itemize}
+	\item Carlos Augusto Ligmanowski - GRR20081238
+	\item Francisco Panis Kaseker - GRR20071909
+	\item Leandro José Machado Vargas - GRR20072734
+	\item Roberto Beraldo Chaiben - GRR20084213
+\end{itemize}
+
+
+%===================================================
+
+\chapter{Levantamento e Análise de Requisitos}
+
+
+A etapa de levantamento de requisitos é composta por diversas técnicas que visam a obter do cliente as
+informações necessárias para desenvolver o projeto do sistema de informação. Dentre essas técnicas, temos:\\
+
+ 
+\begin{itemize}
+	\item \textbf{Entrevistas}: entrevistas com clientes e usuários potenciais;
+	\item \textbf{Observação}: observação do comportamento dos usuários em seu ambiente de trabalho;
+	\item \textbf{\textit{Brainstorming}}: reunião com várias pessoas, onde todos discutem um tema central;
+	\item \textbf{Análise de textos}: o usuário descreve as necessidades textualmente;
+	\item \textbf{Reutilização de requisitos}: Reaproveitamento de padrões ou requisitos de outros sistemas. 
+\end{itemize}
+
+
+Cada uma das seguintes seções abordarão os seguintes perfis individualmente:
+
+\begin{enumerate}
+	\item \textbf{Perfil dos Professores}: detalhes relacionados à interface dos professores e às funcionalidades
+	que ela deve possuir;
+	\item \textbf{Perfil da Coordenação}: detalhes relacionados à interface da coordenação e às funcionalidades
+	que ela deve possuir;
+	\item \textbf{Perfil dos Alunos}: detalhes relacionados à interface dos alunos e às funcionalidades
+	que ela deve possuir;
+	\item \textbf{Perfil da Secretaria}: detalhes relacionados à interface da secretaria e às funcionalidades
+	que ela deve possuir;
+\end{enumerate}
+
+
+Quando não houver necessidade de dividir dados nos perfis acima, ou existir dados comuns a todos eles, será citado
+em um \textbf{Perfil Geral}.
+
+
+\section{Requisitos Funcionais}
+
+Requisitos funcionais são aqueles intimamente ligados ao sistema, essenciais para ele, como documentos
+específicos, campos de formulário, ações de um menu de opções etc.
+
+\subsection{Perfil de Professores}
+
+\begin{itemize}
+	\item Atualização de dados cadastrais, como nome, endereço, telefone, CPF, RG etc
+	\item \textbf{Gerenciamento de frequência dos alunos}: emissão de lista de presença, controle de faltas dos alunos;
+	\item \textbf{Acompanhamento de notas}: cadastro de notas dos alunos, com operações de adição, remoção, atualização e visualização;
+	\item \textbf{Consulta ao ensalamentos das disciplinas que cada professor ministra}: consulta ao local onde ministrará aulas de suas disciplinas;
+\end{itemize}
+
+
+
+
+\subsection{Perfil da Coordenação}
+
+\begin{itemize}
+	\item \textbf{Gerenciamento de ensalamento das disciplinas}: definir os ensalamentos das turmas de cada disciplina;
+	\item \textbf{Gerenciamento de matrículas do curso}
+		\begin{itemize}
+			\item Gerenciamento de matrículas em disciplinas isoladas
+			\item Quebra de pré-requisitos
+			\item Validação de disciplinas por equivalência
+			\item Fixar a lista de oferta de disciplinas
+			\item Correção de Matrícula
+			\item Cancelamento de matrícula: somente até antes de decorrida a metade do período letivo
+		\end{itemize}
+	\item \textbf{Trancamento e destrancamento de curso}
+	\item \textbf{Cancelamento de registro acadêmico}
+	\item \textbf{Efetivação de registro acadêmico}
+	\item \textbf{Requisição de transferência de curso}
+	\item \textbf{Criação de período especial}: criação de turmas em períodos especiais, como durante as férias;% (art. 86, 37/97)
+	\item \textbf{Envio de lista ao DAA de possíveis formandos}% (art. 110, 37/97)
+	\item \textbf{Geração de certificado de aprovação}% (art. 112, 37/97)
+	\item \textbf{Geração de comprovante de aprovação (válido até a chegada do certificado de conclusão)}
+\end{itemize}
+
+
+
+\subsection{Perfil de Alunos}
+
+\begin{itemize}
+	\item Atualização de dados cadastrais, como nome, endereço, telefone, CPF, RG etc
+	\item Solicitação de matrículas;
+	\item Consulta ao histórico;
+	\item Comprovante de matrículas;
+	\item Cancelamento de matrículas;
+	\item Trancamento de curso;
+	\item Solicitação de prova de adiantamento de disciplina;
+	\item Solicitação de exercícios domiciliares% (art. 85, 37/97);
+	\item Solicitação de revisão de prova;
+	\item Solicitação de segunda chamada de prova.
+\end{itemize}
+
+
+
+
+\subsection{Perfil da Secretaria}
+
+\begin{itemize}
+	\item Divulgação de editais;
+	\item Gerenciamento de faltas dos docentes;
+	\item Impressão de documentos;
+	\item Orientações gerais.
+\end{itemize}
+
+
+
+
+%===============================================================
+
+
+
+
+\section{Requisitos não-funcionais}
+
+Requisitos não-funcionais estão relacionados com o ambiente em que o sistema será executado. Isso
+envolve detalhes de segurança, tecnologias, \textit{hardware} etc.\\
+
+Possíveis subdivisões dos requisitos não-funcionais podem ser: \\
+
+\begin{itemize}
+	\item Requisitos operacionais;
+	\item Requisitos de segurança;
+	\item Requisitos de desempenho;
+	\item Especificações de Hardware e software.
+\end{itemize}
+
+
+\subsection{Perfil Geral}
+
+\begin{itemize}
+	\item \textbf{Estabilidade}: o sistema deve suportar o tráfego na maioria dos casos,
+	especialmente em períodos críticos, como o de matrículas, em que muitos usuários utilizam o 
+	sistema simultaneamente;
+	\item \textbf{Interoperabilidade}: capacidade de se integrar e se comunicar com sistemas semelhantes,
+	por meio de uso de padrões abertos, com bases de dados em XML
+	\item \textbf{Confiabilidade}: o sistema deve ser um reflexo fiel da realidade, sem
+	discrepância de informações e sempre atualizado;
+	\item \textbf{Desempenho}: o sistema deve ser rápido, não podendo levar mais de 30 (trinta)
+	segundos para processar a informação solicitada;
+	\item \textbf{Escalabilidade} O sistema deve ser modularizado o suficiente para permitir a expansão do sistema e suas funções;
+	\item \textbf{Usabilidade}: o sistema deve ser fácil de ser utilizado por todos os usuários,
+	desde os leigos até os experientes;
+	\item \textbf{Acessibilidade}: o sistema deve prover acessibilidade para portadores de deficiências,
+	permitindo navegação inteiramente via teclado, possibilidade de aumento de fontes de textos, links orientados aos programas de leitura de texto, textos que substituam imagens etc;
+\end{itemize}
+
+
+%======================================================
+
+
+\section{Requisitos Normativos}
+
+Requisitos normativos, ou restritivos, são informações como custos, prazos, plataforma tecnológica, aspectos legais, comunicação com outros sistemas e regras de negócio;
+
+
+\subsection{Perfil Geral}
+
+\begin{itemize}
+	
+	\item Só são permitidos acessos ao sistema pelos usuários vinculados ao Departamento de Informática da UFPR;
+	\item Adequação às leis do regimento interno da Universidade e da legislação do
+MEC;
+	\item Plataforma tecnológica: software livre e gratuito.
+\end{itemize}
+
+
+\subsection{Perfil de Professores}
+
+\begin{itemize}
+	\item Cada professor só pode acessar e modificar informações referentes às disciplinas que ministra
+\end{itemize}
+
+
+\subsection{Perfil da Coordenação}
+
+\begin{itemize}
+\item A Coordenação não pode modificar dados como notas e frequências de alunos, apenas consultá-las, visto que são atribuições restritas aos professores
+\end{itemize}
+
+
+
+\subsection{Perfil de Alunos}
+
+\begin{itemize}
+	\item Caso o aluno tenha quatro (04) ou mais reprovações pendentes em disciplinas obrigatórias distintas, ele
+deverá matricular-se somente nestas disciplinas;
+	\item Máximo de 3 (três) disciplinas isoladas simultâneas por aluno por semestre letivo;
+	\item A carga horária não pode ultrapassar 8 (oito) horas diárias ou 40 (quarenta) horas semanais de aula;
+	\item Não deve permitir que o aluno solicite uma matéria como eletiva em outro curso se essa for uma matéria obrigatória do seu currículo.
+\end{itemize}
+
+
+
+%================================================================
+
+
+\section{Requisitos Inovadores}
+São os requisitos que aperfeiçoam a interface entre o usuário e o sistema, melhorando a usabilidade e, portanto, a eficiência do trabalho; Também pode colaborar com a diminuição da taxa de erros e o controle dos erros.
+
+\subsection{Perfil Geral}
+
+\begin{itemize}
+	\item Envio de SMS com informações gerais para alunos;
+	\item Acesso por meio de dispositivos móveis;
+	\item Autenticação por meio de chaves SSH.
+\end{itemize}
+
+
+
+\subsection{Perfil dos Alunos}
+
+\begin{itemize}
+	\item Avaliação de professores ao fim de cada semestre;
+	\item Sistema de fila de espera para matrículas.
+\end{itemize}
+
+
+\subsection{Perfil dos Professores}
+
+\begin{itemize}
+	\item \textbf{Gerenciamento de trabalhos}: criação de trabalhos práticos de disciplinas, controle de entrega e sistema de envio de mensagens sobre os trabalhos;
+	\item \textbf{Solicitação de criação de disciplina à Coordenação}: conforme achar conveniente, um professor pode solicitar à coordenação a criação de uma
+	disciplina. O módulo deve possibilitar informar detalhes como possível nome para a disciplina, descrição, ementa e objetivos.
+\end{itemize}
+
+
+
+\subsection{Perfil da Secretaria}
+
+\begin{itemize}
+	\item \textbf{Lista de Possíveis Formandos}: possibilitar geração de lista de possíveis formandos, com base nas disciplinas que os alunos estão cursando no semestre corrente.
+\end{itemize}
+
+
+
+
+%====================================
+
+\printindex
+
+
+\end{document}
+

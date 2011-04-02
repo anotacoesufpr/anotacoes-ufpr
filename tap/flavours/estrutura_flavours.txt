@@ -1,0 +1,452 @@
+*********************************************************************
+How-to flavours por exemplos??
+*********************************************************************
+A ideia geral da OO eh deslocar o foco sobre os dados.
+- para a descricao abstrata de programas, trabalha-se com modularizacao
+e ocultacao parcial dos dados.
+- na procedural nos agimos sobre os dados, na OO os objetos contem a acao
+sobre os seus dados
+- facilidade pela programacao da solucao devido as camadas de abstracoes do problema
+- facilidade na especificacao de requisitos devido a modularidade que o OO permite
+- facilidade em reutilizacao de codigo
+- facilidade na manutencao de codigos grandes devido a abstracao de classes e a modularizacao
+do sistema baseado em OO
+*********************************************************************
+Comentando código:
+;;; meu_comentario
+*********************************************************************
+Escopo principal:
+
+uses flavours;
+flavour nome_da_classe; ;;; inicio da classe
+	ivars ;;;variaveis da classe
+
+	defmethod nome_do_metodo(parametros); ;;; inicia um metodo
+	lvars ;;;variaveis locais/local vars
+	enddefmethod; ;;; termina o metodo
+
+endflavour; ;;; termina um metodo	
+*********************************************************************
+Instanciando um objeto:
+
+vars nomeDoObjeto;
+make_instance([classe atributo1 lala atributo lalala atributo3 lalalala]) -> nomeDoObjeto
+nomeDoObjeto => ;;; imprime na tela
+*********************************************************************
+Estrutura para condicao:
+
+if alguma_expressao then
+	cmd1;
+	cmd2;
+	cdmN;
+elseif outra_expressao then
+	cmd20;
+	cmd21;
+	cmdMM;
+else
+	cmd30;
+	cdm31;
+	cmdPP;
+endif;
+*********************************************************************
+Imprimindo na tela:
+
+[Eu sou um cara legal] =>
+*********************************************************************
+Imprimindo variaveis:
+
+[Eu sou um cara legal e meu nome eh ^nome]
+*********************************************************************
+Chamando metodos:
+
+uses flavours; ;;; essencial
+flavour pessoa; ;;; classe pessoa
+	ivars nome idade sexo; ;;; atributos da classe
+
+	defmethod aniversario; ;;; metodo aniversario
+		idade + 1 -> idade; ;;; soma idade com 1 e atribui a idade
+		[feliz aniversario para ^nome] => ;;; imprime na tela texto + variavel nome
+	enddefmethod;
+
+	defmethod identifique_se; ;;; metodo identifique_se
+		pr('<pessoa');
+		pr(nome);
+		pr('>\n');
+	enddefmethod;
+endflavour;
+
+Instanciando:
+vars joao;
+make_instance([pessoa nome joao idade 30 sexo masculino]) -> joao;
+
+Imprimindo o objeto joao:
+joao =>
+
+Imprimindo idade, sexo e nome:
+joao <- idade =>
+joao <- sexo =>
+joao <- nome =>
+
+Usando o metodo aniversario:
+joao <- aniversario;
+
+Observando que houve alteracao na idade depois da chamada do metodo acima:
+joao <- idade =>
+*********************************************************************
+declarando um vetor:
+{a b c d e f} -> vetor;
+
+Acessando vetor:
+vetor(2) =>
+* b
+
+Sobrescrever no vetor:
+"mudando" -> subscrv(2,vetor)
+vetor =>
+** {a mudando c d e f}
+*********************************************************************
+Matriz
+newarray([1 10 1 10], 0) -> matriz ;;;([lista de limites], valor_inicial de cada posicao)
+
+Imprimindo matriz:
+matriz =>
+** <array [1 10 1 10]>
+
+Consultando matriz:
+matriz(3,9) =>
+** 0
+
+Inserindo em matriz:
+1 -> matriz(3,0);
+matriz(3,9) =>
+** 1
+*********************************************************************
+Listas:
+[a b c d] -> lista1
+
+Pegar a cabeca:
+hd(lista1)
+
+Pegar cauda:
+tl(lista1)
+
+Concatenar listas:
+lista1::lista2
+lista1<>lista2
+[^^lista ^^lista2]
+
+Veja as exemplificacoes:
+: vars teste;
+: [1 2 3 4] -> teste;
+: teste =>
+** [1 2 3 4] 
+: vars teste2;
+: [5 6 7 8] -> teste2;
+: vars teste3;
+: teste::teste2 -> teste3; ;;; tipo I
+: teste3 =>
+** [[1 2 3 4] 5 6 7 8]  ;;; resultado do tipo I
+: teste<>teste2 -> teste3;
+: teste3 =>
+** [1 2 3 4 5 6 7 8] 
+: [^^teste ^^teste2] -> teste3; ;;; tipo II
+: teste3 =>
+** [1 2 3 4 5 6 7 8] ;;; resultado do tipo II
+: [^teste ^teste2] -> teste3; ;;; tipo III
+: teste3 =>
+** [[1 2 3 4] [5 6 7 8]] ;;; resultado do tipo III
+
+Pegar ultimo da lista:
+last(lista1)
+
+remover da lista
+delete (3, [1 2 3 4]) =>
+** [1 2 4]
+
+remover da lista outro exemplo
+delete (hd(teste),teste)->teste;
+teste =>
+
+inserir elemento na lista
+[^^nome_da_lusta ^variavel_a_ser_inserida] -> var
+
+veja alguns exemplos de insercao em listas:
+: vars b;
+: 1 -> b;
+: [^^teste ^b] -> teste3;                                               
+: teste3 =>
+** [1 2 3 4 1] 
+: [^b ^^teste] -> teste3;
+: teste3 =>
+** [1 1 2 3 4]
+*********************************************************************
+estrutura de repeticao: repeat (escolha aleatoria de cmd1 em uma lista de cmds)
+
+repeat 5 times
+	oneof([
+		cmd1
+		cmd2
+		cmd3
+		....
+	)] =>
+endrepeat;
+*********************************************************************
+<<<<<<< .mine
+estrutura de repeticao: until
+until (condicao) do
+	cmds;
+endutil;
+
+ex.:
+3 -> num;
+
+until num > 99
+do
+	num + 1 -> num;
+endutil;
+*********************************************************************
+member(x,y)
+
+melhor explicado com exemplos:
+member (2,[1 5 4 6 2 3 7 9]) =>
+** true
+member ([3 4 5], [1 2 [3 4 5] 6 7]) =>
+** true
+member(4, [1 2 [3 4 5] 6 7]) =>
+** true 
+*********************************************************************
+estrutura de repeticao: while
+
+sintaxe geral:
+while CONDICAO do COMANDOS endwhile
+
+exemplo:
+1 ->num;
+while num*num < 1000 do
+	num + 1 ->num
+endwhile;
+*********************************************************************
+estrutura de repeticao: for
+
+COM INCREMENTO:
+for (atribuicao) step (incremento) till (condicao)
+do
+	cmds;
+endfor;
+
+exemplo:
+for 1->x step x+2->x till x>42
+do
+	spr(x)
+endfor;
+
+EM LISTA:
+for (item)  in (lista)
+do
+	cmds;
+endfor;
+
+exemplo:
+[1 2 3 4 5] -> numbers;
+for num in numbers do
+	pr('\n quadrado de>'); pr(num); pr('eh:'); pr(num*num);
+endfor;
+
+PARA SUBLISTAS, direto no exemplo:
+for L on [a b c] do L => endfor;
+** [a b c]
+** [b c]
+** [c]
+
+OUTRA FORMA DE INCREMENTO:
+for x from 2 by 7 to 20 do x=> endfor;
+X comeca em 2, incrementa em 7 e vai ateh 20, imprimindo o valor de x
+O incremento também pode ser um decremento
+**************************************************************
+for com incremento manual
+
+forma geral:
+for ATRIBUTOS step INCREMENTO till CONDICAO do COMANDOS endfor;
+
+exemplo:
+
+for 1 -> x
+	step x+2 -> x
+		till x < 42
+			do spr(x); ;;;imprime x
+endfor;
+>>>>>>> .r938
+*********************************************************************
+<<<<<<< .mine
+tipo de variaveis:
+vars  > variavel permanente
+lvars > variavel temporaria
+constant > constante permanente
+lconstant > constante temporaria
+
+isdeclared("variavel"); ;;; verifica o status de uma variavel
+**********************************************************************
+for de lista
+
+forma geral:
+forma ITEM in LISTA do COMANDOS endfor;
+
+exemplo:
+[1 2 3 4 5] -> numeros;
+for num in numeros do
+	pr('\n O quadrado de: '); pr(num); pr('eh: '); pr(num*num);
+endfor;
+
+saída:
+O quadrado de 1 eh: 1
+...
+O quadrado de 5 eh: 25
+*********************************************************************
+funcoes em flavours:
+
+define cabecalho
+	variaveis
+	comandos
+enddefine;
+
+exemplo:
+define teste11;
+	vars a11;
+	1 -> a11;
+enddefine;
+
+chamada de funcao:
+teste11();
+=======
+for de sublistas
+
+forma geral:
+for SUBLISTA on LISTA do COMANDOS endfor;
+
+exemplo:
+for L on [a b c] do L => endfor
+** [a b c]
+** [b c]
+** [c]
+*********************************************************************
+procedimentos recursivos:
+
+UMA VARIAVEL:
+define fatorial(n) -> resposta;
+	if n = 0 then
+		1 -> resposta
+	else
+		n * fatorial(n-1) -> resposta
+	endif;
+enddefine;
+
+UMA LISTA:
+define conta_elem(lista);
+	if lista == [] then
+		0;
+	else
+		1 + conta_elem(tl(lista));
+	endif;
+enddefine;
+
+SEPARANDO ELEM. DE UMA LISTA EM SUBLISTAS
+define listifica(lista) - > resultado ;;; joga em resultado
+	if lista = [] then
+		[] -> resultado
+	else
+		[[^(hd(lista)] ^^(listifica(tl(lista))] -> ;;; recursividade
+	endif;
+enddefine;
+
+LINEARIZANDO LISTAS COM SUBLISTAS SEM ALTERAR LISTAS JA LINEARIZADAS
+define lineariza(lista) -> resultado;
+	if lista = [] then
+		[] -> resultado
+	elseif islist(hd(lista)) then
+		[ ^^(lineariza(hd(lista))) ^^(lineariza(tl(lista))) ] -> resultado
+	else
+		[ ^hd(lista) ^^(lineariza(tl(lista))) ] -> resultado
+	endif;
+enddefine;
+=======
+outro for incremental:
+
+forma geral:
+for VARIAVEL from INICIAL by INCREMENTO to FINAL do COMANDOS enfor;
+
+exemplo:;
+for x from 2 by 7 to 20 do x => endfor;
+** 2
+** 9
+** 16
+
+Numeros negativos tambem podem ser usados no INCREMENTO
+*********************************************************************
+isstring(1234) =>
+** false
+
+isstring('abc') =>
+** true
+*********************************************************************
+'linguagem' >< ' ' >< 'de programacao' =>
+** linguagem de programacao
+
+consstring(97, 98, 99, abc) =>
+** abc
+
+explode('abc') =>
+** 97 98 99
+
+isword(91) =>
+** false
+
+isword("begin") =>
+** true
+
+consword('noventa') =>
+** noventa
+
+"ana" <> "maria" =>
+** anamaria
+*********************************************************************
+*********************************************************************
+*********************************************************************
+*********************************************************************
+*********************************************************************
+*********************************************************************
+Teoria:
+
+- abstracao: oo oferece modularizacao e ocupacao parcial da informacao.
+modularizacao fragmenta o programa em modulos e a ocultacao da informacao
+basicamente significa esconder de outros modulos como determinado modulo
+eh implementado
+
+- polimorfismo:
+1) um objeto podera pertencer a mais de uma classe;
+2) compartilhamento de comportamento ou sobrecarga, ou seja, objetos podem
+se referir a um mesmo método, mesmo sendo de classes diferentes.
+
+- especializacoes de metodos:
+explicacao por exemplo: seja fila uma classe com os metodos insere, elimina
+e imprime, as sub-classes poderao ter metodos com o mesmo nome (sobrecarga
+explicada em polimorfismo) podendo refina-las, estendendo ou substituindo
+integralmente o codigo de comportamento equivalentes nas super-classes.
+
+- heranca simples:
+flavour professor isa pessoa;
+	ivars ...
+	metodos ...
+endflavour;
+
+professor sera uma sub-classe de pessoa e, portanto, podera responder aos
+metodos da classe pessoa;
+
+- heranca multipla:
+flavour professor_ingles isa professor;
+	ivars ...
+	metodos ...
+endflavour
+
+professor_ingles eh uma subclasse de professor, mas professor eh uma subclasse
+de pessoa, o que se compreende por heranca multipla :)
+*********************************************************************

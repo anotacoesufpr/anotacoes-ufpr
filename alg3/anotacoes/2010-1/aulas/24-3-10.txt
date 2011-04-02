@@ -1,0 +1,27 @@
+ARVORE 234
+
+Insercao (registro n, apontador(p))
+Se arvore vazia
+	CriaNo(r)
+Se nodo n apontado por p eh nodo-4
+	"arvore n"
+	p1<-criaNo(r.Reg[0])
+	p2<-criaNo(r.Reg[2])
+	p1<-Ap[0]<-n.Ap[0]
+	p2-<Ap[1]<-n.Ap[1]
+	p2<-Ap[0]<-n.Ap[2]
+	p2<-Ap[1]<-n.Ap[3]
+	Se n eh raiz
+		novaRaiz<-criaNo(n.Reg[1])
+		novaRaiz.Ap[0]<-p1
+		novaRaiz.Ap[1]<-p2
+	Se nao
+		insere n.Reg[1] no pai(p)
+Se p eh nodo folha
+	insere r em p
+Se nao
+	Se r.chave > n.Reg[j] /* j eh o indice + baixo em [0,n.NumReg] que
+				satisfaz essa condicao */
+		Insere(r,n.Ap[j])
+	Se nao
+		Insere(r,n.Ap[n.NumReg])

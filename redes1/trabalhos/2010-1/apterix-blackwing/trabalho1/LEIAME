@@ -1,0 +1,14 @@
+ALUNO 1: FABIO AUGUSTO PIERIN, GRR 20081951
+ALUNO 2: FRANCISCO PANIS KASEKER, GRR 20071909
+
+TRABALHO DE REDES I
+
+--
+
+O trabalho implementa todos os ítens solicitados.
+
+Entretanto há um problema com o timeout, pois ele não foi usado via thread.
+A idéia era usá-lo via thread através do "setsockopt", contudo devido ao mau
+gerenciamento do nosso tempo não concluímos essa ideia e mantivemos nossa
+função de escuta e conta_tempo em um mesmo processo, obviamente um
+processo não perfeito. e significativamente instável para o controle do timeout.

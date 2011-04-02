@@ -1,0 +1,123 @@
+CI215	- 	Sistemas Operacionais
+
+Trabalho 1
+
+Data de Entrega		19/06/2009
+
+
+             Compactador de Arquivos Paralelo
+
+OBJETIVOS 
+
+O objetivo do trabalho é escrever um programa que dado um diretório 
+origem faz a compactação recursiva de todos os arquivos pertecentes
+ao diretório origem e seus sub-diretórios. O algoritmo de compactação
+deve ser o utilizado pelo bzip2, você pode utilizar as funções da
+biblioteca  libbz2. O que você não pode fazer é chamar o comando
+bzip2 diretamente.
+
+Supondo que executamos o comando: tarbz2 DIR1 DIR2 
+
+O programa deve ter resultado equivalente a seguinte sequência de
+comandos:
+
+	cp -ax DIR_ORIGEM DESTINO.bz2.tar
+	cd DIR_TMP
+	find . -exec bzip2 {} \;
+	tar cf DESTINO.bz2.tar DIR_TMP
+	rm -rf DIR_TMP
+
+	** OBSERVAÇÃO: Isto não é a mesma coisa de um tar.bz2
+
+Onde DIR_ORIGEM é o diretório de origem dos dados, podendo
+conter um número indefinido de sub-diretórios e DESTINO.bz2.tar
+é o arquivo que vai conter o backup com arquivos compactado de 
+DIR_ORIGEM.
+
+	** OBSERVAÇÕES
+
+		(a) você pode utilizar o aplicativo tar, preferência
+		se comunicando com ele via PIPE.
+
+		(b) você não precisa de fato fazer a cópia dos arquivos
+		para DIR_TMP. Tudo pode ser feito em memória.
+
+		(c) para percorrer a árvore de diretório você deve utilizar
+		as funções relacionadas da libc (não vale chamar um ls -lR)
+
+		(d) você não deve se preocupar com as permissões dos arquivos.
+
+		(e) deve ser possível recuperar o backup que você utilizando
+		os comandos tar e bzip2.
+
+ARQUITETURA
+
+Uma opção seria utilizar uma thread (linha de execucação) para
+cada arquivo a ser compactado. Entretanto para um número grande
+de arquivos rapidamente seriam esgotados os recurso do sistema.
+
+A solução é implentar um pool of consumers, um conjunto de  threads 
+que executa a função de compactar os arquivos. O pool consome um 
+buffer onde cada entrada possui uma estrutura mínima (pode ser
+necessários outros campos):
+
+	typedef struct {
+		int infd;
+		int outfd;
+		char filename[PATH_MAX];
+	}
+
+O pool of producer é responsável por produzir esse buffer, ou seja, 
+percorrer o diretório de origem, abrir o arquivo de origem (infd) e criar
+o arquivo de destino (outfd) alimentando o buffer.
+
+A medida que os arquivos compactados são gerados eles devem alimentar
+um tar. 
+ 
+EXPERIMENTOS E RELATÓRIO
+
+Os experimentos devem apresentar execuções do programa
+com diferentes parâmetros para o número de threads produtoras
+e consumidoras. Também é desejável resultados de
+experimentos realizados com versões iniciais do seu
+programa, supostamente mais lentas. Experimentos com
+diferentes cargas (conjunto distintos de arquivos
+a serem copiados) também são desejáveis.
+ 
+A idéia é que os experimentem mostrem como
+as decisões de projeto melhoraram o desempenho do
+copiador. Você deve tentar demonstrar que teu programa
+é realmente eficiênte.
+
+Devem ser realizados pelo menos 12 experimentos
+e apresentados os resultados. Os gráficos comparando
+os resultados devem ser feitos usando o gnuplot.
+
+Para medir o tempo de execução o relógio não é bom
+amigo. Vejam: wait4 e getrusage.
+
+ENTREGA FINAL
+
+Na data da entrega deve ser entregue o relatório final (escrito
+em Latex) contendo:
+	1. Introdução	
+	2. Arquitetura do Sistema
+	3. Experimentos
+	4. Conclusão
+
+Ainda no dia da entrega será realizado um teste de funcionamento
+e  desempenho do sistema. Será oferecido um conjunto de dados
+para o programa de cada equipe copiar.
+
+Será usado o programa "time" para medir o tempo de execução
+do sistema. Ver "man time".
+
+
+REFERENCIA
+
+Kay A. Robbins, S. Robbins, Unix Systems Programming: Communication,
+Concurrency, and Threads.
+
+
+
+

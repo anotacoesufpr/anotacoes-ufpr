@@ -1,0 +1,38 @@
+TEORIA DAS PROBABILIDADES
+
+* DEFINICOES
+
+Clssica:
+P(A)=(casos provais)/(casos possiveis)
+
+Frequentista:
+P(A)=(numero de ocorrencias)/(numero de observacoes)
+
+Geometricas:
+P(A)=(area de A)/(area total)
+
+PROPRIEDADES:
+1. 0 <= P(A) <= 1
+2. P(omega)=1
+3. P(0)=0
+4. P(U(i->n)xAI) = Somatoria de 1 ateh n de P(Ai) /* eventos mutuamente exclusivos, i.e., sem intercessao */
+5. P(Â)=1 -P(A) /* propriedade do evento complementar */
+
+Teorema da soma:
+P(A U B) = P(A) + P(B) - P(A intercessao B)
+
+Probabilidade condicional:
+P(A\B) = (P(A intercessao B))/(P(B))
+
+Teorema do Produto:
+P(A intercessao B) = P(A) x P(B\A) ou P(B) x P(A\B)
+
+P/ eventos independentes:
+P(A intercessao B) = P(A) x P(B)
+
+TEOREMA DA PROBABILIDADE TOTAL
+P(A) = P(A intercessao C1) U P(A intercessao C2) U ... U P(A intercessao Cn)
+= P(C1) x P(A/C1) + ... + P(Cn) x P(A/Cn) 
+
+TEOREMA DE BAYES:
+P(C1\A) = [P(C1) x P(A\C1)]/[P(A)]

@@ -1,0 +1,134 @@
+# Modelagem do Trabalho 1 de PO - Situação 7
+#
+
+# estoque inicial: 50 unidades
+# capacidade normal: 200 unidades/quadrimestre
+# capacidade extra: 40 unidades/quadrimestre
+
+# Subcontratação (terceirização):
+/*
+	Período 		Subcontratação Máxima
+	1o	Q					200
+	2o	Q					50
+	3o	Q					50
+*/
+
+# Contratos a serem atendidos
+/*
+	Período		Demanda
+	1o Q		200
+	2o Q		300
+	3o Q		500
+*/
+
+# Custos
+/*
+	Custos				Valor/unidade
+	normal				4
+	extra				6
+	subcontratação		10
+	estocagem			2 / Qiadrimestre
+	atraso na entrega	20 / quadrimestre
+*/
+
+#### SITUAÇÃO 7 ####
+/*
+	* Turno extra apenas no último quadrimestre
+	* Permitir subcontratação em todos os períodos
+	* Atraso permitido em apenas um quadrimestre
+	* Considerar estoque final de 200 unidades
+*/
+
+
+#=======================================#
+
+
+/* Variáveis de decisão */
+
+var x1n >= 0;
+var x2n >= 0;
+var x3n >= 0;
+var x3e >= 0;
+var x1s >= 0;
+var x2s >= 0;
+var x3s >= 0;
+var x1z >= 0;
+var x2z >= 0;
+var x3z >= 0;
+var x1a >= 0;
+var x2a >= 0;
+
+
+/* Função objetivo */
+minimize z: 4*x1n + 4*x2n + 4*x3n + 6*x3e + 10*x1s + 10*x2s + 10*x3s + 2*x1z + 2*x2z + 2*x3z + 20*x2a + 20*x1a;
+
+/* Restrições */
+
+# Capacidade de produção normal
+s.t. normal1: x1n <= 200;
+s.t. normal2: x2n <= 200;
+s.t. normal3: x3n <= 200;
+
+# Capacidade de produção extra
+s.t. extra3: x3e <= 40;
+
+# Subcontratação por quadrimestre
+s.t. sub1 : x1s <= 200;
+s.t. sub2 : x2s <= 75;
+s.t. sub3 : x3s <= 75;
+
+# Restrições de estoque
+s.t. esto1 : x1z <= 250;
+s.t. esto2 : x2z <= 200;
+s.t. esto3 : x3z <= 200;
+
+#No máximo atrasa o que tem de demanda
+s.t. atras1 : x1a <= 150;
+s.t. atras2 : x2a <= 300;
+
+
+#Demandas
+s.t. demanda1 : x1n + x1s = 150 + x1z -x1a  ;
+s.t. demanda2 : x2n + x2s + x1z  = 300 + x2z +x1a -x2a ;
+s.t. demanda3 : x3n + x3s + x3e + x2z = 500 +x2a +x3z ;
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

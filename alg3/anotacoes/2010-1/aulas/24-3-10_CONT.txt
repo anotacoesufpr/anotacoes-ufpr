@@ -1,0 +1,28 @@
+ARVORE RUBO-NEGRA (RED BLACK TREES)
+
+DEF.:
+1. Todo nodo eh preto ou vermelho
+2. Todo nodo externo eh preto
+3. Se o nodo eh vermelho, seus dois filhos sao pretos
+4. Todo caminho de um nodo ateh o nodo externo contem exatamente o mesmo
+numerode nodos pretos
+
+ler livro rubo-negra: algoritmos em c
+implementacao: cobi
+
+A,S,E,R,C,H,I,N,G,X
+
+FINAL:
+234:
+	    I
+	E	R
+AC	GH	N	SX
+
+RUBRO-NEGRA:
+			I
+		E		R
+	   A 	    G	     N	    S
+	      C*         H*             X*
+
+*VERMELHA
+

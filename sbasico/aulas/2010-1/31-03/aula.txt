@@ -1,0 +1,8 @@
+$rotulo
+devolve o endereco de memoria de 'rotulo'
+
+--
+
+as psca.s -o psca.o
+ld pscao -o psco -lc -dynamic-linker /lib/ld_linux.so.2
+

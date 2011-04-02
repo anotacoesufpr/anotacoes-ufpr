@@ -1,0 +1,46 @@
+1) Diferencie cabo par trançado categoria 5, 5e e 6, fibra óptica e cabo coaxial. Cite
+seus principais usos. Diferencie roteador e switch. Mostre três exemplos de
+topologia de rede em desenhos (1,0).
+
+2) Explique o funcionamento do CSMA/CD e do CSMA/CA. Por que o quadro mínimo do
+CSMA/CD é de 64 bytes? (1,0)
+
+3) Demonstre o funcionamento do protocolo janelas deslizantes para comunicação
+entre duas máquinas usando volta-N. Devem ser transmitidas 20 mensagens, sendo
+que o número de sequência delas é representado por 4 bits. O tamanho inicial da
+janela é de 3 mensagens e deve ser alterado para 5 logo após a 12a mensagem e
+para 2 após a 16a mensagem. As mensagens com número de sequência ímpar são
+sempre transmitidas com erro da primeira vez e corretamente na segunda. A 14a
+mensagem deve ser retransmitida 4 vezes até chegar completamente. (2,0)
+
+4) Explique como funciona a duplexação por divisão de tempo e por divisão de
+frequência. Como ela pode ser usada em conjunto com as técnicas de acesso
+múltiplo por divisão de tempo, por divisão de frequência e por divisão de
+código. (1,0)
+
+5) Escolha um endereco IP classe B. Divida essa rede em 12 subredes. Mostre
+quais são os endereços de rede de cada uma das subredes, mostre qual é o
+endereço de broadcast de cada uma das subredes, mostre qual a máscara utilizada
+por cada uma das subredes. (2,0)
+
+6) Explique o funcionamento de  três esquemas de condificação digital de dados,
+é obrigatório que um deles seja o código manchester. (1,0)
+
+7) Ethernet (1,0)
+a) Como é o endereçamento das placas ethernet? Como ele é dividido e o que
+representa cada parte?
+b) Qual a técnica de controle de fluxo, de detecção de erros e de codificação
+usada pela ethernet?
+c) Qual é o tamanho mínimo das mensagens ethernet? Porque elas tem esse valor?
+
+8) Diferencie ADSL e Cable Modem (1,0)
+
+9) Explique o funcionamento das modulações de amplitude, frequência e fase.
+(1,0)
+
+10) Explique o funcionamento dos protocolos ARP, RARP, para que eles servem?
+(0,5)
+
+11) Diferencie em uma tabela celulares de 1G/2G/2,5G/3G (0,5)
+
+12) Diferencie 802.11 a/b/g/n (1,0)

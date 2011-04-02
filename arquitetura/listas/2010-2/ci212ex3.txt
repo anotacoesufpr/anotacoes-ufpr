@@ -1,0 +1,114 @@
+UFPR - Depto de Informática
+CI212 - Organização e Arquitetura de Computadores
+Terceira Lista de Exercícios                         [v1.6, 03out08]
+
+1) Considere a execução do trecho de código abaixo no pipeline de 5
+estágios, SEM adiantamento.  (a) Modifique o código para que ele execute
+corretamente num processador SEM lógica de bloqueios (stalls).
+(b) Re-escreva o código para que ele execute com um mínimo de bolhas
+(pipeline sem adiantamento e nem bloqueios).  (c) Qual o ganho de
+desempenho da resposta de (b) com relação à resposta de (a)?
+
+exercício 1				     exercício 2
+loop:					     add r5,r6,r7
+   ld.d f0,0(r4)			     lw  r6,100(r2)
+   ld.d f2,0(r6)			     sub r7,r6,r8
+   mul.d f4,f2,f0  # 1 ciclo		     sw  r7,200(r2)
+   add.d f6,f4,f8  # f8 escalar
+   st.d f4,0(r8)   #
+   st.d f6,8(r8)   # sufixo .d indica instrução PF tipo double
+   addi r4,r4,8    # f0..f8 são regs de ponto flutuante de 64 bits
+   addi r6,r6,8
+   addi r8,r8,16
+   bne r8,r9,loop  # r9 limite
+
+2) Considere a execução do trecho de programa acima no pipeline original de
+cinco estágios (com bloqueios e adiantamento).  Quantos ciclos serão
+necessários para executar este código?  Desenhe um diagrama que mostra as
+dependências, e outro diagrama que mostra como o código será executado
+(mostrando as bolhas e/ou adiantamento).
+
+3) Considere o seguinte programa, ao ser executado no processador do
+Capítulo 6.
+
+     # $20 contém 0x4000.0000
+     # $21 contém 800
+     mov $5, $0
+Sum: lw  $10, 0($20)
+     add $5, $5, $10
+     addiu $20, $20, 4
+     addiu $21, $21, -4
+     bne $21, $0, Sum
+
+(a) Considere a CPU segmentada mais simples, sem nenhuma forma de
+adiantamento e nem bloqueios.  Acrescente ao código o que for necessário
+para garantir a execução correta deste programa.  Qual o número total de
+ciclos necessários para computar a redução do vetor apontado por $20?
+(b) Otimize o código para reduzir o número de ciclos.  Qual o novo número
+total de ciclos?  Qual o ganho?  (c) Repita (a) considerando adiantamento.
+(d) Qual o ganho considerando as respostas de (b) e (c)?
+
+4) Projete um circuito eficiente e eficaz de previsão de desvios, com
+capacidade para conter informações sobre 1024 instruções de desvio.
+
+5) (a) Enumere e descreva todas as causas para exceções no processador
+segmentado do Cap6.  Desenhe um diagrama simplificado do processador e
+mostre os locais onde as exceções ocorrem e onde são detectadas.
+(b) Liste a seqüência de eventos associados ao tratamento de uma exceção,
+considerando todos os efeitos no processador.
+
+6) Enuncie a Lei de Amdahl.  Como esta lei influencia no projeto de
+processadores com (a) ciclo longo; (b) multiciclos; e (c) segmentados?
+
+7) Circuito de Adiantamento - (i) Escreva as equações lógicas que descrevem
+o controle dos dois seletores nas entradas A e B da ULA. (ii) Escreva as
+equações lógicas que descrevem o controle do adiantamento para o
+estágio de memória. (iii) Escreva as equações que lógicas que descrevem o
+controle do adiantamento para desvios no estágio de decodificação.
+
+8) Controle de Paradas - (i) Escreva as equações lógicas que detectam
+dependências de dados (ALU, uso dos LDs, desvios). (ii) Escreva as equações
+lógicas que detectam dependências de controle.
+
+9) Processadores superescalares - Discuta os problemas ocasionados pela
+execução de duas instruções por ciclo num processador segmentado de cinco
+estágios.
+
+10) Mostre como implementar as instruções abaixo no processador segmentado
+em cinco estágios.  Sua implementação não pode introduzir nenhum risco
+estrutural e deve ter um custo relativamente baixo.  Indique quaisquer
+modificações necessárias e mostre a tabela de sinais de controle ativos em
+cada um dos estágios de execução da instrução.  SE não é possível
+implementar a instrução sem a adição de riscos estruturais ou custo
+elevado, justifique.  A vírgula significa "execução simultânea".  Note que
+estas instruções NÃO FAZEM PARTE do conjunto de instruções do MIPS para
+os fins desta disciplina.
+  lwpi rt, desl(rs) # rt <- M[ rs+desl ] , rs <- rs+desl 
+  swpi rt, desl(rs) # M[ rs+desl ] <- rt , rs <- rs+desl 
+  ldi rd,rs,rt      # rd <- M[ rs+rt ]  -- load indexado
+  bal desl          # r31 <- PC+8 , PC <- (PC+4) + ext( desl<<2 )
+  bgtzal rs,desl    # if(rs >= 0) { r31 <- PC+8 , PC <- (PC+4)+ext(desl<<2) }
+  b desl            # PC <- (PC+4) + ext( desl<<2 )  -- branch always
+
+11) Enquanto estudamos processadores segmentados (Cap-6), vimos várias
+técnicas para aumentar o desempenho dos processadores, algumas delas
+listadas abaixo.  Para cada um dos itens abaixo, explique CLARA e
+SUCINTAMENTE como/porque este produz ganho de desempenho.  (a) Segmentação
+em cinco estágios; (b) eliminação de riscos estruturais; (c) eliminação de
+riscos de dados [dependências de dados]; (d) eliminação de riscos de
+controle [dependências de controle]; (e) super-escalaridade; (f) execução
+especulativa.
+
+12) Considere um circuito combinacional que não é segmentado e têm latência
+T; para este circuito, a taxa de computação é 1/T.  O ganho de desempenho
+de uma implementação segmentada pode ser modelada pela Equação que define
+G, na qual T é a latência do circuito original sem segmentação, S é o
+atraso adicional introduzido pelos registradores e k é o número de
+estágios, supondo que a computação possa ser dividida em k estágios iguais.
+   G=1/(T/k+S)
+Assim, (T/k+S) é o tempo mínimo necessário para a computação em cada
+estágio do novo sistema, e 1/(T/k+S) é sua taxa de computação
+(throughput).  A Equação é similar à Lei de Amdahl.  (a) Descreva a relação
+entre estas duas equações, e (b) dê uma explicação intuitiva para a
+semelhança entre as duas equações.
+

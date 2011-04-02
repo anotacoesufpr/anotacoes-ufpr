@@ -1,0 +1,50 @@
+1) DESEJA-SE VERIFICAR AS DIFERENCAS ENTRE 4 POSICOES DE UMA PASTILHA EM UM
+REATOR. PARA ISSO, CONDUZIU-SE UM EXPERIMENTO COM 3 REPETICOES CADA, OBTENDO-SE
+A SEGUINTE TABELA ANOVA:
+
+
+-------------------------------------------------------------------------------------------
+F.V.	|	G.L.	|	S.Q.	|	Q.M.	|	F	|	P_VALOR
+-------------------------------------------------------------------------------------------
+TRAT.		3		16,22		5,41		8,29		0,007747
+RES.		8		5,22		0,65
+-------------------------------------------------------------------------------------------
+
+POSICAO	| MEDIA_AMOSTRAL_X
+1	|	4,32
+2	|	1,77
+3	|	1,93
+4	|	1,32
+
+A QUE CONCLUSAO CHEGAMOS COM UM ALPHA DE 5% ??
+
+1) ANALISE DO P_VALOR
+
+P_VALOR MENOR QUE 5%, REJEITA H0, TESTE DE TUKEY : PELO MENOS UMA EH DIFERENTE
+
+2) D.M.S. = DIFERENCA MINIMA SIGNIFICATIVA = q*sqrt(QMRes/r)
+q = coluna 4, lista 8 da tabela de tukey (G.L. Res = 8, e o numero de tratamentos=4)
+
+D.M.S. = 4,5*SQRT(0,65/3) = 2,11
+
+3) TABELA
+
+|P1-P2| = 2,54*
+|P1-P3| = 2,38*
+|P1-P4| = 2,99*
+|P2-P3| = 0,16
+|P2-P2| = 0,45
+|P3-P4| = 0,61
+
+4) COMPRAR
+
+ORDENAR DE ACORDO COM AS MEDIAS AMOSTRRAIS
+
+T	|	MEDIA_AMOSTRAL_X | DIFERENCAS
+____________________________________________________________
+1		4,32			a     > diferiu e apresentou a melhor media
+3		1,93				b
+2		1,77				b
+4		1,32				b
+------------------------------------------------------------
+

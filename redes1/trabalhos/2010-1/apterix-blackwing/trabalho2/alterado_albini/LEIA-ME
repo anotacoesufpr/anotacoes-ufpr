@@ -1,0 +1,2 @@
+Para executar a simulação da rede e gerar os graficos basta executar o ./execucaoCompleta
+Os graficos são gerados por grupos de amostra, isto é, é pego um x numero de pacotes (amostra) e feita a media da latência e taxa de entrega. Foi optado por fazer dessa forma para que o grafico ficasse mais claro. O tamanho da amostra está definida em 70 pacotes, para alterar basta editar a variavel vAmostra nos arquivos filtrar_gerarGraficoLatencia e filtrar_gerarGraficoTaxa.

@@ -1,0 +1,229 @@
+\documentclass{abnt}
+
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{hyperref}
+\usepackage[alf]{abntcite}
+\usepackage{amsmath}
+
+\setcounter{chapter}{1}
+
+\titulo{Segurança em Redes de Computadores}
+\comentario{Segunda avaliação da disciplina de Orientação Bibliográfica}
+\autor{Roberto Beraldo Chaiben}
+\local{Curitiba}
+\instituicao{Universidade Federal do Paraná}
+\data{24/06/2010}
+
+
+\begin{document}
+
+
+\folhaderosto
+
+\sumario
+
+\chapter{Revisão de Literatura}
+
+\section{Introdução}
+
+As redes de computadores estão sendo utilizadas cada vez mais intensamente em todo o planeta. Além das redes locais, há a Internet,
+a rede mundial de computadores. Logo, segurança é essencial, e é objeto de estudos de diversos profissionais da Tecnologia da Informação.
+
+Com o progresso rápido e vertiginoso da computação em rede, muitas brechas de segurança foram geradas. Isso exige estudos exaustivos a fim
+de detectá-las e corrigi-las, enquanto outros indivíduos exploram essas falhas com o intuito de obter informações privilegiadas
+e sigilosas, para, de alguma forma, beneficiarem-se, muitas vezes ilegalmente, com elas.
+
+
+\section{\textit{Backup}}
+
+Segundo \citeonline{b20}, há duas regras iniciais para a segurança de uma rede: possuir \textit{backup} e, mais que isso, possuir mais de
+um \textit{backup}, ou seja, possuir redundância de dados. Isso garante que, se informações importantes forem perdidas, será possível
+recuperá-las com facilidade. Essas cópias devem ser atualizadas frequentemente, a fim de evitar o armazenamento de informações obsoletas.
+
+
+\section{Segurança Física}
+
+Segundo \citeonline{b2}, \citeonline{b15}, \citeonline{b7}, \citeonline{b12}, \citeonline{b17} e \citeonline{b20}, é imprescindível que as
+máquinas essenciais para o funcionamento de uma rede estejam em um local adequado, seguro, longe de condições climáticas e ambientais que
+possam prejudicar o funcionamento do sistema. Esse local também deve possuir acesso restrito a pessoas de confiança, responsáveis pela
+administração da rede, impedindo que pessoas maliciosas e mal intencionadas obtenham acesso físico aos componentes vitais de uma rede.
+
+É importante possuir geradores de energia elétrica e \textit{no-breaks}, que possam garantir o funcionamento dos principais equipamentos
+da rede durante uma falta de energia.
+
+
+\section{Criptografia}
+
+Segundo \citeonline{b20}, \citeonline{b15}, \citeonline{b19}, \citeonline{b10}, \citeonline{b8} e \citeonline{b11}, criptografia consiste
+na codificação de uma mensagem por meio de uma chave secreta de criptografia, ou seja, transformar uma mensagem em algo que somente quem
+conheça essa chave possa compreendê-la.
+
+
+\section{Algoritmos de Chave Pública}
+
+\begin{quotation}
+
+Em 1976, dois pesquisadores da \textit{University of Stanford}, Diffie e Hellman (1976), propuseram um
+sistema de criptografia radicalmente novo, no qual as chaves de criptografia e de descriptografia
+eram diferentes, e a chave de descriptografia não podia ser derivada da chave de criptografia. Em
+sua proposta, o algoritmo de criptografia (chaveado) E e o algoritmo de descriptografia (chaveado)
+D tinham de atender a três requisitos, que podem ser declarados da seguinte forma:
+
+\begin{itemize}
+
+	\item D(E(P)) = P.
+    \item É extremamente difícil deduzir D a partir de E.
+    \item E não pode ser decifrado por um ataque de texto simples escolhido.
+
+\end{itemize}
+
+(TANENBAUM, A. S.; Redes de Computadores, 2003, p. 565)
+
+\end{quotation}
+
+O primeiro requisito diz que, se aplicarmos D a uma mensagem criptografada, E(P), iremos obter outra vez a mensagem de texto simples original P.
+Sem essa propriedade, o destinatário legítimo não poderia decodificar o texto cifrado. O segundo é autoexplicativo. O terceiro é necessário
+porque os intrusos podem experimentar o algoritmo até se cansarem (\textit{brute force}). Sob essas condições, não há razão para a chave
+criptográfica não se tornar pública.
+
+O método funciona da seguinte forma: uma pessoa, digamos Maria, desejando receber mensagens secretas, primeiro cria dois algoritmos que atendem
+aos requisitos anteriores. O algoritmo de criptografia e a chave de Maria se tornam públicos. Por exemplo, Maria poderia colocar sua chave pública
+na \textit{home page} que ela tem na \textit{Web}. Usaremos a notação $E_M$ para indicar o algoritmo de criptografia parametrizado pela chave pública
+de Maria. De modo análogo, o algoritmo de descriptografia (secreto) parametrizado pela chave privada de Maria é $D_M$. João faz o mesmo, publicando
+$E_J$, mas mantendo secreta a chave $D_J$.
+
+
+\subsection{RSA}
+
+\begin{quotation}
+
+Devido às vantagens potenciais da criptografia de chave pública, muitos pesquisadores estão se dedicando integralmente a seu estudo, e alguns algoritmos
+já foram publicados. Um método muito interessante foi descoberto por um grupo de pesquisadores do \textit{MIT}\footnote{http://web.mit.edu} (\textit{Massachusetts Institute of Technology})
+e é conhecido pelas iniciais dos três estudiosos que o criaram (\textit{Rivest, Shamir, Adleman}): \textit{RSA}. Ele sobreviveu a todas as tentativas de rompimento por mais de um quarto de século e é reconhecido como um
+algoritmo muito forte. Grande parte da segurança prática se baseia nele. Sua principal desvantagem é exigir chaves de pelo menos 1024 \textit{bits} para manter um
+bom nível de segurança (em comparação com 128 \textit{bits} para os algoritmos de chave simétrica), e isso o torna bastante lento. (TANENBAUM, A. S.; Redes de Computadores, 2003, p. 566)
+
+\end{quotation}
+
+
+O algoritmo para criptografia RSA é:
+
+\begin{enumerate}
+
+	\item Escolha dois números primos extensos, $p$ e $q$ (geralmente, de 1024 \textit{bits}).
+	\item Calcule $n = p$ $q$ e $z = (p - 1) (q - 1)$.
+	\item Escolha um número $d$ tal que $z$ e $d$ sejam primos entre si.
+	\item Encontre e de forma que e $d = 1$ mod $z$.
+
+\end{enumerate}
+
+
+A segurança do método se baseia na dificuldade de fatorar números extensos. Se pudesse fatorar o valor n (publicamente conhecido), o criptoanalista poderia
+então encontrar $p$ e $q$ e, a partir desses, encontrar $z$. Com o conhecimento de $z$ e $e$, é possível encontrar $d$ utilizando-se o algoritmo de
+Euclides\footnote{Em Matemática, o algoritmo de Euclides é um método simples e eficiente de encontrar o máximo divisor comum entre dois números inteiros diferentes de zero}.
+Felizmente, os matemáticos têm tentado fatorar números extensos por pelo menos 300 anos, e o conhecimento acumulado sugere que o problema é extremamente difícil.
+
+
+\section{\textit{Hashes}}
+
+Um \textit{hash} é uma sequência de \textit{bits} geradas por um algoritmo de dispersão, em geral representada em base hexadecimal, que permite a visualização em letras e números
+(0 a 9 e A a F), representando meio \textit{byte} cada.
+
+Essa sequência busca identificar um arquivo ou informação unicamente. Por exemplo, uma mensagem de correio eletrônico, uma senha, uma chave criptográfica ou mesmo um arquivo.
+É um método para transformar dados de tal forma que o resultado seja quase exclusivo. Além disso, funções usadas em criptografia garantem que não é possível a partir de um
+valor de \textit{hash} retornar à informação original, exceto utilizando-se de métodos de \textit{brute force}.
+
+
+\subsection{MD5}
+
+O MD5 é o quinto de uma série de sumários de mensagens criadas por Ronald Rivest. Ele opera desfigurando os \textit{bits} de uma forma tão complicada que todos os \textit{bits} de saída são
+afetados por todos os \textit{bits} de entrada. Resumindo, a função começa aumentando o tamanho da mensagem até chegar a 448 \textit{bits} (módulo 512). Em seguida, o tamanho original é
+anexado como um inteiro de 64 \textit{bits}, a fim de gerar uma entrada total cujo tamanho seja um múltiplo de 512 \textit{bits}. A última etapa antes dos cálculos serem efetuados é inicializar
+um \textit{buffer} de 128 \textit{bits} com um valor fixo. 
+
+Em cada rodada, um bloco de entrada de 512 \textit{bits} é extraído e colocado no \textit{buffer} de 128 \textit{bits}. Para que os cálculos sejam feitos com maior precisão, também é incluída uma tabela
+criada a partir da função de seno. Há quatro rodadas para cada bloco de entrada. Esse processo continua até que todos os blocos de entrada tenham sido consumidos. O conteúdo do
+\textit{buffer} de 128 \textit{bits} forma o sumário de mensagens.
+
+O MD5 já é usado há mais de uma década, e muitos pessoas o têm atacado. Foram encontradas algumas vulnerabilidades, mas certas etapas internas impedem que ele seja rompido. Porém,
+se as barreiras restantes dentro do MD5 caírem, ele poderá falhar eventualmente. Apesar disso, atualmente, ele ainda resiste.
+
+
+\subsection{SHA-1}
+
+A outra função importante do sumário de mensagens é o SHA-1 (\textit{Secure Hash Algorithm 1}), desenvolvido pela NSA e aprovado pelo NIST no FIPS 180-1. A exemplo do MD5, esse
+algoritmo processa os dados de entrada em blocos de 512 \textit{bits}. No entanto, ele gera um sumário de mensagens de 160 \textit{bits}.
+
+O algoritmo do SHA-1 começa preenchendo a mensagem com a adição de um \textit{bit} 1 ao final, seguido pelo número de \textit{bits} 0 necessários para tornar o tamanho um múltiplo
+de 512 \textit{bits}. Em seguida, um número de 64 \textit{bits} contendo o tamanho da mensagem antes do preenchimento é submetido a uma operação OR nos 64 \textit{bits} de baixa
+ordem. Com os computadores, essa orientação corresponde a máquinas bi g-endian, como SPARC, mas o SHA-1 sempre preenche o fim da mensagem, não importando que máquina endian seja usada.
+
+Durante a computação, o SHA-1 mantém cinco variáveis de 32 \textit{bits}, de $H_0$ a $H_4$, onde o \textit{hash} se acumula. Elas são inicializadas como constantes especificadas no
+padrão. Cada um dos blocos $M_0$ a $M_{n-1}$ é agora processado. Para o bloco atual, primeiro as 16 palavras são copiadas no início de um \textit{array} auxiliar de 80 palavras, $W$.
+Em seguida, as outras 64 palavras em $W$ são preenchidas, usando-se a fórmula:
+
+$W_i$ $=$ $S^1$ ($W_{i-3}$ XOR $W_{i-8}$ XOR $W_{i-14}$ XOR $W_{i-16}$ ), (16 $\le$ i $\le$ 79)
+
+
+onde $S^b$ ($W$) representa a rotação circular à esquerda da palavra de 32 \textit{bits}, $W$, por $b$ \textit{bits}. Agora, são inicializados cinco variáveis de rascunho de $A$ até $E$,
+com valores de $H_0$ a $H_4$, respectivamente.
+
+
+Agora que o primeiro bloco de 512 \textit{bits} foi processado, o próximo é iniciado. O \textit{array} $W$ é reinicializado a partir do novo bloco, mas $H$ fica como estava. Quando esse
+bloco é concluído, o próximo é iniciado e assim por diante, até todos os blocos da mensagem de 512 \textit{bits} serem processados. Quando o último bloco é concluído, as cinco
+palavras de 32 \textit{bits} no \textit{array} $H$ são transmitidas como saída, formando o \textit{hash} criptográfico de 160 \textit{bits}. O código C completo para SHA-1 é dado na
+RFC 3174\footnote{http://www.apps.ietf.org/rfc/rfc3174.html}.
+
+Novas versões de SHA-1 estão em desenvolvimento para hashes de 256, 384 e 512 \textit{bits}, respectivamente.
+
+
+
+\section{Considerações Finais}
+
+A segurança na Tecnologia da Informação, especialmente na área de Redes de Computadores, é abordada como um dos principais temas da Computação, desde a Literatura mais
+antiga até a atual. Muitos profissionais não medem esforços nesses estudos, a fim de obter os melhores resultados e soluções.
+
+Tudo isso, aliado ao crescimento vertiginoso das tecnologias, o que, inevitavelmente, gera brechas de segurança pelo caminho, garante que nunca faltarão temas para estudo
+na área de Segurança, de forma que um pesquisador ou profissional desse ramo jamais ficará ocioso.
+
+
+
+\bibliography{texto}
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

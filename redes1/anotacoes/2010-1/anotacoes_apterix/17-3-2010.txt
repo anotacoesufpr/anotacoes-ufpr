@@ -1,0 +1,29 @@
+Camada de Enlace
+- Subdividida em 2:
+
+-> LLL > Controle Logico do Enlace
+-> MAC > Controle de Acesso ao Meio
+
+--> MAC
+	Tarefa: Definir qual maquina pode acessar o meio de transmissao
+	a cada vez
+-> Duas ou mais maquinas acessando ao meio ao mesmo tempo causam uma
+colisao e estas mensagens devem ser descartadas.
+
+CSMA -> Carrier S Multipic Access (escuta e espera para transmitir)
+CSMA Nao persistente (espera um tempo aleatoria para tentar novamente)
+[0,2^(n-1)]
+CSMA tenta 16x vezes, falha em 16
+maximo de [0,1024]
+> unidade de tempo depende do sistema
+
+CSMA/CD (With Collission Detections)
+
+ficou ouvindo cada bit ateh o ultimo byte do 64o bit para garantir que 
+nao ha colisao.
+
+CSMA/CA (With Collission Avoidnes)
+RTS -> Request-to-send
+CTS -> Clear-to-Send
+
+Passagem de Bastao (geralmente usados em redes com topologia de anel)

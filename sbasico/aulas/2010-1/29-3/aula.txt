@@ -1,0 +1,6 @@
+SB.pdf problema:
+linha 7 errada, mudar para: *y=z;
+
+(%eax) pega o conteudo apontado por %eax
+
+pushl $B empilha o endereco de B

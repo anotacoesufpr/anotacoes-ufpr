@@ -1,0 +1,38 @@
+Trabalho 2 da disciplina CI058 - Redes 1
+
+Autores:
+	Roberto Beraldo Chaiben - rbc08 - GRR 20084213
+	Carlos Augusto Ligmanowski Júnior - calj08 - GRR 20081238
+
+	
+Especificação
+
+	10. Rede em estrela montada com 4 switchs conectados em linha e cada um destes com 48 máquinas a 100
+	Mbps
+	* variar a quantidade de transmissores 30 / 40 / 50 / 60 transmissores
+	* 10 receptores
+	* cada transmissor gera 30 mensagens por segundo
+	* atraso da transmissão 10 ms
+	* simular 3 minutos de vida da rede
+	* gerar gráñco da taxa de entrega e da latência da rede
+
+
+Estrutura de arquivos
+
+	|-- config.conf -> arquivo com configurações para o Shell Script que gera as estatísticas e os gráficos
+	|-- especificacao.txt -> Especificação do trabalho
+	|-- execucao.sh -> Script que deve ser executado para gerar as simulações e os gráficos
+	|-- filtro.sh -> Shell Script que filtra o tracefile e gera os gráficos
+	|-- latencia.awk -> Script AWK que gera as estatísticas da latência da rede
+	|-- LEIAME -> Arquivo LEIAME
+	|-- taxa.awk -> Script AWK que gera as estatísticas da taxa de entrega da rede
+	|-- trab2.tcl -> Script TCL para gerar a simulação no NS 2
+
+
+Procedimentos para a geração dos gráficos
+
+	Para a geração de todas as simulações e as criações dos gráficos, basta executar o script execucao.sh:
+	
+	$ ./execucao.sh
+	
+	Esse script gera um arquivo config.tcl, temporário, para cada chamada de "ns" no loop. Esse arquivo temporário contém a criação de uma variável TCL chamada "transmissores", que armazena o número de transmissores para aquela simulação. Ao fim da execução do script, esse arquivo temporário é removido.

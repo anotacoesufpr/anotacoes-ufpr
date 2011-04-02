@@ -1,0 +1,163 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{verbatim} 
+\usepackage{listings}
+
+\begin{document}
+
+\setlength{\parskip}{2ex}
+
+\begin{tabular}[l]{ | p{10cm} | l | }
+	\hline \multicolumn{2}{|c|}{Trabalho de Software Básico - Turma 2010-1} \\
+	\hline Nome: Francisco Panis Kaseker &
+	GRR20071909 \\
+	\hline Título: Explicação e implementação de uma SYSCALL &
+	Data: 30/06/2010 \\
+	\hline
+\end{tabular}
+
+
+\vspace{2cm}
+
+\section{Introdução}
+
+Basicamente uma \textit{SYSCALL} é uma chamada da aplicação feito ao \textit{Kernel} do
+sistema operacional. Essa chamada executa alguma rotina no sistema, mas dentro
+da camada do \textit{Kernel}. A segunda seção explicará com maior profundidade do
+que tratam as \textit{SYSCALLs} (história, exemplos etc) e, por fim, a terceira
+tratará de explicar como adicionar uma chamada ao sistema no Linux.
+
+\section{SYSCALLs: O que são}
+
+\subsection{História}
+Devido a necessidade de alguns aplicativos precisarem obter determinados ações
+ou resultados do sistema operacional sem para isso terem de rodar sob os
+privilégios do modo \textit{root}, as \textit{SYSCALLs} vieram para suprir essa
+necessidade sem para isso diminuir a segurança do sistema operacional.
+
+\subsection{Porque usá-las}
+Essencialmente para garantir segurança ao sistema ao não permitir que os
+aplicativos tenham que rodar sob os privilégios do \textit{root}, mas que possam
+desempenhar suas funções no sistema normalmente.
+
+\subsection{Exemplos}
+Nos sistemas \textit{UNIX-like} nós temos a \textit{POSIX} que desempanhm diversas funções (como,
+por exemplo, open, read, write, close, wait, exec, fork, exit kill etc). Nos
+sistemas baseados em Windows, temos a \textit{WIN32}, somente implementadas pela
+Microsoft. Parte delas está descrita na documentação da Microsoft e outra parte
+não.
+
+\subsection{Implementaçõs mais comuns} 
+As chamadas ao sistema possuem diversas utilidades atualmente. Na parte de
+controle de processos, por exemplo, temos a criação ou fechamento de um
+processo ou alocação e liberação de memória. Para o gerenciamento de arquivos,
+temos a abertura, fechamento, escrita ou leitura de arquivos. Há ainda chamadas
+ao sistema para envio de dados na rede, gerenciamento de drivers (hd, cd, dvd
+etc) e tantas outras funções cujo controle é somente do sistema operacional ou
+do \textit{root} .
+
+\subsection{O modelo POSIX}
+O modelo \textit{POSIX} é uma padronização de chamadas do sistema para tentar garantir a
+portabilidade de um código em diferentes sistemas operacionais. O modelo \textit{POSIX} é
+seguido pelos sistemas Unix-like, porém isso não é uma regra. O sistema \textit{FreeBSD},
+por exemplo, tem mais que o dobro de \textit{SYSCALLs} que o definido pela \textit{POSIX}.
+
+\subsection{O modelo WIN32}
+Essa API é desenvolvida para o sistema operacional Windows, da Microsoft. Ela
+abrange desde os sistemas 16bits até os 64bits do seu portfólio.
+Embora a WIN32 seja um modelo para fornecer recursos do sistema operacional aos
+aplicativos, ela permite que outras API's tenham acesso diretamente aos recursos
+de hardware do sistema, especialmente para hardware gráfico e de rede.
+
+\section{Implementando uma SYSCALL}
+Será implementado uma \textit{SYSCALL} no \textit{Kernel} Linux x86 que tem a função de
+exibir quantas vezes ela foi chamada. Será usado uma variável global como
+contador e a \textit{SYSCALL} terá de somar o valor um a essa variável global sempre
+que for chamada. Todo printk ("printf do Kernel") será ligo no seguinte log: /var/log/syslog\\
+A \textit{SYSCALL} aqui implementada foi a de número 339.
+
+\subsection{Compilando o Kernel}
+
+Foi utilizado o tutorial abaixo para compilar o Kernel; Importante: O autor do
+artigo do site abaixo referenciado é o mesmo autor desse trabalho.
+http://gerencievocemesmo.com.br/site/?p=281
+
+\subsection{Implementando uma SYSCALL no Linux x86}
+
+\begin{enumerate}
+
+\item Baixar o Kernel e extraí-lo em algum lugar; Usei o "/usr/src/".
+
+\item Para facilitar, criei um link simbólico para usar o path "/usr/src/linux"
+como source do Kernel.
+
+\item Crie um arquivo chamado "minhasys.c" em "/usr/src/kernel/minhasys/". O seu conteúdo
+será o seguinte:
+
+%code
+\begin{lstlisting}
+#include <linux/linkage.h>
+asmlinkage int sys_minhasys() {
+MINHAVARIAVELGLOBAL++;
+printk("CHAMADA %d VEZES!\n", MINHAVARIAVELGLOBAL);
+return 0;
+}
+\end{lstlisting}
+
+\item Agora vamos modificar alguns arquivos para tornar a nova \textit{SYSCALL}
+disponível ao \textit{Kernel}.
+
+\begin{itemize}
+\item arquivo: /usr/src/linux/arch/x86/include/asm/unistd\_32.h \\
+adicione na ultima linha: \#define \_\_NR\_minhasys         NUMERO\\
+Substitua NUMERO pelo último número do define da lista incrementado de "1".
+
+\item arquivo: /usr/src/linux/arch/x86/include/asm/syscalls.h\\
+adicione ao fim da lista: asmlinkage int sys\_helloworld();
+
+\item arquivo: /usr/src/linux/arch/x86/kernel/syscall\_table\_32.c\\
+adicione: .long sys\_minhasys
+
+\item arquivo: /usr/src/linux/Makefile
+linha original: core-y += kernel/ mm/ fs/ ipc/ security/ crypto/ block/\\
+nova linha: core-y += kernel/ mm/ fs/ ipc/ security/ crypto/ block/ minhasys/
+
+\end{itemize}
+
+\item Agora crie um arquivo chamado "Makefile" dentro do diretório "minhasys"
+com o seguinte conteúdoo:\\
+obj-y := minhasys.o
+
+\item O contador (variável int MINHAVARIAVELGLOBAL) foi declarado dentro da syscall como static, assim a declaração será feita uma única vez e o valor não será perdido.
+
+\item Agora é só compilar o \textit{Kernel}.
+
+\end{enumerate}
+
+\section{Dicas adicionais}
+
+\begin{itemize}
+
+	\item O NUMERO de uma \textit{SYSCALL} pode ser qualquer uma dentro do formato (int), desde que já não esteja sendo usada.
+	\item No how-to acima a syscall foi colocada dentro de um arquivo separado, mas poderia ter sido incluída facilmente dentro do arquivo "kernel/sys.c", junto as outras \textit{SYSCALL}; Fazendo isso, não é necessário criar ou modificar nenhum Makefile.
+
+\end{itemize}
+
+\section{Referências}
+
+\begin{itemize}
+
+	\item http://macboypro.wordpress.com/2009/05/15/adding-a-custom-system-call-to-the-linux-os/
+	\item http://gerencievocemesmo.com.br/site/?p=281
+	\item http://www.linuxchix.org/content/courses/kernel\_hacking/lesson8
+	\item http://ubuntuforums.org/attachment.php?attachmentid=149947\&d=1268472461
+	\item http://en.wikipedia.org/wiki/System\_call
+	\item http://pt.wikipedia.org/wiki/POSIX
+	\item http://en.wikipedia.org/wiki/Windows\_API
+	\item http://blog.veiga.eti.br/niveis-de-log-do-printk-para-depurar-o-kernel-pela-console/
+
+\end{itemize}
+
+\end{document}

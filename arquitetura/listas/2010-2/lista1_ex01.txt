@@ -1,0 +1,7 @@
+1.
+
+O MIPS possui instruções de tamanho fixo: 32 bits. Essa padronização tem o intuito de simplificar
+a implementação do hardware (arquitetura RISC: Reduced Instruction Set Computer).
+
+Todas as instruções possuem como primeiro parâmetro o destino da operação, seja ele um registrador
+ou endereço de memória.

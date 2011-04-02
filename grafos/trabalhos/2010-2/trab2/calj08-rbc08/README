@@ -1,0 +1,49 @@
+Trabalho 2 da disciplina CI 065 - Algoritmos e Teoria dos Grafos
+
+
+Autores:
+	Carlos Augusto Ligmanowski Júnior - GRR 20081238 - calj08
+	Roberto Beraldo Chaiben - GRR 20084213 - rbc08
+
+
+Exercícios escolhidos
+	Foram escolhidos os exercícios sobre Isomorfismo e K-Conexidade
+
+
+Estrutura de Diretórios
+
+	Os arquivos fontes encontram-se no diretório ./src.
+	Após a compilação, of arquivos .class estarão em ./bin
+
+
+Compilação e Execução
+
+	NOTA SOBRE A COMPILAÇÃO NAS SERVIDORAS DO DINF:
+
+		Algumas servidoras do DInf estão com problemas no Java, mais
+		precisamente na compilação. Ao executar o comando "javac", é retornado
+		um erro de falha de memória.
+
+		A compilação foi bem sucedida nas seguintes servidoras (não foram
+		testadas todas):
+
+		* mumm
+		* talisker
+
+		A compilação falhou nas seguintes servidoras:
+
+		* dalmore
+		* bowmore
+
+
+	Para compilar, execute o seguinte comando, no diretório raiz do trabalho:
+	
+	$ make
+
+	Esse comando compilará os arquivos .java, inserindo os arquivos .class
+	correspondentes em ./bin.
+	Os arquivos isomorfos e k-conexo são scripts BASH que chamam a classe
+	correspondente, passando o parâmetro para ela:
+
+	$ ./isomorfos <arquivo>
+	$ ./k-conexo <arquivo>

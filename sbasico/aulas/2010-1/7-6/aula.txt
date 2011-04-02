@@ -1,0 +1,11 @@
+BIBLIOTECAS ESTATICAS
+gcc -fpic a.c -o a.o
+gcc -fpic b.c -o b.o
+ld -shared -o libMyDynLib.so
+gcc -o man main.c -L
+--
+--
+
+Programa Ligador
+
+

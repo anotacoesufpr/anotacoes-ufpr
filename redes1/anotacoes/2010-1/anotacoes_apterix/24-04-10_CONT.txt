@@ -1,0 +1,42 @@
+PROTOCOLOS DE COMUNICACAO
+	> Conjunto de regras
+
+-> Kermit
+	A<=>B
+		->Semi-duplex
+		->Para-e-espera
+		->CRC-8	
+
+
+			TAMANHO
+	      |---------------------------------------|
+______________________________________________________
+|MARCA|TAMANHO|SEQUENCIA|TIPO |DADOS            |CRC  |
+-------------------------------------------------------
+|8bits|8bits  |8bits    |8bits|0 a 255 bytes    |8bits|
+-------------------------------------------------------
+
+Marca: 01111110
+Tamanho -> bytes
+	menor -> 3
+	maior -> 255
+
+Sequencia ->
+Dados     ->
+CRC       ->
+Tipo      ->
+
+-------------------------------------------------------------
+TIPO | DESCRICAO
+-------------------------------------------------------------
+  D  | Dados
+  Y  | Aceitacao (ACK)
+  N  | Rejeicao (NACK) (rejeita a mensagem que voce mandou)
+  S  | Inicio da Transmissao
+  F  | Descritor de arquivo (nome, tamanho etc)
+  B  | Final da transmissao de 1 grupo de arquivos
+  Z  | Final da transmissao de 1 arquivo
+  X  | Mostra na tela
+  A  | Atributos (permissoes etc)
+  E  | Erro (falta de arquivo etc)
+-------------------------------------------------------------

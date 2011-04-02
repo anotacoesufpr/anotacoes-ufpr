@@ -1,0 +1,797 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[pdftex,pagebackref=true,colorlinks=true,linkcolor=blue,unicode]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[brazil]{babel}
+
+\author{Victor Tarabola Cortiano}
+\title{CI237: Matem\'{a}tica Discreta}
+
+\theoremstyle{definition} \newtheorem{definicao}{Def}
+\theoremstyle{definition} \newtheorem{exemplo}{Exemplo}
+\theoremstyle{plain}      \newtheorem{teorema}{Teorema}
+\theoremstyle{remark}     \newtheorem*{corolario}{Corol\'{a}rio}
+
+
+\begin{document}
+
+
+\maketitle
+\tableofcontents
+
+\newpage
+
+
+
+\section{Informa\c{c}\~{o}es sobre a disciplina}
+
+\begin{enumerate}
+
+\item Programa
+\begin{itemize}
+\item Fundamentos
+\item Indu\c{c}\~{a}o
+\item Recurs\~{a}o
+\item Recorr\^{e}ncias
+\item Analise Assint\'{o}tica
+\item Contagem
+\end{itemize}
+\end{enumerate}
+
+\section{Conceitos B\'{a}sicos}
+
+\begin{definicao}
+Chao: $\lfloor x \rfloor = max\{z \in \mathbb{Z}, z \leq x\}$
+\end{definicao}
+\begin{definicao}
+Teto: $\lceil  x \rceil  = min\{z \in \mathbb{Z}, z \geq x\}$
+\end{definicao}
+\begin{definicao}
+$\mathbb{A}^\mathbb{B} = \{f, f: \mathbb{B} \longrightarrow \mathbb{A}\}$
+\end{definicao}
+
+\begin{teorema}
+$\lfloor x \rfloor$ \'{e} o \'{u}nico inteiro que satisfaz
+$x - 1 < \lfloor x \rfloor \leq x$
+\end{teorema}
+\begin{teorema}
+$\lceil x \rceil$ \'{e} o \'{u}nico inteiro que satisfaz
+$x \leq \lceil x \rceil < x + 1$
+\end{teorema}
+
+\section{Recorr\^{e}ncias}
+
+A maioria das fun\c{c}oes tratadas doravante ser\~{a}o do tipo
+$f: \mathbb{N} \longrightarrow \mathbb{C}$.
+
+\begin{exemplo}
+Seja $l: \mathbb{N} \longrightarrow \mathbb{N}$ o n\'{u}mero de
+digitos na representa\c{c}\~{a}o bin\'{a}ria de n
+\end{exemplo}
+
+\begin{teorema}
+\begin{equation*}
+l(n) =
+\begin{cases}
+0 & \text{se } n = 0, \\
+l(\lfloor \frac{n}{2} \rfloor) + 1 & \text{se } n \neq 0
+\end{cases}
+\end{equation*}
+\end{teorema}
+
+\begin{corolario}
+$\forall n > 0 \qquad l(n) = \lfloor \log n \rfloor + 1 $
+\end{corolario}
+
+\begin{exemplo}
+Seja $b: \mathbb{N} \longrightarrow \mathbb{N}$ o n\'{u}mero de
+d\'{i}gitos 1 na representa\c{c}\~{a}o bin\'{a}ria de n.
+\end{exemplo}
+
+\begin{teorema}
+\begin{equation*}
+b(n) =
+\begin{cases}
+0 & \text{se } n = 0, \\
+b(\lfloor \frac{n}{2} \rfloor) + n \mod 2 & \text{se } n \neq 0
+\end{cases}
+\end{equation*}
+\end{teorema}
+
+\begin{definicao}
+Seja $f: \mathbb{A} \longrightarrow \mathbb{A}$. Para todo
+$n \in \mathbb{N}$, definimos $f^n: \mathbb{N} \longrightarrow \mathbb{N}$
+como a fun\c{c}\~{a}o dada por:
+\begin{equation*}
+f^n(a) =
+\begin{cases}
+a & \text{se } n = 0, \\
+f\Big(f^{n-1}(a)\Big) & \text{se } n > 0
+\end{cases}
+\end{equation*}
+\end{definicao}
+
+\begin{corolario}
+Se $f(x) = \lfloor \frac{x}{k} \rfloor$ ent\~{a}o
+$f^n(x) = \lfloor \frac{x}{k^n} \rfloor$, com $k \in \mathbb{N}$
+\end{corolario}
+
+\begin{definicao}
+Uma recorrencia \'{e} uma fun\c{c}\~{a}o definida recursivamente.
+\end{definicao}
+
+\begin{exemplo}
+Seja $f(n) = f(n-1) + 1 \forall n > 0$. Queremos uma express\~{a}o
+n\~{a}o recursiva para $f$.
+
+Se $n > 0$, ent\~{a}o
+
+\begin{eqnarray*}
+f(n) & = & f(n-1) + 1 = \\
+& = & \Big(f(n-1-1) + 1\Big) = \\
+& = & \cdots = \\
+& = & f(n-u) + u
+\end{eqnarray*}
+
+$u$ \'{e} o menor inteiro tal que $n - u \leq 0$. Em outras palavras: \\
+$u = min\{k \in \mathbb{N}, n -k \leq 0\} = n$. Portanto: \\
+$f(n) = f(n-u) + u = f(0) + n$
+\end{exemplo}
+
+\begin{teorema}
+Seja $f(n) = f\Big(h(n)\Big) + s(n)$ para todo $n > n_0$.
+Ent\~{a}o: \\
+\begin{equation*}
+f(n) = f\Big(h^u(n)\Big) + \sum_{i=0}^{u-1} s\Big(h^i(n)\Big)
+\end{equation*}
+Na qual $u = min\{k \in \mathbb{N}, h^k(n) \leq n_0\}$
+\end{teorema}
+
+\begin{exemplo}
+Uma progress\~{a}o aritm\'{e}tica \'{e} uma fun\c{c}\~{a}o que satisfaz
+a recorr\^{e}ncia $f(n) = f(n-1) + r$. Usando a nota\c{c}\~{a}o anterior
+temos: $h(n) = n - 1$ e $s(n) = r$ \\
+Temos que $h^k(n) = n - k$.
+\begin{eqnarray*}
+u & = & min\{k \in \mathbb{N}, h^k(n) \leq n_0\} = \\
+& = & min\{k \in \mathbb{N}, n - k \leq n_0\} = \\
+& = & min\{k \in \mathbb{N}, n - n_0 \leq k\} = \\
+& = & n - n_0
+\end{eqnarray*}
+Portanto,
+\begin{eqnarray*}
+f(n) & = & f\Big(h^{n-n_0}(n)\Big) + \sum_{i = 0}^{n - n_0 - 1}
+s\Big(h^i(n)\Big) = \\
+& = & f\Big(n - (n - n_0)\Big) + \sum_{i = 0}^{n - n_0 - 1} r = \\
+& = & f(n_0) + (n-n_0)r
+\end{eqnarray*}
+\end{exemplo}
+
+\begin{teorema}
+Seja $f(n) = m(n)f\Big(h(n)\Big)$ para todo $n > n_0$.
+Ent\~{a}o: \\
+\begin{equation*}
+f(n) = f\Big(h^u(n)\Big)\prod_{i=0}^{u-1}m\Big(h^i(n)\Big)
+\end{equation*}
+Na qual $u = min\{k \in \mathbb{N}, h^k(n) \leq n_0\}$
+\end{teorema}
+
+\begin{exemplo}
+Uma progress\~{a}o geom\'{e}trica \'{e} uma fun\c{c}\~{a}o que satisfaz
+a recorr\^{e}ncia $f(n) = qf(n-1)$.  Usando a nota\c{c}\~{a}o anterior
+temos: $h(n) = n - 1$ e $m(n) = q$ \\
+Temos que $h^k(n) = n - k$.
+\begin{eqnarray*}
+u & = & min\{k \in \mathbb{N}, h^k(n) \leq n_0\} = \\
+& = & min\{k \in \mathbb{N}, n - k \leq n_0\} = \\
+& = & min\{k \in \mathbb{N}, n - n_0 \leq k\} = \\
+& = & n - n_0
+\end{eqnarray*}
+Portanto,
+\begin{eqnarray*}
+f(n) & = & f\Big(h^{n-n_0}(n)\Big)\prod_{i=0}^{u-1} m\Big(h^i(n)\Big) = \\
+& = & f\Big(n - (n - n_0)\Big)\prod_{i = 0}^{n - n_0 - 1} q = \\
+& = & f(n_0) q^{n - n_0}
+\end{eqnarray*}
+\end{exemplo}
+
+\begin{teorema}
+Seja $f(n) = m(n)f\Big(h(n)\Big) + s(n)$ para todo $n > n_0$.
+Ent\~{a}o: \\
+\begin{equation*}
+f(n) = f\Big(h^u(n)\Big)\prod_{i=0}^{u-1}m\Big(h^i(n)\Big) +
+\sum_{i=0}^{u-1}s\Big(h^i(n)\Big)\prod_{j=0}^{i-1}m\Big(h^j(n)\Big)
+\end{equation*}
+Na qual $u = min\{k \in \mathbb{N}, h^k(n) \leq n_0\}$
+\end{teorema}
+
+\begin{teorema}
+Dado um polin\^{o}mio de ra\'{i}zes $r_1, \cdots, r_{l}$ e respectivas
+multiplicidades $m_1, \cdots, m_{l}$, sua base \'{e} dada por:
+\begin{equation*}
+\Big\{r_1^n, nr_1^n,\cdots,n^{m_1-1}r_1^n,
+r_2^n, nr_2^n,\cdots,n^{m_2-1}r_2^n, \cdots,
+r_{l}^n, nr_{l}^n,\cdots,n^{m_{l}-1}r_{l}^n\Big\}
+\end{equation*}
+\end{teorema}
+
+\begin{definicao}
+Definimos como Recorr\^{e}cia Linear Homog\^{e}nia toda fun\c{c}\~{a}o
+da forma:
+\begin{equation*}
+f(n) = \sum_{i=1}^{k} a_if(n-i) \qquad \forall n \geq k
+\end{equation*}
+\end{definicao}
+
+\begin{exemplo}
+A Sequ\^{e}ncia de Fibonacci \'{e} um caso espec\'{i}fico de
+Recorr\^{e}cia Linear Homog\^{e}nia:
+\begin{equation*}
+f(n) =
+\begin{cases}
+f(n-1) + f(n-2) & \text{se } n > 2, \\
+1 & \text{se } n = 1 \\
+0 & \text{se } n = 0 \\
+\end{cases}
+\end{equation*}
+\end{exemplo}
+
+\begin{corolario}
+A Sequ\^{e}ncia de Fibonacci satisfaz: \\
+$f(n) + g(n) = (f+g)(n-1)+(f+g)(n-2)$ \\
+$(zf)(n) = (zf)(n-1) + (zf)(n-2)$
+\end{corolario}
+
+\begin{definicao}
+Seja $F = \{f \in \mathbb{C}^\mathbb{N}, f(n) = f(n-1) + f(n-2)$
+\end{definicao}
+
+\begin{corolario}
+O conjunto $F$ \'{e} um subespa\c{c}o vetorial de
+$(\mathbb{C}^\mathbb{N},+)$
+\end{corolario}
+
+Queremos encontrar uma base para F: \\
+Seja $r \in \mathbb{C}$ e $f: \mathbb{N} \longrightarrow \mathbb{C}$
+dada por $f(n) = r^n$. Assumindo que $f \in F$, ent\~{a}o
+$f(n)=f(n-1)+f(n-2)$ para todo $n \geq 2$, ou seja:
+$r^n = r^{n-1} + r^{n-2} \therefore r^n - r^{n-1} - r^{n-2} = 0$
+$\therefore r^{n-2}(r^2 -r -1) = 0 \therefore r^{n-2} = 0$ ou
+$r^2 -r -1 = 0$
+
+Resolvendo a equa\c{c}\~{a}o do segundo grau, temos que:
+\begin{equation*}
+r \in \Big\{0, \frac{1 - \sqrt{5}}{2}, \frac{1 + \sqrt{5}}{2}\Big\}
+\end{equation*}
+
+Fazendo $r_1 = \frac{1 - \sqrt{5}}{2}$ e $r_2 = \frac{1 + \sqrt{5}}{2}$
+
+Ent\~{a}o $f_1 \in F$ e $f_1 \in F$, na qual $f_1(n)=r_1^n$
+e $f_2(n)=r_2^n$.
+
+Como $f_1$ e $f_2$ s\~{a}o LI em $(\mathbb{C}^\mathbb{N},+)$,
+ent\~{a}o $\{f_1,f_2\}$ \'{e} uma base de $F$.
+
+Consequentemente, $\forall f \in F, \exists c_1,c_2 \in \mathbb{C}$
+tais que $f(n) = c_1f_1(n) + c_2f_2(n)$
+
+Em particular:
+
+\begin{equation*}
+\begin{cases}
+f(0) = c_1f_1(0) + c_2f_2(0) \\
+f(1) = c_1f_1(1) + c_2f_2(1)
+\end{cases}
+\end{equation*}
+Ou seja:
+\begin{equation*}
+\begin{cases}
+f(0) = c_1r_1^0 + c_2r_2^0 = c_1 + c_2 \\
+f(1) = c_1r_1^1 + c_2r_2^1 = c_1r_1 + c_2r_2
+\end{cases}
+\end{equation*}
+
+Em particular, na Sequ\^{e}ncia de Fibonacci temos $f(0) = 0$ e
+$f(1) = 1$, portanto:
+\begin{equation*}
+\begin{cases}
+c_1 + c_2 = 0\\
+c_1r_1 + c_2r_2 = 1
+\end{cases}
+\end{equation*}
+
+Portanto, $c_1 = \frac{-1}{r_2-r_1}$ e $c_2 = \frac{1}{r_2-r_1}$
+
+Como $r_2 - r_1 = \frac{1+\sqrt{5}}{2} - \frac{1-\sqrt{5}}{2} = $
+$\sqrt{5}$, Ent\~{a}o:\\
+$c_1 = - \frac{1}{\sqrt{5}} = - \frac{\sqrt{5}}{5}$ e
+$c_2 = \frac{1}{\sqrt{5}} = \frac{\sqrt{5}}{5}$. Portanto:
+
+\begin{eqnarray*}
+f(n) & = & c_1f(n-1) + c_2f(n-2) = \\
+& = & - \frac{\sqrt{5}}{5}\Big(\frac{1-\sqrt{5}}{2}\Big)^n +
+\frac{\sqrt{5}}{5}\Big(\frac{1+\sqrt{5}}{2}\Big)^n = \\
+& = & \frac{\sqrt{5}}{5} \bigg[\Big(\frac{1+\sqrt{5}}{2}\Big)^n -
+\Big(\frac{1-\sqrt{5}}{2}\Big)^n\bigg]
+\end{eqnarray*}
+
+\begin{definicao}
+Se $r$ \'{e} raiz do polin\^{o}mio $P$, ent\~{a}o a multiciplade
+de $r$ \'{e}:
+\begin{equation*}
+max\{k \in \mathbb{N}, (x-r)^k | P\}
+\end{equation*}
+\end{definicao}
+
+\begin{corolario}
+Sejam $r_1,r_2,\cdots,r_l$ as distintas raizes do polin\^{o}mio
+caracter\'{i}stico de $R(a_1, \cdots, a_k)$, com multiplicidades
+$m_1,m_2,\cdots,m_l$, respectivamente. O conjunto
+$\{n^j r_i^n, 1 \leq i \leq l$ e $0 \leq j < m\}$ \'{e} uma base
+de $R(a_1, \cdots, a_k)$.
+\end{corolario}
+
+\begin{corolario}
+Se $f(n)$ satisfaz uma Recorr\^{e}cia Linear Homog\^{e}nia para todo
+$n \geq k$, ent\~{a}o:
+\begin{equation*}
+f(n) = \sum_{i=1}^{l}\sum_{j=0}^{m_i-1} c_{ij} n^j r_i^n
+\end{equation*}
+Na qual $r_i$ s\~{a}o as ra\'{i}zes, $m_i$ as multiplicidades e
+$c_{ij}$ s\~{a}o dados pela solu\c{c}\~{a}o de um sistema linear.
+\end{corolario}
+
+\begin{definicao}
+Uma Recorr\^{e}cia Linear n\~{a}o Homog\^{e}nia \'{e} uma
+recorr\^{e}ncia linear da forma:
+\begin{equation*}
+f(n) = \sum_{i=1}^{k} a_i f(n-i) + g(n) \qquad \forall n \geq k
+\end{equation*}
+\end{definicao}
+
+\begin{teorema}
+A fun\c{c}\~{a}o $f(n) = c n^k r^n$ com $k \in \mathbb{N}$ e
+$c,r \in \mathbb{C}$ satisfaz uma RLH cujo polin\^{o}mio
+caracter\'{i}stico \'{e} $(x-r)^{k+1}$.
+\end{teorema}
+
+\begin{teorema}
+\begin{equation*}
+\sum_{i=0}^{n} i 2^i = 2^n(n-1) + 2
+\end{equation*}
+\end{teorema}
+
+\begin{proof}
+\begin{equation*}
+\text{Seja } s(n) = \sum_{i=0}^{n}i2^i =
+\sum_{i=0}^{n-1}i2^i + n2^n = s(n-1) + n2^n
+\end{equation*}
+Portanto $s$ satisfaz uma RLnH. $n2^n$ satisfaz uma RLH cujo
+polin\^{o}mio caracter\'{i}stico \'{e} $(x-2)^2$, ent\~{a}o
+$s(n)$ satisfaz uma RLH cujo polin\~{o}mio caracter\'{i}stico
+\'{e}: $(x-1)(x-2)^2$ e, portanto,
+$s(n) = c_{10}1^n + c_{20}2^n + c_{21}n2^n$. Logo:
+\begin{equation*}
+\begin{cases}
+s(0) = c_{10}1^0 + c_{20}2^0 + c_{21}(0)2^0 \\
+s(1) = c_{10}1^1 + c_{20}2^1 + c_{21}(1)2^1 \\
+s(2) = c_{10}1^2 + c_{20}2^2 + c_{21}(2)2^2
+\end{cases}
+\end{equation*}
+Ou seja,
+\begin{equation*}
+\begin{cases}
+0 = c_{10} + c_{20} \\
+2 = c_{10} + 2c_{20} + 2c_{21} \\
+10 = c_{10} + 4c_{20} + 8c_{21}
+\end{cases}
+\end{equation*}
+Portanto, $c_{10} = 2, c_{20} = -2, c_{21} = 2$, Ent\~{a}o:\\
+\begin{equation*}
+s(n) = 2 -2(2^n) + 2n2^n = 2^n(n-1)+2=(n-1)2^n + 2
+\end{equation*}
+\end{proof}
+
+\begin{corolario}
+Se $f$ satisfaz uma RLH cujo polin\^{o}mio caracter\'{i}stico
+\'{e} P, ent\~{a}o:
+\begin{equation*}
+s(n) = \sum_{i=0}^{n} f(i) \text{ satisfaz uma RLH cujo polin\^{o}mio
+caracter\'{i}stico \'{e} } P(x-1)
+\end{equation*}
+\end{corolario}
+
+\begin{proof}
+\begin{equation*}
+\text{Como } s(n) = \sum_{i=0}^{n}f(i) = \sum_{i=0}^{n-1}f(i) + f(n)=
+s(n-1) + f(n)
+\end{equation*}
+Ent\~{a}o, $s$ satisfaz a RLnH $s(n)=s(n-1)+f(n)$. Portanto,
+$s$ satisfaz uma RLH cujo polin\^{o}mio caracter\'{i}stico \'{e}
+$P(x-1)$
+\end{proof}
+
+\begin{exemplo}
+Soma de uma Progress\~{a}o Aritm\'{e}tica:
+\begin{equation*}
+s(n) = \sum_{i-0}^{n} f(i)
+\end{equation*}
+cujo polin\^{o}mio caracter\'{i}stico \'{e} $(x-1)^2(x-1)=(x-1)^3$.
+Portanto: \\ $s(n) = c_{10}1^n + c_{11}n1^n + c_{12}n^21^n =$
+$c_{10}+nc_{11}+n^2c_{12}$. Ent\~{a}o:
+\begin{equation*}
+\begin{cases}
+f(0) = c_{10}+(0)c_{11}+(0)^2c_{12} \\
+f(0) + f(1) = c_{10}+(1)c_{11}+(1)^2c_{12} \\
+f(0)+f(1)+f(2) = c_{10}+(2)c_{11}+(2)^2c_{12}\\
+\end{cases}
+\end{equation*}
+Em outras palavras:
+\begin{equation*}
+\begin{cases}
+f(0) = c_{10} \\
+f(0) + f(0) + r = c_{10}+c_{11}+c_{12} \\
+f(0)+f(0)+r+f(0)+2r = c_{10}+2c_{11}+4c_{12}
+\end{cases}
+\end{equation*}
+Ou seja:
+\begin{equation*}
+\begin{cases}
+f(0) = c_{10} \\
+2f(0) + r = c_{10}+c_{11}+c_{12} \\
+3f(0)+3r = c_{10}+2c_{11}+4c_{12}
+\end{cases}
+\end{equation*}
+Portanto, $c_{10}=f(0),c_{11}=f(0)+\frac{r}{2},c_{12}=\frac{r}{2}$.
+Ent\~{a}o:
+\begin{eqnarray*}
+f(n) & = & f(0)+\Big(f(0) + \frac{r}{2}\Big)n + (\frac{r}{2})n^2 = \\
+& = & f(0)+nf(0)+n\frac{r}{2}+n^2\frac{r}{2} = \\
+& = & f(0)(n+1) + \frac{n}{2}(n-1)r
+\end{eqnarray*}
+\end{exemplo}
+
+\begin{exemplo}
+O n-\'{e}simo termo de uma Progress\~{a}o Geom\'{e}trica pode ser
+descrito pela recorr\^{e}ncia $f(n)=rf(n-1)$, cujo polin\^{o}mio
+caracter\'{i}stico \'{e} $(x-r)$. Base: $\{(r^n)\}$. Portanto:
+$f(n) = c_{10}r^0 = c_{10}.$ \\
+Logo, $f(n)=f(0)r^n$.
+\end{exemplo}
+
+\begin{exemplo}
+Soma de uma Progress\~{a}o Geom\'{e}trica:
+\begin{equation*}
+s(n) = \sum_{i-0}^{n} f(i)
+\end{equation*}
+cujo polin\^{o}mio caracter\'{i}stico \'{e} $(x-r)(x-1).$
+Base: $\{(r^n,1^n)\}$. Portanto:
+\begin{equation*}
+s(n) = c_{10}1^n + c_{20}r^n = c_{10} + c_{20}r^n
+\end{equation*}
+\begin{equation*}
+\begin{cases}
+f(0) = c_{10} + c_{20}r^0 \\
+f(0) + f(1) = c_{10}+c_{20}r^1 \\
+\end{cases}
+\end{equation*}
+Em outras palavras:
+\begin{equation*}
+\begin{cases}
+f(0) = c_{10}+c_{20} \\
+f(0) + f(0)r = c_{10}+c_{20}r \\
+\end{cases}
+\end{equation*}
+Sou seja:
+\begin{equation*}
+\begin{cases}
+f(0) = c_{10}+c_{20} \\
+f(0)(r+1) = c_{10}+c_{20}r \\
+\end{cases}
+\end{equation*}
+Portanto, $c_{10}=-\frac{f(0)}{r-1}$ e $c_{20}=-\frac{f(0)r}{r-1}$.
+Ent\~{a}o:
+\begin{equation*}
+s(n) = -\frac{f(0)}{r-1} + \frac{f(0)r}{r-1}r^n =
+f(0)\Big(\frac{r^{n+1}-1}{r-1}\Big)
+\end{equation*}
+\end{exemplo}
+
+\section{\'{A}rvores Bin\'{a}rias}
+
+\begin{definicao}
+\'{A}rvores Bin\'{a}ria \'{e} uma \'{a}rvore (representada por $\lambda$)
+ou um par $\Big(E(t),D(t)\Big)$, no qual $E(t)$ e $D(t)$ s\~{a}o
+\'{a}rvores bin\'{a}rias. Definimos $\mathbb{B}$ como o conjunto de todas
+as \'{a}rvores bin\'{a}rias.
+\end{definicao}
+
+\begin{definicao}
+O tamanho de uma \'{a}rvore bin\'{a}ria $t$ \'{e} dada por:
+\begin{equation*}
+|t| =
+\begin{cases}
+0 & \text{se } t = \lambda, \\
+|E(t)| + |D(t)| + 1 & \text{se } t \neq \lambda
+\end{cases}
+\end{equation*}
+\end{definicao}
+
+\begin{definicao}
+A altura de uma \'{a}rvore bin\'{a}ria $t$ \'{e} dada por:
+\begin{equation*}
+h(t) =
+\begin{cases}
+0 & \text{se } t = \lambda, \\
+1 + max\bigg\{h\Big(E(t)\Big),h\Big(D(t)\Big)\bigg\}
+& \text{se } t \neq \lambda
+\end{cases}
+\end{equation*}
+\end{definicao}
+
+\begin{definicao}
+\begin{equation*}
+h^{-}(n) = min\{h(t), |t| = n\}
+\end{equation*}
+\begin{equation*}
+h^{+}(n) = max\{h(t), |t| = n\}
+\end{equation*}
+\end{definicao}
+
+\begin{corolario}
+\begin{equation*}
+h^{-}(|t|) \leq h(t) \leq h^{+}(|t|) \qquad
+\forall t \in \mathbb{B}
+\end{equation*}
+\end{corolario}
+
+\begin{teorema}
+\begin{equation*}
+h^{+}(n) = n
+\end{equation*}
+\end{teorema}
+
+\begin{proof}
+\begin{eqnarray*}
+h^{+}(n) & = & max\{h(t), |t| = n\} = \\
+& = & max\Bigg\{1 + max\bigg\{h\Big(E(t)\Big),
+h\Big(D(t)\Big)\bigg\}, |t| = n\Bigg\} = \\
+& = & 1 + max\{h(t), |t| < n\} = \\
+& = & 1 + max\{h^{+}(k), k < n\} = \qquad
+\text{ como } h^{+} \text{ \'{e} crescente} \\
+& = & 1 + h^{+}(n-1) = \\
+& = & n
+\end{eqnarray*}
+\end{proof}
+
+\begin{corolario}
+\begin{equation*}
+h^{-}(|t|) \leq h(t) \leq |t| \qquad
+\forall t \in \mathbb{B}
+\end{equation*}
+\end{corolario}
+
+\begin{definicao}
+\begin{equation*}
+T^{-}(n) = min\{|t|, h(t) = n\}
+\end{equation*}
+\begin{equation*}
+T^{+}(n) = max\{|t|, h(t) = n\}
+\end{equation*}
+\end{definicao}
+
+\begin{corolario}
+\begin{equation*}
+T^{-}\Big(h(t)\Big) \leq |t| \leq T^{+}\Big(h(t)\Big) \qquad
+\forall t \in \mathbb{B}
+\end{equation*}
+\end{corolario}
+
+\begin{teorema}
+\begin{equation*}
+T^{+}(n) = 2^n + 1
+\end{equation*}
+\end{teorema}
+
+\begin{proof}
+\begin{eqnarray*}
+T^{+}(n) & = & max\{|t|, h(t) = n\} \\
+& = & max\bigg\{\Big(|E(t)| + |D(t)| + 1 \Big), h(t) = n \bigg\} = \\
+& = & 1 + max\{|t| + |t|, h(t) < n \} = \\
+& = & 1 + max\{2|t|, h(t) < n \} = \\
+& = & 1 + 2max\{|t|, h(t) < n \} = \\
+& = & 1 + 2max\{T^{+}(k), k < n\} = \\
+& = & 1 + 2T^{+}(n - 1) = \\
+& = & 2^n - 1
+\end{eqnarray*}
+\end{proof}
+
+\begin{corolario}
+\begin{equation*}
+T^{-}\Big(h(t)\Big) \leq |t| \leq 2^{h(t)} - 1 \qquad
+\forall t \in \mathbb{B}
+\end{equation*}
+\end{corolario}
+
+\begin{corolario}
+Devido ao corol\'{a}rio anterior, temos:
+\begin{equation*}
+h(t) \geq \log(|t|+1)
+\end{equation*}
+Portanto:
+\begin{equation*}
+h(t) \geq \lceil \log(|t| + 1) \rceil = \lfloor \log(|t|) \rfloor + 1
+\end{equation*}
+\end{corolario}
+
+\begin{corolario}
+Devido aos corol\'{a}rios anteriores, temos:
+\begin{equation*}
+\lfloor \log(|t|) \rfloor + 1 \leq h(t) \leq |t|, \qquad
+\forall t \in \mathbb{B}
+\end{equation*}
+\end{corolario}
+
+\begin{definicao}
+Definimos $\mathbb{AVL}$ como o conjunto de todas \'{a}rvores
+$t \in \mathbb{B}$ que s\~{a}o vazias ou satisfazem: \\
+\begin{itemize}
+\item $E(t) \in \mathbb{AVL}$
+\item $D(t) \in \mathbb{AVL}$
+\item $\bigg|h\Big(E(t)\Big) - h\Big(D(t)\Big)\bigg| \leq 1$
+\end{itemize}
+Doravante, denominaremos de \'{a}rvore AVL qualquer \'{a}rvore
+pertencente ao conjunto $\mathbb{AVL}$.
+\end{definicao}
+
+\begin{teorema}
+\begin{equation*}
+\lfloor \log|t| \rfloor + 1 \leq h(t) \leq 1.4405 \cdot \log|t|
+\qquad \forall t \in \mathbb{AVL}
+\end{equation*}
+\end{teorema}
+
+\begin{proof}
+Seja $T_{AVL}^{-}(n)$ o tamanho m\'{i}nimo de uma \'{a}rvore AVL de
+altura n.
+\begin{eqnarray*}
+T_{AVL}^{-}(n)&=& min\{|t|,h(t)=n \text{ e } t \in \mathbb{AVL}\}=\\
+& = & 1+min \{|E(t)|+|D(t)|, h(t) = n \text{ e } t \in \mathbb{AVL}\}
+\end{eqnarray*}
+Temos que $h\big(E(t)\big) < h(t) = n$ e $h\big(D(t)\big) < h(t) = n$. \\
+Supondo que $h\big(E(t)\big) = n - 1$, como $t$ \'{e} AVL, ent\~{a}o
+$h\big(D(t)\big) = n - 1$ ou $h\big(D(t)\big) = n - 2$. Ent\~{a}o:
+\begin{eqnarray*}
+T_{AVL}^{-}(n)&=&1+min\{E(t),h(E(t))=n-1\text{ e } t \in \mathbb{AVL}\}+\\
+&& +\: min\{D(t),h(D(t))=n-1\text{ e } t \in \mathbb{AVL}\} = \\
+& = & 1 + min \{|t|, h(t) = n - 1 \text{ e } t \in \mathbb{AVL}\} +\\
+&& +\: min \{|t|, h(t) = n - 2 \text{ e } t \in \mathbb{AVL}\} = \\
+& = & 1 + t^{-}(n-1) + t^{-}(n-2)
+\end{eqnarray*}
+Cuja solu\c{c}\~{a}o quando $T_{AVL}^{-}(0) = 0$ \'{e}:
+\begin{eqnarray*}
+T_{AVL}^{-}(n)&=&\frac{5-3\sqrt{5}}{2}\Big(\frac{1-\sqrt{5}}{2}\Big)^n+
+\frac{5+3\sqrt{5}}{2}\Big(\frac{1+\sqrt{5}}{2}\Big)^n - 1 = \\
+& = & c_1r_1^n + c_2r_2^n - 1 = \\
+&=&c_2r_2^n\Big(1+\frac{c_1r_1^n}{c_2r_2^n}-\frac{1}{c_2r_2^n}\Big)=\\
+& = & f(n)r_2^n
+\end{eqnarray*}
+Como $t^{-}\big(h(t)\big)\leq|t|$ ent\~{a}o $\forall t \in \mathbb{AVL}$
+$f\big(h(t)\big)r^{h(t)} \leq |t|$, ou seja:
+\begin{equation*}
+h(t)\log r_2 + \log f\big(h(t)\big) \leq \log |t|
+\end{equation*}
+Portanto:
+\begin{equation*}
+h(t) \leq \frac{\log |t| - \log f\big(h(t)\big)}{\log r_2} = 
+\frac{1}{\log r_2} \log |t| - \frac{\log f\big(h(t)\big)}{\log r_2}
+\end{equation*}
+Como $f$ \'{e} crescente, $f(n) > 1$ para todo $n \geq 2$, portanto
+$\log f(n) > 0$, ent\~{a}o:
+\begin{equation*}
+h(t) \leq \frac{1}{\log r_2} \log |t| =
+\frac{1}{\log{\frac{1+\sqrt{5}}{2}}} \log |t| < 1.4405 \cdot \log |t|
+\end{equation*}
+Logo, se $h(t) \geq 2$ ent\~{a}o $h(t) \leq 1.4405 \cdot \log |t|$.
+Ora, como $h(t) \geq \lfloor \log |t| \rfloor + 1$, ent\~{a}o:
+\begin{equation*}
+\lfloor \log|t| \rfloor + 1 \leq h(t) \leq 1.4405 \cdot \log|t|
+\qquad \forall t \in \mathbb{AVL}
+\end{equation*}
+\end{proof}
+
+\section{An\'{a}lise Assint\'{o}tica}
+
+\begin{definicao}
+Dadas $f,g: \mathbb{N} \longrightarrow \mathbb{R}$, dizemos que
+$g$ \'{e} assint\'{o}ticamente limitada superiormente por $f$ se
+existem $c_p \in \mathbb{C}$ e $n_p \in \mathbb{N}$ tais que
+$c_p > 0$ e:
+\begin{equation*}
+|g(n)| \leq c_p|f(n)| \qquad \forall n \geq n_p
+\end{equation*}
+Escrevemos $g(n) \in O\big(f(n)\big)$. \\
+Uma conven\c{c}\~{a}o de nota\c{c}\~{a}o estabelece que a
+express\~{a}o $O\big(f(n)\big)$ do lado direito de uma
+igualdade significa que a igualdade \'{e} satisfeita
+substituindo-se $O\big(f(n)\big)$ por algum elemento
+do conjutno $O\big(f(n)\big)$. \\
+Tamb\'{e}m fica estabelecido que a express\~{a}o $O\big(f(n)\big)$
+do lado esquerdo de uma igualdade indica que a igualdade \'{e}
+satisfeita para todas as fun\c{c}\~{o}es do conjunto $O\big(f(n)\big)$.
+\end{definicao}
+
+\begin{exemplo}
+Existe $f(n) \in O(1)$ tal que:
+$\sum _{i=1}^{n}\frac{1}{i} = \ln(n) + f(n)$, portanto:
+$\sum _{i=1}^{n}\frac{1}{i} - \ln(n)$ \'{e} assint\'{o}ticamente
+limitada superiormente por uma constante.
+\end{exemplo}
+
+\begin{teorema}
+\begin{equation*}
+\log _b n  = O\big(\log n \big) \qquad \forall b > 1
+\end{equation*}
+\end{teorema}
+
+\begin{exemplo}
+Seja $t(n) = c_1+c_2n$, onde $c_1>0$ e $c_2>0$.
+Como $|c_1| \leq c_1|1|$ ent\~{a}o $c_1 = O(1)$. An\'{a}logo para $c_2$.\\
+Portanto: $t(n) = O(1) +O(1)n$. Temos que: \\
+$c_1 + c_2n = \big(\frac{c_1}{n} + c_2\big)n$. Como:
+\begin{equation*}
+\Big| \frac{c_1}{n} + c_2\Big| \leq 2c_2 \qquad
+\forall n > \frac{c_1}{c_2}
+\end{equation*}
+Ent\~{a}o $\frac{c_1}{n} + c_2 = O(1)$. Portanto $t(n)=O(1)n$. Temos que:
+\begin{equation*}
+f(n)=O(1) \Rightarrow  \exists c_p > 0, n_p \in \mathbb{N} \qquad
+|f(n)| \leq c_p|1| \qquad \forall n \geq n_p
+\end{equation*}
+Multiplicando por $|n|$ temos:
+\begin{equation*}
+|n| |f(n)| \leq c_p|n|
+\end{equation*}
+Portanto $t(n) = O(n)$.
+\end{exemplo}
+
+\begin{teorema}
+\begin{equation*}
+\text{Se } \overline{f}(n) = O\big(f(n)\big) \text{ e } \overline{g}(n) =
+O\big(g(n)\big) \text{ ent\~{a}o } \overline{f}(n)\overline{g}(n) =
+O\big(f(n)g(n)\big)
+\end{equation*}
+\end{teorema}
+
+\begin{teorema}
+Reflexividade:
+\begin{equation*}
+f(n) = O \Big(f(n) \Big)
+\end{equation*}
+\end{teorema}
+
+\begin{teorema}
+\begin{equation*}
+\text{Se } \overline{f}(n) = O \Big(f(n) \Big) \text{ e }
+\overline{g}(n) = O \Big(g(n) \Big) \text{ ent\~{a}o }
+\overline{f}(n) + \overline{g}(n) =
+O\bigg(\Big|f(n)\Big| + \Big|g(n)\Big|\bigg)
+\end{equation*}
+\end{teorema}
+
+\begin{corolario}
+\begin{equation*}
+O\Big(1\Big)O\Big(f(n)\Big) = O\Big(f(n)Big)
+\end{equation*}
+\end{corolario}
+
+\begin{teorema}
+Transitividade:
+\begin{equation*}
+\text{Se } h(n) = O\Big(f(n)\Big) \text{ e } f(n) = O\Big(g(n)\Big)
+\text{ ent\~{a}o } h(n) = O\Big(g(n)\Big)
+\end{equation*}
+\end{teorema}
+
+\end{document}

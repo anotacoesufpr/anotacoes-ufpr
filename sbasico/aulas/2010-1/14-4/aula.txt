@@ -1,0 +1,12 @@
+system call > desvia para um endereco cujo conteudo eh um outro endereco
+que trata as system calls
+
+interrupcao > por software
+
+int = syscall
+
+syscall 45 > heap > alocacao dinamica
+eax > syscall 45
+ebx > integer (0 devolve valor atual da brk)
+
+retorno: eax = brk

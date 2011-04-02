@@ -1,0 +1,17 @@
+CRIACAO DE PROCESSOS EM LINUX
+
+while(1) do {
+	le_comando(comando,parametros)
+	if (fork() != 0) {
+		wait(&status)
+	else { escreve(comando,parametros)
+	}
+
+fork();
+- cria uma nova entrada j na tabela de processos
+- PAI e FILHO apontam para o mesmo local
+- O PAI soh continua o fluxo quando o FILHO chamado retorna
+algo ao pai; CTRL+C forca o filho a dar uma resposta
+- com & o PAI nao para no wait()
+exec
+- separa os processos PAI e FILHO

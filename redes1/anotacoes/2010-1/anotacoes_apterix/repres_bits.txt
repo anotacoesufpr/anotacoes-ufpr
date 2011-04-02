@@ -1,0 +1,27 @@
+			REPRESENTAÇÃO BITS - DIGITAL x ANALÓGICO
+
+Digital :
+
+-Abstrata
+
+-Return to zero(RZ): Possui 3 niveis, o que possibilita passar mais bits no clock.
+
+-Non-Return to zero(NRZ)
+
+-Non-Return-to-Zero Inverted (NRZI)
+
+-Manchester: mais usado na comunicação de dados
+ Ex: Ethernet.
+
+-Manchester Diferencial
+
+
+Analogica: 
+
+-Modulação
+    -Amplitude(ASK): Uma amplitude de onda para 1 e outra para 0. Para representar 1 , aumenta a amplitude. Isso mantendo a mesma frequência.
+
+    -Frequência(FSK): Uma frequência para 1 e outra para 0. 
+   
+    -Fase(PSK): Mantem frequência e amplitude constantes , então o que se veritica é se a onda ta subindo ou descendo naquele instante. Se tiver subindo é 1 se tiver descendo é 0.
+        --Fase(QPSK): Usado hj por quase todos os wireless. Se desenha um circulo e verefica-se os ângulos para os bits. Ex: 24º é 001. Então ao invés de verificar se a onda está subindo o descendo , olha o ângulo que ela faz com relação à vertical. Um dos mais usados é o 16 QPK, o qual tem 16 angulações ou pontos.

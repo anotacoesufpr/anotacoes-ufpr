@@ -1,0 +1,33 @@
+--------------------------------------
+ALGORITMO E ESTRUTURA DE DADOS III
+--------------------------------------
+6 ITENS SOLICITADOS PELO TRABALHO:
+1. libArvBin.c:  uma biblioteca contendo as funcoes de insercao,
+busca, remocao e impressao da arvore
+2. libArvBin.h : um arquivo contendo o prototipo (cabecalho) das funcoes
+implementadas na biblioteca libArvBin.c, juntamente com as diretivas
+#define e #include necessarias para que elas sejam executadas.
+3. apl.c
+4. questao.txt
+5. README
+6. Makefile  
+--------------------------------------
+RELATORIO DO QUE FOI FEITO EM CADA ITEM:
+1) libArvBin.c
+(a) BIBLIOTECA > feito
+(b) INSERCAO > feito
+(c) REMOCAO > --
+(d) BUSCA > feito
+(e) IMPRESSAO > feito
+(f) RotEsqComAlt e RotDirComAlt > --
+
+
+2) libArvBin.h > feito
+
+3) apl.c > feito
+
+4) questao.txt > feito
+
+5) README > feito
+
+6) Makefile > testado

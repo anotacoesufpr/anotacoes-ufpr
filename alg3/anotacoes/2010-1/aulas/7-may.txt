@@ -1,0 +1,9 @@
+ARV. PATRICIA
+
+eh uma arvore digital no qual cada nodo N possui uma chave e
+um indice bit K cujo valor de def. da seguinte forma:
+1) Se N eh a razao entre K eh o 1o bit no qual a chave difere
+de 0...0. Se a chave for 0, então K=O;
+2) Se N nao eh raiz, entao K eh o 1o bit no que a chave difere
+da chave do pai.
+Seja Kp o indice bit do pai. Se o bit Kp

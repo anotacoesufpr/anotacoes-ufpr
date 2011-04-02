@@ -1,0 +1,9 @@
+10. Rede em estrela montada com 4 switchs conectados em linha e cada um destes com 48 máquinas a 100
+Mbps
+* variar a quantidade de transmissores 30 / 40 / 50 / 60 transmissores
+* 10 receptores
+* cada transmissor gera 30 mensagens por segundo
+* atraso da transmissão 10 ms
+* simular 3 minutos de vida da rede
+* gerar gráñco da taxa de entrega e da latência da rede
+

@@ -1,0 +1,56 @@
+addi ri,r0,r0
+lui rv,%hi(v)
+ori rv,rv,%lo(v)
+
+lasso:
+	addi ri,ri,1
+	addi rv,rv,16
+	
+	lw ra,-16(rv)
+	lw rb,-12(rv)
+
+	div ra,rb
+	mflo rd #divisao
+	mfhi rm #mod
+
+	sw rd, -8(rv)
+	sw rm, -4(rv)
+
+	slt r3,ri,1024
+	bne r3,r0,lasso
+	nop
+
+numero de ciclos: 5+1024*23
+
+1) marcar todas as dependencias, independentemente de serem criticas
+ou nao.
+
+2) adicionar bolhas nas dependencias criticas.
+
+3) versao otimizada:
+
+addi ri
+lui rv
+ori rv,rv
+
+lasso:	addi rv,rv,16
+	addi ri,ri,1
+
+	lw ra,-16(rv)
+	lw rb,-12(rv0
+
+	slti r3,r1,1024
+
+	div ra,rb
+	mflo ra
+	mfhi rb
+
+	sw rd,-8(rv)
+
+	bne r3,r0,lasso
+	sw rm,-4(rv)
+
+numero de ciclos: 7+1024*16
+
+4) Desempenho:
+(17*1024+7)/(24*1024+5)

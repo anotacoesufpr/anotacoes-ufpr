@@ -1,0 +1,21 @@
+Trabalho 2 entrega na penúltima semana de aula
+ ->Silular uma rede ethernet no NS-2 com os parametros passados em sala.
+
+→ Resultados:
+	→ grafico com a taxa de entrega média   (impresso) fazer script
+	→ grafico com o traso médio de cada pacote de dados (impresso) fazer script
+->grafico no gnuplot e script(e-mail) que gera o grafico
+	
+NS
+/public/soft/linux/ns/ns-allinone2.30
+
+vale 1,0
+
+Tipo 3
+Rede em estrela montada como uma árvore, um switch principal, conectado com 5 switchs e cada um destes com 10 máquinas a 10Mbps
+# 30 transmissores
+# 10 receptores
+# cada transmissor gera 20 mensagens por segundo
+# variar o atraso da transmissão 1ms / 10ms / 100ms / 1000ms
+# simular 3 minutos de vida da rede
+# gerar gráfico da taxa de entrega e da latência da rede

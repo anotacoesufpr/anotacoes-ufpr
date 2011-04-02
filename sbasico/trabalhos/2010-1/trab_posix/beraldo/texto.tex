@@ -1,0 +1,250 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{hyperref}
+\usepackage[paper=a4paper,lmargin=1.5cm, rmargin=1.5cm, tmargin=1.6cm, bmargin=1.5cm]{geometry}
+
+
+\title{\textit{System Calls} - Chamadas ao Sistema}
+\author{Roberto Beraldo Chaiben - GRR 20084213}
+\date{30/06/2010}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\section{Definição}
+
+Uma \textit{System Call}, também chamada apenas de \textit{syscall}, consiste em uma função que é chamada pelo programador, a fim
+de executar tarefas do Sistema Operacional. Quando uma \textit{syscall} é chamada, o processo corrente é interrompído, temporariamente,
+passando a execução ao Sistema Operacional, que executa a operação solicitada no modo supervisor (administrador).
+
+
+\subsection{POSIX}
+
+
+\begin{quotation}
+
+POSIX (acrônimo para \textit{Portable Operating System Interface}, que pode ser traduzido como Interface Portável entre Sistemas Operacionais)
+é uma família de normas definidas pelo IEEE e designada formalmente por IEEE 1003, que tem como objetivo garantir a portabilidade do código-fonte
+de um programa a partir de um sistema operacional que atenda às normas POSIX para outro sistema POSIX. Desta forma as regras atuam como uma
+interface entre sistemas operacionais distintos. A designação internacional da norma é ISO/IEC 9945.
+
+\end{quotation}
+
+\begin{flushright}
+Fonte: http://pt.wikipedia.org/wiki/POSIX
+\end{flushright}
+
+
+As \textit{syscalls} utilizadas em Linux seguem o padrão POSIX.
+
+
+Em Linux, devido à existência do usuário \textit{root}, que detém acesso total ao sistema, somente ele pode realizar determinadas tarefas,
+como acesso a dispositivos de I/O (\textit{Input/Output} - Entrada/Saída). Logo, quando um processo executado em modo usuário comum precisa
+realizar esse tipo de tarefas, ele precisa solicitar essa ação ao superrvisor (Sistema Operacional). Para isso são utilizadas \textit{syscalls}.
+Ao chamar uma \textit{syscall}, o processo é interrompido e a execução passa ao modo \textit{root}, que executa a solicitação. Feito isso, o
+processo volta a ser executado normalmente, em modo usuário comum.
+
+
+Em assembly intel x86, podemos chamar uma \textit{syscall} da seguinte forma:
+
+\begin{verbatim}
+
+movl SYSCALL_NUMBER, %eax
+int 0x80
+
+\end{verbatim}
+
+\textbf{SYSCALL\_NUMBER} deve ser substituído pelo número da \textit{syscall} que se deseja chamar. O número da syscall é sempre movido
+ao registrador EAX. Os demais registradores recebem os parâmetros da syscall.
+
+
+
+\subsection{Win32}
+
+O funcionamento das syscalls em sistemas Windows é semelhante ao o que ocorre no padrão POSIX. 
+
+Para se chamar uma syscall win32 em assembly, usa-se o código abaixo:
+
+\begin{verbatim}
+movl SYSCALL_NUNBER, %eax
+int 0x2e
+\end{verbatim}
+
+Como se pode notar, a única diferença é o número da instrução, que passou de 0x80 para 0x2e.
+
+
+
+
+\section{Como Inserir uma Syscall no Kernel do Linux, na plataforma x86}
+
+
+\subsection{Versões das Ferramentas}
+
+Para a elaboração deste texto, usou-se o Kernel 2.6.32, obtido em http://www.kernel.org, e
+a distribuição Ubuntu, versão 10.04, 32 bits, rodando em uma máquina virtual do Virtual Box.
+
+
+\subsection{Arquivos Modificados}
+
+Assumiremos que os caminhos aqui presentes são relativos ao diretório raiz da distribuição do Kernel baixada e descomprimida
+a partir do site oficial, ou seja, o diretório \textbf{linux-2.6.32}, neste caso.
+
+Também assumiremos que o nome da syscall criada será \textbf{mysyscall}.
+
+\begin{itemize}
+
+	\item arch/x86/kernel/syscall\_table\_32.S
+	\item include/asm/unistd\_32.h
+	\item arch/x86/include/asm/syscalls.h
+	\item Makefile
+
+\end{itemize}
+
+
+\subsection{Diretórios e Arquivos Criados}
+
+É preciso criar um diretório na raiz do diretório do Kernel, que conterá o arquivo fonte e o Makefile para a nova syscall.
+Supondo que a syscall se chamará \textbf{mysyscall}, criaremos o diretório \textbf{mysyscall}. Nele, criaremos os seguintes
+arquivos (caminhos a partir da raiz do Kernel):
+
+\begin{itemize}
+
+	\item mysyscall/mysyscall.c
+	\item mysyscall/Makefile
+
+\end{itemize}
+
+
+\subsection{Modificações em arch/x86/kernel/syscall\_table\_32.S}
+
+Aofinal desse arquivo deve ser inserida a seguinte linha:
+
+\begin{verbatim}
+.long sys_mysyscall
+\end{verbatim}
+
+
+\subsection{Modificações em include/asm/unistd\_32.h}
+
+Toda syscall possui um número (ID único). Esse arquivo relaciona a nova syscall a um número. Deve-se verificar o último número
+utilizado e somarmos uma unidade para termos o ID da nova syscall. Supondo que o último número utilizado seja 1079, a linha a
+ser inserida no final do arquivo será:
+
+\begin{verbatim}
+#define __NR_mysyscall 1080
+\end{verbatim}
+
+
+\subsection{Modificações em arch/x86/include/asm/syscalls.h}
+
+Esse arquivo contém os cabeçalhos de todas syscalls. Vamos adicionar a seguinte linha no final do arquivo:
+
+
+\begin{verbatim}
+asmlinkage long sys_mysyscall(void);
+\end{verbatim}
+
+O identificador \textit{asmlinkage} deve estar presente no início de todos os protótipos de syscalls. Estamos
+considerando uma syscall sem parâmetros, por isso a palavra \textit{void}.
+
+
+\subsection{Modificações no Makefile}
+
+Adicionar na linha onde há \textbf{core-y +=} (653 no Makefile utilizado) o nome do diretório onde ficará o fonte da syscall
+(mysyscall, nesse caso).
+
+
+\subsection{Conteúdo de mysyscall/mysyscall.c}
+
+Nesse arquivo ficará o código-fonte da nova syscall. 
+
+Toda implementação de syscall deve incluir "linux/linkage.h".
+
+
+\begin{verbatim}
+#include "linux/linkage"
+
+asmlinkage int sys_mysyscall(void)
+{
+    // implementação da syscall
+}
+\end{verbatim}
+
+
+\subsection{Código de mysyscall/Makefile}
+
+O Makefile para a nova syscall conterá apenas isto:
+
+
+\begin{verbatim}
+obj-y := mysyscall.o 
+\end{verbatim}
+
+
+\begin{verbatim}
+
+\end{verbatim}
+
+
+
+
+
+
+
+
+
+
+\section{Referências}
+
+\begin{itemize}
+
+	\item Criação de System Calls em Linux e Compilação de Kernel:
+	
+	\begin{itemize}
+	
+		\item http://tldp.org/HOWTO/html\_single/Implement-Sys-Call-Linux-2.6-i386/
+		\item http://www.csee.umbc.edu/courses/undergraduate/CMSC421/fall02/burt/projects/howto\_add\_systemcall.html
+		\item http://courses.cs.vt.edu/\~cs3204/spring2004/Projects/2/InstructionsToAddSystemCallToLinux\_rev00.pdf
+		\item http://gerencievocemesmo.com.br/site/?p=281
+		\item http://www.falkotimme.com/howtos/debian\_kernel2.6\_compile/
+	
+	\end{itemize}
+	
+	
+	\item Definições de System Calls:
+	
+	\begin{itemize}
+	
+		\item http://www.softpanorama.org/Internals/unix\_system\_calls.shtml
+		\item http://www.symantec.com/connect/pt-br/articles/windows-syscall-shellcode
+		\item http://msdn.microsoft.com/pt-br/library/aa908825.aspx
+		\item http://www.codeguru.com/Cpp/W-P/system/devicedriverdevelopment/article.php/c8035/
+	
+	\end{itemize}
+
+\end{itemize}
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+Sim, eh possivel. Basicamente devemos inserir o novoNo
+da mesma maneira que qualquer arvore Binaria.
+Apos a insercao ter sido feita, devemos fazer sucessivas
+rotacoes ateh que o novoNo seja a raiz.
+
+Algoritmo em formato de pseudo-código que explica bem o processo:
+inserir(_,_)
+		se nodoNull
+			return cria(no);
+		se (CHAVE_INSERIR < noAtual) { 
+       no->esquerdo = inserir(no->esquerdo, CHAVE_INSERIR); 
+       no = rotacaoDireita(no); 
+    } 
+    senao { 
+       no->direito = inserir(no->direito, CHAVE_INSERIR); 
+       no = rotacaoEsquerda(no); 
+    }
+		return no
+
+Sendo que rotacaoDireita(no) e rotacaoEsquerda(no) devolvem
+a nova posicao do novoNo apos a rotacao.
+
+Para que a árvore continue balanceada, devemos depois de cada
+rotacao acima chamar a funcao de balanceamento.

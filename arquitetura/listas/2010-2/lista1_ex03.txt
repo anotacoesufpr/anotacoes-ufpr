@@ -1,0 +1,28 @@
+3.
+
+Há tres tipos de endereçamento:
+
+Tipo R:
+	Usada em operaçoes com registradores, geralmente instruṍes mateḿaticas
+	
+	opcode: 5 bits
+	rs: 6 bits
+	rt: 5 bits
+	rd: 5 bits
+	shamt: 5bits
+	funct: 6 bits
+
+Tipo I:
+	Utilizada em instruçoes com constantes (imediatos).
+	
+	opcode: 6 bits
+	rs: 5 bits
+	rt: 5 bits
+	imediato: 16 bits
+
+TIpo J:
+	Usada em desvios (jumps):
+	
+	opcode: 6 bits
+	endereço: 26 bits
+

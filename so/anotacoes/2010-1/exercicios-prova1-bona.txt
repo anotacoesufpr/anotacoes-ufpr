@@ -1,0 +1,123 @@
+1. Os serviços e funções oferecidas por um sistema operacional podem ser
+divididas em duas categorias. Descreva brevemente as duas categorias
+e discuta como elas se diferem.
+
+2. Liste 5 (cinco) serviços, oferecidos por um sistema operacional, que são 
+projetados para tornar o sistema de computação mais conveniente 
+para os usuários. 
+
+3. O que são System Calls, cite 4 exemplos.
+
+4. Os sistemas operacionais podem ser construídos de diferentes maneiras. Descreva 
+as principais arquiteturas existentes.
+
+5. Descreva as ações tomadas pelo kernel para fazer a troca de contexto
+entre processos.
+
+6. Explique o que são os anéis de execucação. Qual a diferença entre
+código executando no nível 0 e em outros níveis. 
+
+7. O que são processos, e quais os estados que podem assumir?
+
+8. O que são threads? Em que diferem de processos convecionais?
+
+8.1. As principais seções de um processo são Pilha, Heap, Dados e 
+Código.  Quais destas seções podem e/ou devem ser compartilhadas
+entre threads?
+
+9. Mostre um exemplo de uso do fork(). Explique quais são
+os valores retornados pela função.
+
+10. Na criação de processos utilizando fork() um novo processo
+é criado com a imagem do processo pai. Como o kernel Linux evita 
+a necessidade de realizar esta cópia no momento da chamada do fork?
+
+11. O que significa escalonamento preemptivo? 
+
+12. O que significa dizer que o Kernel também é preemptivo?
+
+13. O que é starvation? Mostre um algoritmo que poderia levar
+a essa condição.
+
+14. O que é um deadlock? Mostre um um algoritmo que pode entrar
+em deadlock.
+
+15. Quais dos seguintes algoritmos de escalonamento podem levar 
+a "starvation" e porque?
+	a) First-come, Fist-served
+	b) Shortest job first
+	c) Round Robin
+	d) Priority
+
+16. Que técnica é usada para evitar que um processo em um algoritmo de escalonamento
+por Multilevel Feedback-Queue nunca execute?
+
+17. Mostre como funciona a solução de alternância estrita. Explique
+qual é sua limitação na prática.
+
+18. O que é o problema da Região Crítica? Mostre um exemplo onde
+não tratá-lo poderia levar a um erro. 
+
+19. O que são semáforos? Mostre um exemplo de uso.
+
+20. Mostre uma solução usando semáforos para o problema "Bounded-Buffer" 
+
+21. Mostre uma solução usando semáforos para o problema "Readers-Writers" 
+
+22. Mostre uma solução usando semáforos para o problema "Dining-Philosophers" 
+
+23. O que é copy-on-write e sob quais circunstâncias ela é útil?
+
+24. Explique o que é segmentação e paginação.  
+
+25. Explique o que é endereço lógico, endereço linear e endereço
+físico. Qual unidade (paginação ou segmentação) é responsável por
+converter cada um destes endereços.
+
+26. A segmentação em no Kernel Linux não é usada intensamente, porque?
+Também diga quais são os 4 principais segmento utilizados neste sistema operacional.
+
+27. No kernel Linux executando na arquitetura x86 como é feito
+o Acesso Rápido aos Descritores de Segmento?
+
+28. Explique a diferença entre fragmentação interna e externa.
+
+29. Que esquema de paginação é utilizado para mapear mais que 4GB na
+arquitetura x86 de 32 bits?
+
+30. Dadas partições de memória de 100KB, 500KB, 200KB, 300KB e 600KB (em
+ordem), como cada um dos algoritmo: Fist-fit, best-fit e worst-fit, alocariam
+processos de 212Kb, 417Kb, 112KB e 426KB? Qual dos algoritmos faria
+o uso mais eficiente de memória.
+
+31. Explique os seguintes algoritmos para substituição de páginas (page
+replacement): FIFO, Optimal e LRU. No caso do LRU, você deve explicar
+quais são as políticas de aproximação para o LRU.
+
+32. Como funciona o mapeamento de arquivos em  memória, qual a vantagem
+de utilizar esse modo de acesso. 
+
+33. O que é o modo de alocação de memória "Buddy System". Qual a sua
+desvantagem?
+
+34. O que é o mecanismo de alocação chamado SLAB?
+
+35. O que é o Overcommit de memória? Quais as possíveis configurações
+para a váriavel de kernel /proc/sys/vm/overcommit_memory no kernel 2.6?
+
+36. No kernel Linux qual é a chamada de sistema utilizada para aumentar o
+heap do processo? Qual sua relação com a função malloc()?
+
+37. Em que momentos é executado o algoritmo de "Page Frame Reclaiming"?
+
+38. Considerando algoritmo de "Page Frame Reclaiming" o que acontece
+quando os processos de usuários começam a consumir mais memória?
+
+39. Qual a relação entre o espaço de endereçamento de um processo
+e a utilização da memória física?
+
+40. No Linux o que significa dizer que a memória virtual de um
+processo é 50MB, a memória residente 20MB e a memória compartilhada
+10MB.
+
+ 

@@ -1,0 +1,100 @@
+1. Autoria do Software
+2. Estrutura de Diretórios e Arquivos
+3. Instruções de Compilação
+4. Breve Descrição dos Algorítmos e Estruturas de Dados
+5. Bugs Conhecidos
+6. Outras Informações
+
+
+1. Autoria do Software
+
+	O software foi desenvolvido por:
+		
+		ROBERTO BERALDO CHAIBEN, GRR20084213, login: rbc08
+
+
+
+2. Estrutura de Diretórios e Arquivos
+
+	 /bin/
+	 	Diretório onde ficam os arquivos binários compilados e o executável final.
+	 
+	 /html/
+	 	Diretório onde será armazenada a documentação HTML gerada pelo Doxygen.
+	 
+	 /src/Doxyfile
+	 	Arquivo de configuração do Doxygen
+	 
+	 /src/error.{c,h}
+	 	Arquivo error.c, responsável pela manipulação de erros, e seu respectivo headerfile error.h.
+	 
+	 /src/files.{c,h}
+	 	Arquivo files.c, que manipula arquivos, e seu respectivo headerfile .h.
+	 
+	 /src/global.{c,h}
+	 	Arquivo global.c, o qual contém as funções globais do programa, como início, finalização, movimento de jogador. O respectivo headerfile (globa.h) contém não somente os protótipos das funções, mas, também, as definições das constantes do jogo, enumerações, estruturas e definições de tipo (typedef's).
+	 
+	 /src/header.html
+	 	Cabeçalho personalizado da documentação HTML.
+	 
+	 /src/labirinto.c
+	 	Arquivo principal do programa. Contém a função main.
+	 
+	 /src/Makefile
+	 	Arquivo Makefile.
+	 
+	 /src/memory.{c,h}
+	 	Arquivo memory.c, responsável pela manipulação de memória, e seu respectivo headerfile memory.h.
+	 
+	 /src/my_regex.{c,h}
+	 	Arquivo my_regex.c, que implementa funções usando Expressões Regulares (ER's), e o respectivo headerfile my_regex.h.
+	 
+	 /src/stylesheet.css
+	 	Arquivo CSS personalizado para a documentação HTML.
+	 
+	 
+
+3. Instruções de Compilação
+
+	Dentro do diretório /src/, execute o seguinte comando:
+	
+	$ make
+	
+	Após a compilação bem-sucedida, os arquivos .o e o programa executável estarão no diretório /bin/. Para executá-lo, proceda da seguinte forma (considerando que você, ainda, está no diretório /src/):
+	
+	$ ../bin/labirinto -i -l arquivo_de_entrada [-o arquivo_de_saida]
+	
+	O arquivo de saída é opcional, por isso está entre colchetes.
+
+
+
+4. Breve Descrição dos Algorítmos e Estruturas de Dados
+
+	4.1 Estruturas de Dados
+	
+		Há, basicamente, duas estruturas de dados responsáveis pelo armazenamento das informações concernetes ao jogador e ao labirinto. São elas:
+		
+			* struct_labirinto (tLABIRINTO) -> armazena o mapa e seus respectivos números de linhas e colunas. Também são armazenados nessa estrutura os nomes dos arquivos de entrada e de saída. Há também, o número e as respetivas coordenadas das saídas, portas e chaves. Essas informações são úteis para a implementação do modo batch.
+			
+			* struct_jogador (tJOGADOR) -> Nessa estruutra são armazenados o raio de visão atual, a posição do jogador no labirinto, o modo do jogo, além de valores (0 ou 1) que informam se o jogador possui uma determinada chave. Há, também, uma estrutura que armazena as posições por onde o jogador já passou (passos do jogador).
+			
+		4.2 Principais Algorítmos
+		
+			O programa usa a interface NCurses, sendo necessário ter essa biblioteca instalada a fim de compilar o código.
+			O processamento das opções de linha de comando é realizado pela função getopt(), que requer a biblioteca unistd.h. 
+			Após o processamento bem-sucedido das opções, é iniciada a NCurses, criados os pares de cores que serão utilizados no jogo. Carrega-se o mapa de um arquivo binário ou texto, conforme o mime-type dele. O arquivo binário corresponde ao arquivo gerado pelo jogador, ao pressionar a tecla P e pausar o jogo.
+			Em seguida, inicia-se o jogo, que é um loop que se encerra quando o jogador pausa o jogo, sai dele ou encontra a saída.
+			A implementação do raio de visão é simlpes: basta definir em quais posições o mapa deverá começar e terminar de ser exibido.
+
+
+
+5. Bugs Conhecidos
+
+
+	Arquivo memory.c, na função aloca_memoria_passos:
+		Se não houver mais memória no vetor de passos, deveriam ser alocadas mais posições, para os passos, mas a função realloc() não está sendo executada na totalidade do loop. Constam mais informações no código-fonte dessa função.
+
+
+6. Outras Informações
+
+	O modo batch não foi implementado, devido à falta de tempo. A estrutura de dados para essa implementação, porém, existe.

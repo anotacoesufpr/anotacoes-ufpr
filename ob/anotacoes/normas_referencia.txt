@@ -1,0 +1,40 @@
+Livro:
+
+	SOBRENOME, Prenome. Título:  subtítulo. Nota de tradução.* Edição.** Local: Editora, ano de publicação. nº de pág. (opcional) (Série) (opcional)
+
+	Exemplo:
+
+	WEISS, Donald. Como Escrever com Facilidade. São Paulo: Círculo do Livro, 1992.
+
+
+Periódico:
+
+	TÍTULO DA PUBLICAÇÃO. Local: editor, ano do primeiro volume e do último, se a publicação terminou. Periodicidade (opcional). Notas especiais (títulos anteriores, ISSN, etc.) (opcional).
+
+	Exemplo:
+
+	EDUCAÇÃO & REALIDADE. Porto Alegre: UFRGS/FACED, 1975-
+
+
+
+Capítulos de livro:
+
+	SOBRENOME, Prenome (autor do capítulo). Título. In: SOBRENOME, Prenome (autor da obra no todo). Título. Local: Editora, ano. pág. inicial e final.
+
+	Exemplo:
+
+	SCHWARTZMAN, Simon. Como a Universidade Está se Pensando? In: PEREIRA, Antonio Gomes (Org.). Para Onde Vai a Universidade Brasileira? Fortaleza: UFC, 1983. P. 29-45.
+
+	ou
+
+	CECCIM, Ricardo Burg. Exclusão e Alteridade: de uma nota de imprensa a uma nota sobre a deficiência mental. In: EDUCAÇÃO e Exclusão: abordagens sócio-antropológicas em educação especial. Porto Alegre: Mediação, 1997. P. 21-49.
+
+
+
+
+
+
+
+
+
+

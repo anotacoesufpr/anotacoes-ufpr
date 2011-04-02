@@ -1,0 +1,63 @@
+Uma universidade urbana conta com 5 prédios espalhados em 1 campus de acordo com a figura abaixo
+
+Matemática----------------Quimica
+   |                       |
+   |                       |
+   |                       |
+Filosofia----------------Fisica-------Administração
+
+Os prédios estão a poucas centenas de metros uns dos outros
+=>Rede atual
+ -> Física
+  -10 andares
+  -Rede 10 Base 2
+  -100 computadores linux
+  -conexão a internet através de 3 computadores com modem discado 33Kbps
+  -1 cluster com 10 máquinas no porão
+  -5 servidores para processamento de aplicações específicas dos usuários
+ -> Matemática
+  -10 andares
+  -Rede 10 Base T
+  -cabo cat3
+  -50 máquinas
+  -6 hubs de 12 portas cada localizados no porão
+  -Sem conexão com a internet
+ ->filosofia
+  - Prédio de 5 andares
+  - 20 computadores
+  - nenhuma rede
+  - cada computador tem um modem discado de 14400 bps
+ -> Quimica
+  - 5 andares
+  - 50 máquinas
+  - Rede 10 Base 5
+  - 5 servidores no porão
+  - sem conexão com a internet
+ -> Administração
+  - 3 andares sendo o último exclusivo da reitoria
+  - 10 máquinas
+  - 1 servidor de BD no último andar
+  - Rede 10 Base 2
+  - Sem conexão com internet
+=> Conexão entre prédios
+   -> Token Ring porém sem tráfego atualmente
+=> A nova rede deve
+a) aceitar um crescimento de 300% dos pontos de rede (switch com 3/4 das portas disponíveis)
+b) Deve padronizar as redes de todos os prédios (ethernet 
+c) Deve considerar um GRANDE aumento de volocidade de comunicação
+d) Deve permitir o acesso a internet de TODAS as máquinas
+e) Posicionamento dos servidores pode mudar
+f) Considerar 2x mais servidores
+g) Acesso a internet deve suportar o trafego
+h) Montar um servidor de e-mail com acesso de qualquer máquina do campus.
+i) professores devem poder acessar o servidor de BD de qualquer lugar do campus
+j) Alunos não devem poder acessar o servidor de BD
+k) Os prédios da Física e da matemática devem ter sinal de rede sem fio cobrindo todo o prédio
+l) Todas as muinas devem ter endereços IP
+m) Os prédios devem ser interconectados
+n) último andar do prédio da administração deve ser isolado do resto
+=> Fazer diagrama desta nova rede inerna e externa (impresso)
+=> Entregar estimativa de custo de TODOS os componentes necessários a implantação (impresso)
+=> Entregar detalhamento dos endereços IP/máscaras/broadcast utilizados. (impresso)
+
+listar os preços com a fonte. marca e modelo.

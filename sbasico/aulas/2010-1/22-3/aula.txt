@@ -1,0 +1,17 @@
+pushl %ebp
+movl %sp, %ebp
+
+ebp deve ser ajustado a cada entrada de procedimento
+em C apenas um registro de ativacao fica ativo no momento
+
+ebp+algo = parametros
+ebp = I.G.
+ebp-algo = variaveis locais
+
+---
+memoria -> cpu -> memoria
+NUNCA: memoria -> memoria
+---
+retorno de procedimento sempre em EAX
+---
+

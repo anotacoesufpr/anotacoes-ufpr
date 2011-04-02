@@ -1,0 +1,38 @@
+ARVORE B
+
+GRAU T:
+	nodos:
+		min: t-1 chaves
+		max: 2t -1 chaves
+
+REMOCAO:
+1) folhas > apenas remove a chave
+2)
+- nodo interno > procurar sucessor ou antecessor
+- joga o valor no local da chave a ser removida
+
+ALGORITMO:
+
+remove(Apontador Reg, Apontador x, Chave K)
+	indK = buscaNodo(x,k)
+	esq = p[indK](x)
+	Se indK > sen(x)
+		du = NULL
+	Se nao
+		du = p[indK+1](x)
+	Se != NULL e chave[indK](x) = K
+		Se folha(x)
+			"removo x de x"
+		Se nao
+			/*n eh filho, mas adou x */
+			Se num(esq) >= t
+				precK=predecessor(esq,k)
+				remove (raiz, x, precK)
+				chave[indK](x) = predK
+			Se nao
+				succK = acessor ( du,k )
+				remove( raiz, s, sucK )
+				chave[indK](x) = succK
+			Se nao
+				  = merge(indK,x)
+				se x = raiz

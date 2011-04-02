@@ -1,0 +1,5 @@
+ALGORITMO KMP
+
+janelas de tamanho X e verifica em janelas
+
+pi: calcula o maior sufixo que tb seja prefixo

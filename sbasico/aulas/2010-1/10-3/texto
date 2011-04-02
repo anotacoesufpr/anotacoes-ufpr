@@ -1,0 +1,4 @@
+A: .int 0
+B: .int 0
+
+sem o "0" A e B terao o mesmo endereco

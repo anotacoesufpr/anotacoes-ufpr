@@ -1,0 +1,23 @@
+P_VALOR BAIXO > REJEITA H0 > HA DIFERENCA DE PELO MENOS UM
+
+
+1) D.M.S. = 4,2*(SQRT(12826/4)=237,83
+
+ORDENANDO AS MEDIAS EM ORDEM DECRESCENTE:
+
+|1-2|=185,25
+|1-3|=37,25
+|1-4|=304,75*
+|2-3|=222,5
+|2-4|=490*
+|3-4|=267,5*
+
+
+T	MEDIAS		DIFERENCAS
+2	3156,23			a
+1	2971,00			a
+3	2933,75			a
+4	2666,25				b
+
+Pior tipo de mistura: tipo 4
+Melhor tipo demistura: 2, 1 e 3. Pois nao ha diferenca significativa entre eles.

@@ -1,0 +1,46 @@
+7.
+
+pseudoinstrução		=>  tradução
+
+move $t1, $t2		=>  add $t1, $t2, $0
+
+clear $t5			=>  and $t5, $t5, $0
+
+beq $t1. peq, L		=> 
+
+beq $t1, gde, L		=>  lui $t0, upper(gde)
+						ori $t0, $t0, lower(gde)
+						beq $t0, $t1, L
+
+li $t1, peq			=>  ori $t1, $0, peq
+
+li $t2, gde			=>  lui $t0, upper(gde)
+						ori $t0, $t0, lower(gde)
+
+ble $t3, $t4, L		=>  sgt $t0, $t3, $t4
+						bne $t0, $0, L
+
+bgt $t5, $t6, L		=>  sgt $t0, $t5, $t6
+						bne $t0, $0, L
+
+bge $t5, $t6, L		=>	sge $t0, $t5, $t6
+						bne $t0, $0, L
+
+addi $t0, $t2, gde	=>  lui $t3, upper(gde)
+						ori $t3, lower(gde)
+						add $t0, $t2, $t3
+
+lw $t5, gde($t2)	=>  lui $t0, upper(gde)
+						ori $t0, $0, lower(gde)
+						add $t2, $t2, $t0
+						lw $t5, 0($t2)
+
+abs $t3, $t2		=>  bge $t2, 0, POS
+						# inverter os bits e somar uma unidade
+						xori $t2. $t2, 1 # inverte os bits
+						addi $t3, $r2, 1 # soma 1
+						POS:
+
+
+
+

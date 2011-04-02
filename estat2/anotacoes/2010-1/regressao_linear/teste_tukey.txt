@@ -1,0 +1,18 @@
+USADO PARA COMPARAR AS MEDIAS DE TRATAMENTOS UTILIZANDO-SE DE
+COMPARACAO DE MEDIAS OU CONTRASTES!!
+
+
+
+1)DELTA(ALPHA) = DIFERENCIA MINIMA SIGNIFICATIVA (D.M.S.) = 
+= q * SQRT (QMRes/r)
+q = tabela da pagina 143, teste de tukey
+
+SE O CONTRASTE FOR MAIOR QUE O DELTA(ALPHA), ENTAO
+AS MEDIAS DIFEREM AO NIVEL ALPHA DE SIGNIFICANCIA.
+
+2) ORDENAMOS EM ORDEM DECRESCENTE AS MEDIAS EM UMA TABELA
+
+se a diferenca for significativa, ela sera considerada.
+
+marca-se uma letra para uma diferenca significativa entre medias
+(acima do delta(alpha))

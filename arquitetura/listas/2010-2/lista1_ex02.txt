@@ -1,0 +1,8 @@
+2.
+
+O grande problema das instruções da plataforma 80x86 é a falta de
+padronização. Há instruções de diferentes tamanhos, como instruções
+de 1 byte, 17 bytes ou 32 bytes. Isso caracteriza arquitetura CISC
+(Complex Instruction Set Computer). Nesse tipo de arquitetura, os
+bytes iniciais das instruções são utilizados para indicar o tamanho
+da instrução. Isso dificulta a implementação do hardware.

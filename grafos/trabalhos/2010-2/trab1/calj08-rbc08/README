@@ -1,0 +1,28 @@
+Trabalho 1 da disciplina CI 065 - Algoritmos e Teoria dos Grafos
+
+
+Autores:
+	Carlos Augusto Ligmanowski Júnior - GRR 20081238 - calj08
+	Roberto Beraldo Chaiben - GRR 20084213 - rbc08
+
+
+Estrutura de Diretórios
+
+	Os arquivos fontes encontram-se no diretório src.  O subdiretório libs contém as classes utilizadas para implementar
+	os algoritmos.
+
+
+Compilação e Execução
+
+	Para compilar, execute o seguinte comando, no diretório raiz do trabalho:
+	
+	$ make
+	
+	Os atquivos bfs e dfs serão criados no diretório raiz do trabalho - o mesmo do Makefile.
+	
+	
+	Para executar, basta:
+	
+	./dfs < grafo
+	e
+	./bfs < grafo

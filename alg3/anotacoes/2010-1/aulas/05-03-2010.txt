@@ -1,0 +1,17 @@
+Arvore de pesquisa
+ - Arvore Binaria sem balanceamento
+ motivo: comprimento da raiz ateh as folhas sao diferentes
+
+ Ordens
+  - pre-ordem
+    visita primeiro as chaves esquerdas, depois as direitas
+
+  - em-ordem ou central
+   
+  - pos-ordem
+    contrario da pre-ordem
+
+  - Arvore Binaria com balanceamento
+  motivo: evita que a arvore vire uma lista (no caso de 
+insercao de termos em sequencia crescente e decrescente)
+

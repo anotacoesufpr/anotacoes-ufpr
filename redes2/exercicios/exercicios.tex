@@ -1,0 +1,777 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage[pdftex,pagebackref=true,colorlinks=true,linkcolor=blue,unicode]{hyperref}
+\usepackage[paper=a4paper,lmargin=2.0cm, rmargin=2.0cm, tmargin=2.0cm, bmargin=2.0cm]{geometry}
+\usepackage{graphicx}
+\usepackage{makeidx}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{indentfirst}
+
+\title{\textit{REDES II} - Exercícios Resolvidos}
+\author{fpk07@c3sl.ufpr.br\\rbc08@inf.ufpr.br}
+%\date{}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\section{Introdução}
+
+
+Este material contém apenas as listas de exercícios 1 e 2 da disciplina de Redes
+II resolvidos.\\
+
+Devido a restrições, o material anteriormente presente aqui teve de ser
+removido, permanecendo apenas os exercícios.\\
+
+As respostas aos exercícios foram contribuições de diversos alunos. Logo, pode
+haver erros. Caso você detecte algum equívoco, favor reportar a um dos emails
+presentes na primeira página deste material.\\
+
+
+%=======================+
+% Listas de Exercícios  |
+%=======================+
+
+\section{Listas de exercícios}
+
+\subsection{Lista 1 de exercícios:}
+
+\begin{enumerate}
+	\item O que é um protocolo?
+	\\R: Um protocolo é um método standard que permite a comunicação entre processos (que se executam eventualmente em diferentes máquinas), isto é, um conjunto de regras e procedimentos a respeitar para emitir e receber dados numa rede.
+
+	\item Quais as principais diferenças do modelo ISO/OSI para o modelo TCP/IP da Internet. Faça um
+elo das camadas de cada modelo. Mostre claramente a correspondência de camadas.
+	\\R: O modelo OSI
+descreve um grupo fixo de sete camadas que pode ser comparado, a grosso modo, com o modelo TCP/IP.\\
+O modelo inicial do TCP/IP é baseado em 4 níveis: Host/rede; Inter-rede; Transporte; e Aplicação.
+Surgiu, então, um modelo híbrido, com 5 camadas, que retira o excesso do modelo OSI e melhora o
+modelo TCP/IP: Física; Enlace; Rede; Transporte; e Aplicação.\\ Segundo Tanenbaum o Modelo TCP/IP
+possui somente quatro camadas e não cinco.
+	\\ \\
+	Relações entre o modelo TCP/IP com o OSI, respectivamente:\\
+	Camada de aplicação : (sessão, apresentação e aplicação) \\
+	Transporte : (sessão e transporte)\\
+	Inter-rede : (camade de rede) \\
+	Interface de rede ou Link de dados : (camada de enlace)\\
+	Interface com a rede : (camada física)
+
+	\item Por que as redes locais necessitam de um protocolo de Controle de Acesso ao Meio (MAC)?
+	\\R: Dentro da camada de enlace, provê um canal de comunicação e um endereçamento que
+possibilitará a conexão entre diversos computadores numa rede.
+
+ 	\item Explique o funcionamento do protocolo de Controle de Acesso ao Meio da Ethernet, o CSMA/CD.
+	\\R: A resposta aqui fornecida será uma cópia da apostila de Redes 1 do mesmo autor dessa
+postila.\\
+O CSMA/CD \textit{Carrier Sense Multiple Access with Collision Detection} é
+caracterizado por todos os nós enquanto transmitem, também escutem (L.W.T. ou
+Listen While Talk). Quando ele detecta uma colisão na rede, ele emite um sinal
+chamado JAM, de 48 bytes, para anunciar que ocorreu uma colisão. Para evitar uma
+nova colisão, ele espera um tempo aleatório e tenta transmitir novamente.\\
+O CSMA/CD garante 95\% de taxa de entrega; O menor pacote no CSMA/CD é de 64
+bytes; Embora pareça uma informação superficial, é muito importante pois já foi
+uma questão de diversas provas. Esse sistema de colisão, usado no modelo
+Ethernet, exige que o menor pacote válido seja de 64 bytes; O maior pacote será
+de 1518 bytes, mas essa não é uma informação importante.\\
+Mas por qual motivo 64 bytes? Em redes até 100mbps, 64bytes é a quantia de bytes
+necessária para tentar garantir que quando o byte número 63 (último byte) estiver sendo
+transmitido, o primeiro byte já tenha chegado, ocupando todo o "cabo" ou "túnel"
+entre a origem e o destino; Para redes fast ethernet (como a de 100mB/s) foi
+necessário aumentar o tamanho do pacote mínimo (512bytes).
+
+Passo-a-passo:
+
+\begin{enumerate}
+        \item Se o canal está livre, inicia-se a transmissão, caso contrário vai para o passo "e";
+        \item (transmissão da informação): Se uma colisão é detectada, a
+transmissão continua até que o tempo mínimo para o pacote seja alcançado (para
+garantir que todos os outros transmissores e receptores detectem a colisão),
+então segue para o passo "e";
+        \item (fim de transmissão com sucesso): Informa sucesso para as camadas de rede superiores,
+sai do modo de transmissão;
+        \item (canal está ocupado): Espera até que o canal esteja livre;
+        \item (canal se torna livre): Espera-se um tempo aleatório, e vai para o passo "b", a  menos
+que o número máximo de tentativa de transmissão tenha sido excedido;
+        \item (número máximo de tentativa de transmissão excedido): Informa
+falha para as camadas de rede superiores e sai do modo de transmissão;
+
+\end{enumerate}
+
+	\item Ethernet é uma rede probabilística, que não pode ser aplicada em ambientes industriais. A rede Field Bus visa este tipo de aplicação, sendo uma rede determinística. Descreva em linhas gerais o funcionamento desta rede, em particular deixe claro como o determinismo é alcançado na comunicação.
+	\\R: Topologia de barramento, mas funcionamento lógico de anel. Tem o funcionamento da Token Ring, portanto é orientada à conexão (não embaralha os pacotes) e não tem colisão de pacotes. Além disso, cada máquina tem sua carga garantida na rede.
+
+	\item Compare o desempenho da rede Ethernet com o da rede Token Ring, considerando as mesmas taxas de transmissão para as duas redes, e situações de alto e baixo tráfego na rede.
+	\\R: Quando há bastante tráfego na rede, a rede Token Ring oferece melhor desempenho, pois não haverá colisão de dados e o tráfego vai através de uma única rota à máquina destino. Quando há baixo tráfego, a Token Ring pode perder bastante desempenho uma vez que o Token fica um X tempo em cada máquina, podendo fornecer tempo desnecessário a máquinas com baixa prioridade de tráfego e/ou pouco tráfego a ser transferido; Já na ethernet, no caso de baixa quantidade de tráfego, as máquinas terão várias rotas para onde os dados podem seguir e mais de uma máquina poderá transmitir ao mesmo tempo, e a colisão de dados não necessariamente a tornará mais lenta se comparada à Token Ring.
+
+	\item Qual a diferença de um código de correção de erros para um código de detecção de erros? Se você recebeu a palavra 0100010 codificada com o Código de Hamming, qual bit está incorreto?
+	\\R: O código de detecção de erros consegue identificar quando um ou mais bits sofreram alteração de acordo com algum método de avaliação. O código de correção de erros consegue, por algum método, descobrir quais alterações ocorreram e modifica-as na tentativa de recuperar a versão original das sequências de bits.
+	\\O código de Hamming recebido é o: 0100010
+	\\(1) Abre espaço nas potências de 2: \_ \_ 0 \_ 0 1 0 
+	\\(2) Nos bits de não potência de dois, faz-se a soma com os maiores decimais que sejam potência de dois.
+	\\Exemplificando, vamos numerar as casas:
+	\\ \_ \_ 0 \_ 0 1 0
+	\\  1 2 3 4 5 6	7
+	\\
+	\\Bit 3: 2+1
+	\\Bit 5: 4+1
+	\\Bit 6: 4+2
+	\\Bit 7: 4+2+1
+	\\(3) Verifica-se a paridade dos bits. Exemplicando será a melhor explicação:
+	\\\textbf{Bit de paridade 1:} Temos três bits que contém na soma "+1" e que são três "0", logo precisamos de mais um 0, que será colocado no bit de paridade 1.
+	\\\textbf{Bit de paridade 2:} Temos três bits que contém na soma "+2", sendo dois "0" e um "1", logo precisamos de mais um 1, que será colocado no bit de paridade 2.
+	\\\textbf{Bit de paridade 4:} Temos três bits que contém na soma "+4", dois "0" e um "1", logo precisamos de mais um 1, que será colocado no bit de paridade 4.
+	\\Agora nós temos o código de Hamming correto:
+	\\0101010
+	\\Comparando com a mensagem recebida, percebemos que o bit número 4 foi alterado.
+	\\Marca-se todas as posições que estão erradas. Nesse caso apenas a 4. Soma-se todas as posições, caso exista mais de uma errada. O valor final dessa soma é o bit errado que, para ser corrigido, deve ser trocado pelo seu oposto.
+	\\No nosso exemplo, a soma resultará em 4 sendo, portanto, o bit 4 errado.
+	\\\textbf{Importante:} O código de Hamming detecta apenas um bit errado.
+
+	\item Considere que a sequência de palavras 0011, 0101 e 1010 acaba de chegar da Internet, junto com o checksum 1100. Algum bit veio errado? Mostre claramente como você chegou na resposta.
+	\\(1) Somas as palavras + o checksum
+	\\  0011
+	\\  0101
+	\\  1010
+	\\  1100
+	\\  ----
+	\\ 11110
+	\\ Bit de carry ativado!
+	\\(2) Como há bit de carry, soma-se ele ao resultado da soma das palavras:
+	\\  1110
+	\\  0001
+	\\  ----
+	\\  1111
+	\\(3) Faz-se o complemento de 1 desse resultado:
+	\\  0000
+	\\(4) Como ficou tudo 0000, conclui-se que não há erro na mensagem. Qualquer coisa diferente de 0000 significa erro.
+
+	\item Qual o formato do endereço IP versão 4? Quais classes foram definidas para este endereço?
+	\\R: 32 bits separado de 1 em 1 byte (ou de 8 em 8 bits). Classes: A, B, C e D.\\
+	A Classe A começa com 00..., a Classe B em 10..., a Classe C em 110... e, por fim, a Classe D em 1110...;
+
+	\item Explique o funcionamento dos protocolos ARP e RARP.
+	\\R: Ver capítulo 9.3.
+
+	\item Todo host que precisa do protocolo ARP precisa executar também o protocolo RARP? Por que? E o contrário: todo host que executa o protocolo RARP executa também o protocolo ARP? Por que?
+	\\ R: Nem todo o host precisa executar também o RARP, mas algum precisa, como no caso das máquinas sem disco. Essas máquinas devem solicitar ao gateway da rede o seu IP. Já para a outra pergunta, sim, toda máquina que executa o RARP precisa executar o ARP, pois ela usa o ARP para se comunicar com outras máquinas.
+	
+	\item Considere o endereço IP 202.39.10.111 e a máscara de subrede 255.255.255.192. Responda: qual host está sendo endereçado? Quantas subredes internas a organização possui?
+	\\R: Qual a classe do IP? 202 = 11000010, classe C
+	\\Qual a subrede? (202.39.10.111)eBitBit(255.255.255.192)=202.39.10.11000000=202.39.10.192
+	\\Quantas subredes? Temos dois bits para netID (ver a submascara, 192), então 4 subredes.
+	\\Qual o host? Sendo classe C e sabendo que 3 bits são para o netID, então do IP 202.39.10.111, pegamos 111 e convertemos para binário: 11011111. Separamos 3 bits no netID: 110|11111. O host então é o: 1+2+4+8+16=31.
+
+	\item Explique como funciona uma Proxy ARP. Em termos de administração de rede, qual a diferença de usar Proxy ARP e subredes?
+	\\R: O link da seção 14.1 explica bem o funcionamento e as vantagens e desvantagens de cada um.
+
+	\item O CIDR permitiu que a versão 4 do protocolo IP pudesse continuar a funcionar na maior parte da Internet. Quais foram os problemas que esta abordagem de endereçamento resolveu? Como é a solução CIDR?
+	\\R: Permitiu criar máscaras de tamanho variável, que viabilizou o fornecimento de, por exemplo, apenas 1 IP para uma organização de tal forma que ela pode criar subredes com ele. O número de CIDR corresponde à quantidade de bits 1 da máscara da subrede. Problem: Desperdício de IPs devido a não subdivisão de IPs.
+
+	\item O formato dos dados em uma rede pode seguir um de dois padrões: Little Endian e Big Endian. Explique seu funcionamento. Qual dos dois é adotado pela Internet?
+	\\R: Internet: Big Endian, formato criado pela Sun. O Big endian diz que os bits mais significativos vem primeiro e o Little Endian, os menos significativos vem antes.
+
+	\item Um protocolo pode oferecer um serviço confiável, orientado à conexão, ou não confiável, não orientado a conexão. O que estas características significam em termos práticos?
+	\\R: Pode, depende da necessidade do usuário sobre o protocolo escilhido.
+	\\Confiável: exige confirmação de recebimento (ACK).
+	\\Orientado à conexão: Não permite embaralhamento dos pacotes.
+
+	\item Faça um desenho do header IP, explicando o propósito de cada campo.
+	\\R:
+	\\|versão|ihl (tamanho)|tos (tipo)|
+
+	\item Já que o protocolo IP não tem confirmações de recebimento, por que os
+datagramas tem identificadores?\\
+	R: Se o pacote for fragmentado, todos os fragmentos tem o mesmo identificador.
+
+	\item Explique como são calculados os campos TTL (Time To Live) e checksum do header IP.
+	\\R: Define-se um número para o TTL e cada router que receber esse pacote faz TTL=TTL-1; Se TTL=0, descarta o pacote.
+	\\Ver questão 8 para aprender o cálculo do checksum do header IP.
+
+	\item Por que é necessário fragmentar um pacote IP? Explique onde e como um pacote fragmentado é reconstituído.
+	\\R: Por causa do MTU que define a quantidade de bytes de saída da interface de rede.
+	\\R: O pacote IP é restituído apenas pelo destino na camada de rede pelo protocolo IP.
+
+	\item Explique o processamento genérico da entidade que implementa o protocolo IP: como é usada a tabela de roteamento? Qual o seu formato básico?
+	\\R: Duas colunas: a primeira da direita tem o netID e a segunda o próximo ponto.
+	\\Tabela fica na máquina. 
+
+	\item Explique como o comando ping é implementado. Qual protocolo ele usa?
+	\\R: Usa o protocolo ICMP.
+	\\Baseado no funcionamento echo request/reply. Um pacote ICMP é enviado e o destino deve responder esse ECHO.
+
+	\item Explique como o comando traceroute é implementado. Qual protocolo ele usa?
+	\\R:
+
+	\item Quais foram os tipos de mensagem ICMP vistas em sala de aula?
+	\\R: Tipo 0, echo request/reply; Tipo 3 e seus subtipos.
+
+	\item O protocolo da camada de rede, no IP, permite a comunicação entre máquinas. O protocolo da camada de transporte tem outra função, qual é ela?
+	\\R: Comunicação entre processos usando portas.
+
+	\item Localidade de funções importantes do protocolo IP.
+	\\R:
+	\\Camada de rede: Fragmentação de pacote, reconstituição de pacote, roteamento e endereçamento.
+	\\Transporte: Comunicação entre processos.
+\end{enumerate}
+
+
+
+%=============================
+% Lista 2  de Exercícios
+%=============================
+
+\newpage
+
+\subsection{Lista 2 de exercícios:}
+
+\begin{enumerate}
+
+	\item Quais entidades se comunicam usando o protocolo da camada de transporte? Quais entidades se comunicam usando o protocolo da camada de rede?
+	\\
+	R: Os \textbf{hosts} se comunicam usando a camada de \textbf{rede}, pois é a camada responsável pelo \textbf{roteamento}. Já os \textbf{processos} se comunicam pela camada de
+	\textbf{transporte}, camada responsável pela comunicação entre \textbf{portas}.
+
+	\item Uma máquina da Internet pode ter, em geral, um único endereço IP mas recebe pacotes para vários aplicações diferentes: e-mail, Web, etc. Como é que as aplicações destinatárias são identificadas?
+	\\R: As aplicações destinatárias são identificadas por meio do número das portas nas quais elas rodam.
+	\\ As portas são inteiros de 16 bits. Existem o conjunto de portas TCP e o conjunto de portas UDP, independentes entre si. Portas entre 0 e 1023 (well-known ports) são reservadas e destinadas a processos específicos, não podendo ser usadas por aplicações gerais.
+
+	\item Explique o processo de abertura de conexão TCP. Um famoso ataque da Internet, o TCP-SYN-Flooding é baseado neste processo. Como é feito este ataque? Lembre-se o administrador de uma rede deve conhecer os ataques para saber evitá-los!
+	\\ R: A conexão TCP é virtual ("não existe na rede”), e é identificada por um par (IP, porta).
+	\\ Abertura de conexão TCP: Three-way Handshake ("aperto de mão em 3 vias").
+	O pacote inicial é iniciado a partir de um valor aleatório. Se você mandou o
+	pacote 5, e o servidor recebeu, o servidor responde com um ACK=5+1, ou seja,
+	"estou esperando o 6". Uma tag chamado SYN (SYNCHRONIZE) é usado apenas na
+	abertura da conexão. O ACK faz a confirmação de recebimento.
+	\\O estabelecimento da conexão é feito usando dois bits na cabeçalho TCP: SYN e ACK. Um segmento que possua a flag SYN ativa sinaliza uma requisição de sincronia do número de sequência. Essa sincronização é necessária em ambos os sentidos, pois origem e destino utilizam números de seqüência distintos. Cada pedido de conexão é seguido de uma confirmação utilizando o bit ACK. O segundo segmento do three way handshake exerce as duas funções ao mesmo tempo: Confirma a sincronização do servidor com o cliente e requisita a sincronização do cliente com o servidor.
+	\\
+	
+	Ataques por SYN-Flood ocorrem da seguinte forma: um cliente malicioso, que implemente intencionalmente um protocolo TCP errado e incompleto, pode não mandar a última mensagem ACK. O servidor irá esperar por isso por um tempo, já que um simples congestionamento de rede pode ser a causa do ACK faltante.
+	\\Esta chamada conexão semi-aberta explora a boa-fé do protocolo TCP que espera por um certo tempo e algumas tentativas de restabelecimento de um sinal ACK válido para retomar a comunicação. A resposta maliciosa ao comando SYN gerada pelo cliente pode ocupar recursos no servidor (memória e processamento) ou causar prejuízos para empresas usando softwares licenciados por conexão (aumento de conexões "ativas"). Pode ser possível ocupar todos os recursos da máquina, com pacotes SYN. Uma vez que todos os recursos estejam ocupados, nenhuma nova conexão (legítima ou não) pode ser feita, resultando em negação de serviço. Alguns podem funcionar mal ou até mesmo travar se ficarem sem recursos desta maneira.
+	
+	Fontes:\\
+	\href{http://under-linux.org/blogs/magnun/curso-de-redes-camada-de-transporte-parte-3-651}{http://under-linux.org/blogs/magnun/curso-de-redes-camada-de-transporte-parte-3-651}
+	\\
+	\href{http://pt.wikipedia.org/wiki/SYN\_Flood}{http://pt.wikipedia.org/wiki/SYN\_Flood}
+
+	
+	\item O TCP oferece serviço de entrega de fluxo confiável de bytes da origem ao destino. Ele usa confirmações de entrega, junto ao controle de fluxo. Para que serve o controle de fluxo do TCP?
+	\\
+	R: O controle de fluxo do TCP serve para definir a maior taxa de transmissão em que as entidades podem se comunicar.
+	\\
+	No campo WIN do TCP, o destinaráio informa a quantidade de bytes livres no buffer. A janela tem tamanho variável. Junto com o ACK, o emissor usa o WIN para decidir o quanto transmite.
+
+
+	\item Explique a funcionalidade de todos os campos do header TCP.
+	\\
+	R: 
+	\begin{itemize}
+		\item Porta de origem (16 bits): porta de origem da mensagem
+		\item Porta de destino (16 bits): porta de destino da mensagem
+		\item Número de Sequência (32 bits): Número de sequência do primeiro octeto de dados do segemnto atual
+		\item ACK (32 bits): número do próximo pacote que a entidade está esperando
+		\item Tamanho do Header (4 bits): Número de palavras de 32 bits simbolizando o tamanho do cabeçalho TCP
+		\item Reservados (6 bits): campo reservado para o futuro. Deve ser 0 atualmente
+		\item Bits de controle (6 bits):
+			\begin{itemize}
+				\item URG: Torna válido o campo Ponteiro para Dados Urgentes
+				\item ACK
+				\item PUSH: Indica que a mensagem deve ser enviada à camada superior da pilha
+				\item RESET: Reinicia a conexão TCP
+				\item SYN
+				\item FIN: Finaliza a conexão TCP
+			\end{itemize}
+		\item WIN (Window) (16 bits): Tamanho da janela para comunicação (controle de fluxo)
+		\item Checksum (16 bits): checksum, em complemento de 1, idêntico ao usado no IP. \textbf{Checksum somente do cabeçalho TCP}
+		\item Ponteiro para dados urgentes (16 bits):
+		\item Opcionais (variável)
+		\item Dados (variável)
+	\end{itemize}
+
+	
+	\item Explique a funcionalidade de todos os campos do header UDP.
+	\\
+	R:
+	\begin{itemize}
+		\item Porta de origem (16 bits): porta de origem da mensagem
+		\item Porta de destino (16 bits): porta de destino da mensagem
+		\item Tamanho (16 bits): Tamanho, em bytes, do cabeçalho e dos dados, somados
+		\item Checksum (16 bits): checksum, como do TCP 
+	\end{itemize}
+
+	
+	\item O campo checksum dos protocolos TCP e UDP é calculado também usando um pseudo-header IP. Explique este cálculo.
+	\\ R: O cálculo do checksum é feito somando-se os octetos recebidos e, em seguida, calculando-se o complemento de 1 do resultado (inverte os bits)
+
+	
+	\item O que é congestionamento numa rede de computadores? Por que se diz que o congestionamento das ruas de uma cidade é completamente diferente do congestionamento de uma rede?
+	\\R: Congestionamento de rede consiste na sobrecarga gerada devido ao grande fluxo de pacotes, que é superior ao limite do buffer do roteador da rede que conclui em pacotes descartados.
+	\\ A grande diferença entre um congestionamento de rede e de trânsito é que no primeiro, os pacotes que não puderem entrar no buffer do roteador são descartados. No trânsito, automóveis não são descartados devido a congestionamentos. 
+
+	
+	\item Explique o funcionamento do algoritmo Slow-Start TCP, uma das abordagens para controle de congestionamento na Internet.
+	\\
+	R: O funcionamento do Slow-Start é baseado na observação de que a taxa em que novos pacotes devem ser
+	injetados na rede deve ser a mesma em que as confirmações (ACK) são enviadas
+	pelo outro destino.
+
+	O slow start requer que outra janela seja mantida pelo TCP emissor: a janela
+	de congestionamento, chamada \textbf{cwnd}. Quando uma nova conexão é estabelecida
+	com outro host na rede, a janela de congestionamento é inicializada com um
+	segmento, ou seja, o tamanho do segmento anunciado pelo nó oposto
+	(tipicamente 536 ou 512 bytes). Toda vez que um novo ACK é recebido, a
+	janela de congestionamento é incrementada de um segmento. A \textbf{cwnd} é mantida
+	em bytes, mas o slow start sempre a incrementa em segmentos. O emissor pode
+	transmitir até o mínimo entre a janela de congestionamento e a janela
+	anunciada pelo receptor. A janela de congestionamento é o controle de fluxo
+	imposto pelo emissor, enquanto a janela anunciada é controle de fluxo
+	imposto pelo receptor.
+   \\
+	O emissor começa transmitindo um segmento e esperando pelo ACK
+	correspondente. Quando este ACK é recebido, a janela de congestionamento é
+	incrementada de um para dois, e dois segmentos podem ser mandados. Quando
+	cada um destes dois segmentos for confirmado, a janela de congestionamento é
+	aumentada para quatro. Isto provê uma aumento exponencial.
+
+	Em um determindado momento a capacidade da Internet será alcançada, e um
+	roteador intermediário começará a descartar pacotes. Isto diz ao emissor que
+	a janela de congestionamento ficou muito grande.
+
+	Quando CWND ultrapassa o valor do limite, a transmissão se dá de forma
+	linear, num processo chamado de Congestion Avoidance onde a CWND é aumentada
+	de 1*FSS (Full Segment Size – Representa o maior tamanho de um segmento
+	transmitido) a cada ciclo de transmissão e confirmação dos pacotes (O RTT -
+	Round Trip Time - depende do ciclo mencionado anteriormente e do Timeout com
+	base no "Algoritmo de Karn").
+	
+	\item Para que servem o algoritmo de Nagle e a solução de Clark? Explique detalhadamente os critérios que elas usam para atingir seus objetivos.
+   \\R: O principal objetivo do algoritmo de Nagle é reduzir o número de segmentos muito pequenos enviados, especialmente em links remoto. Ele permite que os segmentos sejam enviados se a conexão TCP contém dados pendentes na rede. Qualquer segmento em tamanho normal sempre é transmitido imediatamente, o Nagle é eficaz em reduzir o número de pacotes (consegue reduzir em até 3 vezes) enviados por aplicativos interativos tipo, Telnet, e mensageiros, principalmente em links lentos.
+   \\O Clark evita que sejam requisitado informações sobre segmentos pequenos ao emissor. Ambos os algoritmos se complementam.
+	
+	\item Cite 3 timers (temporizadores) usados pelo TCP, explicando a funcionalidade de cada um.
+	\\R: RTT, Algoritmo de Van Jacobson e desvio médio.
+	
+	\item Explique o que é o modelo Cliente-Servidor, usado como paradigma virtualmente por todas as aplicações da Internet (mesmo outros modelos, como peer-to-peer e de objetos distribuídos podem ser mapeados para o modelo Cliente-Servidor).
+	\\
+	R: 
+	O problema básico que o modelo (paradigma) cliente-servidor resolve é como iniciar a
+comunicação.
+
+\begin{itemize}
+	\item Um dos processos fica permanentemente em execução, aguardando a comunicação
+de outro processo (servidor).
+	\item O outro processo inicia a comunicação (cliente) e oferece a interface para o usuário
+(humano ou processo).
+\end{itemize}
+
+O modelo Peer-to-Peer (P2P, par-a-par) é visto muitas vezes como "alternativa" ao modelo
+cliente-servidor. Mas, na verdade, apresenta os mesmos tipos de interação; Um
+peer funciona ao mesmo tempo como cliente e servidor.\\
+
+
+
+	\item Os sistemas Cliente-Servidor podem ser classificados como concorrentes ou iterativos. Explique.
+	\\
+	R:
+\begin{itemize}
+	\item Iterativos: Atendem a um único cliente de cada vez; Os demais aguardam em
+uma fila;
+	\item Concorrentes: Atendem a múltiplos clientes simultaneamente.
+\end{itemize}
+
+Um servidor concorrente faz múltiplas cópias de si mesmo (fork); O processo pai fica
+escutando esperando a chegada de requisições de clientes; Quando chega uma requisição:
+Abre um processo filho para atender aquela requisição; O pai continua escutando.\\
+
+
+
+	\item Outra classificação dos sistemas Cliente-Servidor depende do protocolo de transporte que usam, TCP (orientado à conexão) ou UDP (não orientado à conexão). Explique mostrando também quais podem ser iterativos e concorrentes.
+	\\
+	R:
+	Temos sobre TCP iterativo ou concorrente e UDP apenas iterativo. UDP concorrente não faz
+	sentido, pois ele processa 1 datagrama de cada vez, já sendo naturalmente concorrente.
+
+	
+	\item O que é um socket? Qual a relação entre os sockets e os protocolos TCP/IP?
+	\\R: O socket é uma API de programação de comunicação de dados que pode ser feita usando TCP/IP. A relação é definida como a combinação de um endereço IP, um protocolo e o número da porta do protocolo.
+	
+
+	\item Explique os comandos básicos para a construção de clientes e servidores com sockets. Mostre as diferenças quando se usa UDP e TCP.
+   \\R:\\
+   Cliente:
+
+      \begin{enumerate}
+         \item Abrir socket (cria um descritor de arquivo ou socket)
+         \item TCP: Connect; UDP: Connect (opcionalmente);
+         \item Para enviar: TCP: send; UDP: Com connect, send, e sem connect: sendto;
+         \item Para receber: TCP: revc; UDP: Com connect, recv, e sem connect, recvfrom;
+         \item TCP: close; UDP: Com connect, close, e sem connect não precisa fechar.
+      \end{enumerate}
+
+   Servidor:
+
+      \begin{enumerate}
+         \item Abrir socket (cria um descritor de arquivo ou socket)
+         \item TCP: Connect; UDP: Connect (ocpionalmente);
+         \item TCP: Bind; UDP: ;
+         \item TCP: Listen (fora do loop); UDP: ;
+         \item TCP: Accept (dentro do loop); UDP: ;
+         \item TCP: recv; UDP: Com connect, recv, e sem connect, recvfrom;
+         \item Para enviar: TCP: send; UDP: Com connect, send, e sem connect: sendto;
+         \item TCP: close; UDP: Com connect, close, e sem connect não precisa fechar.
+      \end{enumerate}
+	
+
+	\item Quais comandos do socket bloqueiam?
+   \\R: accept, recvfrom, recv, recvmsg etc.	
+
+	\item Qual comando do socket vai dentro do loop: listen ou accept? Para que servem estes comandos?
+	\\ 
+	R: O \textbf{accept} vai dentro do loop. O accept viabiliza vários clientes a se conectarem a um mesmo servidor (por isso deve estar dentro do loop). O \textbf{listen} serve para informar que a entidade deve escutar uma determinada porta por conexões de clientes (portanto deve estar fora do loop).
+
+	
+	\item O protocolo BOOTP apresenta duas fortes vantagens sobre o protocolo RARP, apesar de que ambos tem a funcionalidade básica de permitir que um host obtenha um endereço IP na inicialização. Que vantagens são estas?
+	\\
+	R:
+	\begin{enumerate}
+		\item BOOTP é um protocolo da camada de aplicação, enquanto o RARP é da
+		camada de enlace. Logo, o BOOTP independe da tecnologia, enquanto o RARP
+		depende dela.
+		\item BOOTP obtém, de uma só vez, todas as informações relavantes para o
+		funcionamento do host, como máscara de sub-rede, servidor DNS etc. O
+		RARP precisa se comunicar várias vezes para obter essas informações.
+	\end{enumerate}
+
+
+
+	\item Faça uma comparação agora entre o DHCP e o BOOTP.
+	
+	R:\\
+	DHCP permite atribuição dinâmica de IPs, enquanto o BOOTP exige uma tabela
+	relacionando hosts e seus IPs.
+	
+	O DHCP pode atribuir endereço para um equipamento de rede de três formas:
+
+	\begin{enumerate}
+		\item \textbf{Configuração Manual}:
+	Neste caso, é possível atrelar um endereço IP a uma determinada máquina na
+	rede. Para isso, é necessária a associação de um endereço existente no banco
+	do servidor DHCP ao endereço MAC do adaptador de rede da máquina.
+	Configurado desta forma, o DHCP irá trabalhar de maneira semelhante ao
+	BOOTP. Esse endereço "amarrado" ao equipamento não poderá ser utilizado por
+	outro, a não ser que eles utilizem a mesma placa de rede.
+		\item \textbf{Configuração Automática}:
+	Nesta forma, o servidor DHCP é configurado para atribuir um endereço IP a um
+	equipamento por tempo indeterminado. Quando este conecta-se pela primeira
+	vez na rede, lhe é atribuído um endereço permanente. A diferença existente
+	entre esta e a primeira configuração é que nesta não é necessária uma
+	especificação do equipamento que utilizará determinado endereço. Ele é
+	atribuído de forma automática.
+		\item \textbf{Configuração Dinâmica}:
+	Neste tipo de configuração, é que reside a característica principal do DHCP,
+	que o diferencia do BOOTP. Desta forma o endereço IP é locado
+	temporariamente a um equipamento e periodicamente, é necessária a
+	atualização dessa locação. Com essa configuração, é possível ser utilizado
+	por diferentes equipamentos (em momentos diferentes) o mesmo endereço IP.
+	Basta, para isso, que o primeiro a locar o endereço, deixe de utilizá-lo.
+	Quando o outro equipamento solicitar ao servidor DHCP um endereço IP poderá
+	ser fornecido ao mesmo o endereço deixado pelo primeiro.
+	\end{enumerate}
+
+
+	\textbf{Como o DHCP é uma evolução do BOOTP, usando, inclusive, o mesmo
+	formato de mensagem, um servidor DHCP responde tanto DHCP quanto BOOTP}.
+
+
+	\item Há dois RFC's básicos do DNS, por que um só protocolo de aplicação precisa de dois documentos?
+	\\
+	R: Há dois RFC's para o DNS pois um define a construção hierárquica dos nomes e também define a sintaxe e as regras de delegação de autoridade para gerência dos nomes. O outro descreve o protocolo propriamente dito.
+
+
+	\item Explique o funcionamento das consultas recursivas e iterativas do DNS, lembre-se que o resolvedor (cliente) é leve!
+	\\
+	R: 
+	Para que um host acesse uma URL qualquer ("www.amazon.com", por exemplo) na internet, primeiramente ele envia uma mensagem de requisição para o servidor de nomes local. O servidor local envia uma consulta ao DNS raiz, o qual percebe o sufixo 'com' e responde uma lista de endereços IP para o DNS local contendo servidores TLD (\textit{Top-Level Domain}) que são reponsáveis por 'com'. Em seguida, o DNS local faz requisição para um desses servidores TLD, o qual percebe o sufixo 'amazon.com' e envia ao DNS local o endereço IP do servidor DNS com autoridade para a Amazon. Finalmente, o DNS local consulta o servidor com autoridade e esse responde com o endereço do hospedeiro 'www.amazon.com'. Assim, o DNS local responde ao hospedeiro o IP do nome solicitado.
+\\
+A partir do processo relatado acima, vemos que há consultas recursivas e iterativas. Entre o hospedeiro e o DNS local, a consulta é recursiva, uma vez que o hospedeiro pede que o DNS local obtenha o mapeamento em seu nome. Enquanto que as outras três consultas (DNS local com DNS raiz, TLD e autoridade) são iterativas, já que as respostas são retornadas diretamente ao DNS local. 
+\\
+\textbf{Consultas recursivas são desabilitadas em servidores raiz (root servers)}
+	
+	
+
+	\item Descreva a estrutura hierárquica utilizada para a construção de nomes DNS.
+	\\
+	R: 
+	Para permitir a descentralização, distribuição, tanto do registro de nomes, ao mesmo tempo
+mantendo todos os nomes em uma única estrutura, foi proposta e árvore de nomes.
+
+\begin{itemize}
+   \item Cada nodo da árvore corresponde a um domínio ou a um host (folha);
+   \item O nome do domínio identifica sua posição na árvore - construído do nodo em
+direção à raíz do "local" para o "global";
+   \item Cada domínio é administrado de forma independente;
+   \item O domínio (ou a organização responsável por dele) pode:
+      \begin{enumerate}
+         \item Dar nome aos seus hosts;
+         \item Criar subdomínios e delegar a autoridade sobre eles.
+      \end{enumerate}
+   \item O domínio mantém um servidor de nomes que obrigatoriamente conhece os endereços
+dos servidores de nomes de todos os seus subdomínios.
+   \item A profundidade da árvore está limitada a 127 níveis.
+   \item Cada nome pode ter até 64 caracteres.
+   \item A autoridade mundial, responsável pelo domínio raíz é o ICANN, www.icann.org.
+   \item No Brasil a autoridade é do Registro.BR (wwww.registro.br). Dentro do CGI: Comitê
+Gestor da Internet.
+\end{itemize}
+
+	
+
+	
+	\item O roteamento na Internet é feito tomando por base a rede dividida nos chamados Sistemas Autônomos (Autonomous Systems - SA's). Daí surgem os conceitos de roteamento interno e roteamento externo, explique.
+	\\
+	R:
+	\begin{itemize}
+		\item Roteamento Interno:
+		Os roteadores utilizados para trocar informacoes dentro de Sistemas
+		Autonomos são chamados roteadores internos (interior routers) e podem
+		utilizar uma variedade de protocolos de roteamento interno (Interior
+		Gateway Protocols - IGPs). Dentre eles estao: RIP, IGRP, EIGRP, OSPF e
+		Integrated IS-IS.
+		\item Roteamento Externo:
+		Roteadores que trocam dados entre Sistemas Autonomos são chamados de
+		roteadores externos (exterior routers), e estes utilizam o Exterior
+		Gateway Protocol (EGP) ou o BGP (Border Gateway Protocol). Para este
+		tipo de roteamento são considerados basicamente coleções de prefixos
+		CIDR (Classless Inter Domain Routing) identificados pelo numero de um
+		Sistema Autonomo.
+	\end{itemize}
+	
+	Fonte: http://www.rnp.br/newsgen/9705/n1-1.html\#ng-roteamento
+
+	
+	\item Existem vários algoritmos de roteamento e vários protocolos de roteamento. O que faz um algoritmo? O que faz um protocolo?
+	\\
+	R:
+	Um protocolo define as regras e os padrões para o roteamento. Os algoritmos
+	são utilizados para, seguindo esses padrões, encontrar um caminho
+	(geralmente o menor deles de acordo com alguma métrica) entre duas entidades da rede.
+
+
+	
+	\item Explique como funciona o algoritmo de roteamento de Bellman-Ford. Cite 2 desvantagens deste algoritmo. Apesar destas desvantagens, há uma vantagem importante que garante que este é o algoritmo mais usado para roteamento na Internet, que vantagem é esta?
+	\\
+	R:
+	\begin{itemize}
+		\item Nodo: Ao inicializar conhece apenas os seus vizinhos da rede.
+		\item Periodicamente, por exemplo, a cada 30 segundos (para a rede isso é muito pouco), os roteadores enviam as tabelas para seus vizinhos.
+	\end{itemize}
+
+Ao receber a tabela do vizinhos, o roteador examina todas as entradas e atualiza na sua tabela aquelas que representarem um melhor caminho de acordo com alguma métrica.\\
+
+Bellman-Ford tem desvantagens:
+
+\begin{itemize}
+	\item Mensagens grandes para redes grandes;
+	\item Atraso para propagar informações grandes;
+	\item Em particular alterações na topologia podem fazer com que tabelas não se estabilizem.
+\end{itemize}
+
+Entretanto a maioria dos protocolos de roteamento da Internet usam Bellman-Ford. Inclusive o BGP, além do RIP e HELLO.\\
+
+O motivo dele ser mais usado: A alternativa (que é o algoritmo de Dijkstra do caminho mais curto), necessita da topologia completa da rede.\\
+
+	\item O protocolo OSPF é o único padrão TCP/IP baseado no algoritmo de Djikstra do caminho mínimo. Por que este protocolo não poderia ser de roteamento externo?
+	\\R: Porque um Sistema Autônomo não tem a obrigação de conhecer a topologia de outro Sistema Autônomo.
+
+	
+	\item O protocolo RIP é muito popular para roteamento interno. Este protocolo, entretanto apresenta problemas tais como a convergência lenta. Explique este problema e uma solução para ele.
+	\\R: Problemas: Números de hops limitado a 12, não detecta loops, convergência lenta. Soluções para este problema:
+	\\\textbf{Split horizon Update (atualização com horizonte partido)}
+	\\Um roteador não propaga para um vizinho entradas da tabela que passam pelo vizinho.
+	\\\textbf{hold down}
+	\\Após um destino tornar inatingível, a tabela não é atualizada por um intervalo até que todas as entradas inválidas na rede desaparecam.
+	\\\textbf{trygered updates}
+	\\Quando um vizinho se torna inatingvel, roteador propaga distância infinito.
+
+	\item O protocolo HELLO é o único protocolo de roteamento que não usa a distância em hops (passos) como métrica, mas sim o atraso (tempo) para um destino. Mostre um exemplo em que esta métrica cria problemas de desbalanceamento no uso da rede.
+	\\R: Caso um dos roteadores esteja com menor atraso, todos os roteadores abaixo dele passarão a utilizar este roteador, sobrecarregando-o. Assim, na próxima vez, o outro roteador não estará sendo usado e terá um atraso menor, logo, todos passarão a utiliza-lo, e consequentemente sobrecarregando-o. Assim consecutivamente, causando oscilação da rede.
+
+	\item Explique o funcionamento do protocolo BGP, virtualmente o único protocolo de roteamento externo usado na Internet.
+	\\R: É um protocolo de roteamento dinâmico para obtenção de informação de sistemas autonomos(AS). Os sistemas autônomos conseguem trocar informações e determinar o melhor caminho para as redes que formam a internet. A divulgação das informações é feita entre roteadores que estabelecem uma relação de vizinhança, sempre na forma de pares. Tendo essa relação, são trocadas as informações contidas nas tabelas de roteamento BGP de cada um destes. Para estabelecer uma relação de vizinhança é necessário que dois roteadores tenham uma conexão direta entre eles, ou que algum protocolo IGP trate de garantir a alcançabilidade. Essa relação de vizinhança pode definir aos roteadores uma relação de speakers ou peers.
+\end{enumerate}
+
+\section{Pontos importantes para a prova 2}
+
+A ideia aqui é relembrar pontos importantes para a prova 2.
+
+\begin{itemize}
+   \item Header IPv4: 20bytes mínimo. Tamanho máximo 60 bytes (15 palavras de 4 bytes);
+   \item ICMP não é confiável, pois usa o IP para enviar pacotes;
+   \item Rede congestionada significa que está ocorrendo descarte de pacotes em alguma pilha de
+algum router ou switch;
+   \item TCP: Confiável (possui ACK) e orientado a conexão (não embaralha dados);
+   \item UDP: Não confiável e não orientado a conexão;
+   \item UDP mais usado para: Aplicativos em tempo real, verificação de desempenho, teste de falhas,
+multicast (TCP não tem multicast) e benchmark da rede.
+   \item IPv6:
+      \begin{itemize}
+         \item 128bits ou 16bytes para endereçamento;
+         \item A Header na verdade é um conjunto de headers. O header 0 ou header base é
+obrigatório. Os outros são headers de extensão;
+         \item Header deve ser um múltiplo de 64 (IPv4 tinha de ser múltiplo de 32).
+         \item Tipos de Header:
+            \begin{enumerate}
+               \item hop\_by\_hop: header processado pelos intermediários (ex.: routers);
+               \item end\_ti\_end: header processado apenas pela origem e destino;
+            \end{enumerate}
+         \item Formato do IP (em hexa): FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF
+         \item Permite Multicast (e broadcast passa a ser considerado um caso especial de
+multicast);
+      \end{itemize}
+   \item Camada de aplicação: Problema básico: como iniciar uma comunicação entre
+cliente-servidor.
+   \item Tipos de servidores:
+      \begin{enumerate}
+         \item iterativos (tcp/udp): atende 1 cliente por vez;
+         \item concorrentes (tcp): atende vários clientes por vez;
+         \\Não faz sentido udp concorrente pois ele processa 1 datagrama por vez, já sendo
+naturalmente concorrente.
+      \end{enumerate}
+   \item Algoritmos para clientes TCP/UDP iniciarem a conexão:
+      \begin{itemize}
+         \item UDP: Determine um IP e uma porta; Aloque um socket; Obtenha a porta que deve estar
+livre para uso no S.O.; Comunique-se com o servidor usando o protocolo de aplicação; Feche o socket.
+         \item TCP: Determine um IP e uma porta; Aloque um socket; Obtenha uma porta livre;
+Estabeleça uma conexão; Comunique-se de acordo com o protocolo da aplicação; Feche o socket.
+      \end{itemize}
+   \item Algoritmos para servidores TCP/UDP:
+         \begin{itemize}
+            \item UDP: Crie um socket usando uma porta conhecida e livre para uso; Repita para
+sempre: receba o datagrama, formule a resposta e envie ao cliente a resposta;
+            \item TCP (concorrente): Crie um socket usando uma porta livre do sistema operacional;
+Fique a espera das requisições; Aceite a conexão e crie um processo filho para atendê-la.\\
+            O processo filho: Recebe a solicitação antendendo em um novo socket; Comunica-se com o
+cliente de acordo com o protocolo de aplicação; Fecha a conexão; Fech o socket.\\
+            \textbf{Atenção:} Todos estarão atendendo pela mesma porta. Identifique o cliente pelo
+IP de origem.
+         \end{itemize}
+   \item O que são sockets? São API de programação de comunicação de dados sobre TCP/IP;
+   \item Não existe padrão para socket (unix tem um, windows tem outro);
+   \item Sobre TCP:
+      \begin{itemize}
+         \item TCP: O ato da comunicação é full-duplex. Há um buffer entre a camada de aplicação e o TCP;
+         \item Portas reservadas ao sistema (well-known hosts): 0 a 1023.
+         \item Conexão TCP: Ela é virtual. Uma conexão TCP é identificada por um par de pares
+(endereço,porta);
+         \item TCP: O SYN (sincronização) é usado apenas na abertura da conexão TCP;
+         \item TCP: A flag URG não significa nada além de mera informaço se a flag PUSH não estiver ativa;
+         \item TCP: Controle de fluxo: Leia capítulo 22.6, \textbf{muito importante};
+         \item TCP: WIN: quantos bytes livres no buffer; jcong: janela de congestionamento;
+         \item TCP Tahoe: estratégia de congestionamento com slowstart;
+         \item TCP Rono: retransmissão rápida;
+         \item Cálculo do Timeout do TCP: Não pode ser constante; Para uma mesma conexão, deve ser
+sempre atualizado; Base de cálculo: RTT (tempo de ida e volta); Medido no relógio local;
+      \end{itemize}
+   \item NAT:
+      \begin{itemize}
+         \item Versão atual usada é o NAPT;
+         \item A rede interna com IP privativo para comunicar-se com a rede externa deve passar por
+um dispositivo NAT e esse dispositivo deve ter um IP válido;
+         \item A comunicação sempre inicia a pártir de um host interno (embora há como burlar isso);
+         \item A sessão NAT guarda: o tipo da sessão (udp, tcp etc); se tcp, o estado da sessão;
+ipLocal e portaLocal do host origem; porta NAT que fará a conexão externa; ipExterno usado (quando
+há mais de um IP válido no dispositivo NAT); Cada pacote gerado atualiza essa sessão.
+      \end{itemize}
+   \item DNS:
+      \begin{itemize}
+         \item Uso de nomes simbólicos ao invés de IPs;
+         \item DNS possui dois RFCs: um define a construção hierárquica dos nomes e as regras de
+delegação de autoridades sobre os nomes e o outro define o protocolo, que permite a tradução do nome
+em endereço IP.
+         \item Árvore de nomes: permite a descentralização e distribuição dos nomes em uma única
+estrutura; Cada nodo da árvore corresponde a um domínio ou a um host (se for host, é uma folha); A
+profundidade de árvore é limitada a 172 níveis; Cada nome pode ter até 64 caracteres; Cada domínio
+obrigatoriamente conhece os servidores de nomes de todos os seus subdomínios.
+         \item O mapeamento de nomes para endereços IPs não é 1 pra 1; 
+         \item O servidor de nomes contém uma tabela cache com os nomes conhecidos. Se em uma
+consulta ele não tiver o nome procurado, ele consulta um servidor raíz; Existem cerca de 12
+servidores raíz no mundo;
+         \item Busca distribuída iterativa: Cada servidor que recebe a consulta responde com o
+endereço servidor de subdomínio mais próximo ao nome procurado.
+         \item Consulta recursiva: O servidor retorna o resultado final. Isso é desabilitado nos
+servidores raíz.
+      \end{itemize}
+   \item BOOTP:
+      \begin{itemize}
+         \item RARP precisa se comunicar várias vezes para obter informações; RARP está na camada de
+enlace e depende de tecnologias;
+         \item BOOTP não depende de tecnologia (está na cada de aplicação) e faz um host obter de
+uma vez todas as informações necessárias para inicializar;
+         \item Endereço IP do destino da requisição: 255.255.255.255; Porta 67 UDP;
+         \item Fragmentação IP não é permitida (lembre-se: ele está "fingindo" usar IP, UDP etc);
+         \item BOOTP é estático: precisa de uma tabela pré-definida com o mapeamento completo de
+endeços físicos (IP);
+         \item Problema: manter essas tabelas. Solução: DHCP.
+      \end{itemize}
+   \item DHCP:
+      \begin{itemize}
+         \item Evolução do BOOTP, portanto retrocompatível;
+         \item O DHCP faz leasing ("empresta") de endereços IP a seus clientes;
+         \item Períodos de leasing variam de uma hora a uma semana;
+         \item Não há mapeamento 1 pra 1.
+      \end{itemize}
+   \item Roteamento:
+      \begin{itemize}
+         \item Lembre-se: As tabelas IPs indicam o próximo passo a ser percorrido por um pacote IP;
+         \item O IP usa a tabela; Os protocolos de roteamento preenchem-na;
+         \item As tabelas são independentes uma das outras;
+         \item Os roteadores foram divididos em duas categorias:
+            \begin{enumerate}
+               \item Roteadores de núcleo: Precisam de informações completas sobre todos os
+destinos;
+               \item Roteadores de borda: Precisam de informação parcial: como chegar ao núcleo.
+            \end{enumerate}
+         \item Quanto você junta dois ou mais backbones, os roteadores de núcleo passam precisar
+conhecer todos os destinos dele e como chegar aos outros núcleos;
+         \item A Internet é administrada pelos sistemas autônomos (AS), de forma independente.
+         \item O roteamento são divididos em duas categorias: \textbf{roteamento interno (dentro de
+uma AS)} e \textbf{externo (entre ASs)};
+         \item Um conhece toda (e apenas) a sua topologia;
+         \item Roteadores AS são classificados em \textbf{interno} se o roteamento de destinos ocorre somente
+dentro de uma AS ou \textbf{externo} se ocorre comunicação com outros ASs.
+         \item Roteamento envolve protocolos e algoritmos. Os protocolos implementam algoritmos de
+roteamento e os algoritmos são estratégias para escolha da melhor rota de acordo com alguma métrica;
+         \item Dois grandes algoritmos: Bellman-Ford (uso de tabelas, menos eficiente) e Dijkstra
+(mais eficiente, exige conhecer toda a topologia);
+         \item Alguns grandes protocolos de roteamento interno: RIP, OSPF e HELLO; Para externo:
+BGP.
+         \item Problemas do Bellman-Ford: mensagens grandes, atraso para propagação, alterações na
+topologia podem torná-lo instável; É o mais usado porque o Dijkstra exige conhecer toda a topologia
+da rede;
+         \item Protocolo RIP (atualmente v2):
+            \begin{itemize}
+               \item Baseado em broadcast;
+               \item A cada 30s os roteadores fazem broadcast para atualizar as tabelas;
+               \item As tabelas são tabelas cache (portanto com prazo de validade);
+               \item Convergência lenta;
+               \item Não detecta Loops; Soluções:
+                  \begin{enumerate}
+                     \item \textbf{Split horizon update:} Um router não propaga para um vizinho
+entradas da tabela que passam pelo vizinho;
+                     \item \textbf{Hold Down:} Após um destino tornar-se inatingível, aguarda um certo tempo
+até que todas as entradas inválidas na rede desapareçam;
+                     \item \textbf{Trygered updates:} Quando um vizinho se torna inatingível, roteador
+propaga distância infinito.
+                  \end{enumerate}
+            \end{itemize}
+      \end{itemize}
+\end{itemize}
+
+\end{document}

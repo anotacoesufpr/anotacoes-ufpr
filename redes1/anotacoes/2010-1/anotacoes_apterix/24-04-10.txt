@@ -1,0 +1,51 @@
+Deteccao de ERROS
+-> Paridade Horizontal:
+	-> par ou impar
+			PAR	IMPAR
+	0000 0000	0	1
+	1111 0000	0	1
+	0010 1101	0	1
+	1010 0100	1	0
+
+-> Paridade Vertical:
+
+		  |
+	0000 0000 |
+	1111 0000 |
+	0010 1101 |
+	1010 0100 |
+----------------------
+	0111 1001
+
+-> Paridade Longitudinal:
+
+
+	0000 0000 | 0
+	1111 0000 | 0
+	0010 1101 | 0
+	1010 0100 | 1
+----------------------
+	0111 1001
+
+-> Teste de Divisao Polinomial
+	(CRC)
+
+	111 000 111 000
+		>>
+			 grau 6
+			^     ^
+			|     |
+	111 000 111 000 000 000 |_ 11011
+		Nao importa o valor da divisao, mas sim o resto
+		Suponha: R=11000
+		
+		>> o que sera enviado? veja:
+	111 000 111000 011000
+
+		>> verificacao:
+	Divide:
+	111 000 111000 011000 |_110111
+		Nao importa o valor da divisao, mas R=0
+
+	Polinomio utilizado sao padroes. Para ethernet, CRC-32.
+

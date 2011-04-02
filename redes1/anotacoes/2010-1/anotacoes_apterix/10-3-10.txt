@@ -1,0 +1,33 @@
+-- sentido de uma comunicacao
+- simplex A->B
+- semi-duplex  A<->B (mas nunca ao mesmo tempo)
+- duplex A<->B (ao mesmo tempo)
+
+DUPLEXACAO
+1) duplexacao por divisao de Tempo (TDD)
+	slot de tempo (envia ou recebe)
+2) duplexacao por divisao de Frequencia (FDD)
+	duas frequencias para enviar/receber
+
+MULTIPLEXACAO
+1) Multiplex. por divisao de Tempo (TDM)
+	slot de tempo para cada um
+2) Multiplex. por divisao de frequencia (FDM)
+	uma para cada
+
+TDM+TDD
+slot de tempo para cada cliente e cada slot eh dividido em 2 para enviar
+ou receber
+
+TDM+TDD
+slot de tempos para cada cliente onde cada cliente recebe E envia
+
+FDM+TDD
+Uma frequencia para cada cliente e cada slot de tempo envia ou recebe
+
+FDM+FDD
+uma frequencia para cada cliente e cada frequencia possui dois canais para
+enviar E receber
+
+3) Multiplexacao por Divisão de Código (CDM)
+	-funcoes de Walsh

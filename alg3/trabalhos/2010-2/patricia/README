@@ -1,0 +1,34 @@
+*******************************************
+NOME: FRANCISCO PANIS KASEKER
+GRR: 20071909
+
+TRABALHO DE ALGORITMOS III
+2010-2 - TRABALHO II
+*******************************************
+Itens solicitados pelo trabalho:
+
+1. libPatricia.c > FEITO
+2. libPatricia.h > FEITO
+3. libPatriz.c > FEITO
+4. libPatriz.h > FEITO
+5. apl.c > FEITO
+6. questao.txt > FEITO
+7. README > FEITO
+8. Makefile: > FEITO   
+*******************************************
+Relatório:
+- inserção e busca na patrícia feita e funcionando
+- transformacao de patricia feita e funcionando
+(testes realizados aqui não deram falha de segmentação)
+- função de custo das duas árvores
+(tamanho da estrutura e número de nodos visitados;
+a comparação é feita sob as mesmas inserções e buscas,
+obviamente)
+- o Makefile apresenta algumas flags extras para facilitar
+a busca por problemas, então peço que tomem cuidado com os
+testes realizados. Estou me baseando no compilador usado no Dinf
+(ubuntu 10.04 creio eu). Em máquinas debian sid/lenny é possível que
+não compile, pois há diferenças entre o gcc 4.2 e superiores em relação
+a alocação e liberação de memória.
+Esse trabalho foi testado em um Ubuntu x64 10.10 e na máquina mumm.
+- Código documento sob padrão do doxygen para linguagem C

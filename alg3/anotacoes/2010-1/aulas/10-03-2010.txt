@@ -1,0 +1,43 @@
+--> Arvore estritamente binaria
+- Todos os nodos que nao sao folhas (nodos internos) tem a subarvore
+esquerda e subarvore direita
+- uma arvore estritamente binaria com n folhas possui 2n -1 nos
+
+Base:
+	n=1
+	#nodos=2n-1
+IH: assume verdadeiro para n folhas
+Inducao: mostrar para n+1 folhas
+	#nodos(n+1)=#nodos(n) + 2 = 2n -1 +2 = 2(n+1) -1
+
+--> Arvore binaria completa de altura d
+- Eh uma arvore estritamente binaria no qual todas as folhas estao no
+nivel d.
+
+Propriedades:
+	#nodos no nivel d eh 2^d
+	#nodos total = 2^(d+1) - 1
+	altura da arvore binaria completa=log b=2,n=(n+1)-1 = d
+
+--> Arvore binaria quase completa de altura d
+	Eh uma arvore binaria no qual:
+1) todas as folhas estao no nivel 
+d ou d-1
+2) para todo nodo nd na div. com um descendente direito no 
+nivel d, nd possui como subarvore esquerda uma arvore binaria completa 
+com folhas no nivel d
+
+
+--> Percursos na arvore binaria
+- pre-ordem (profundidade)
+	visita nodo
+	visita sub. esquerda
+	visita sub. direita
+- em ordem (central)
+	visita sub. esq.
+	visita nodo
+	visita sub. dir.
+- pos-ordem
+	visita sub. esq.
+	visita sub. dir.
+	cisita nido

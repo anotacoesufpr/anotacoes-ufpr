@@ -1,0 +1,13 @@
+ARVORE AVL
+-> maior distancia entre subarvores eh de +-1 em relacao a altura
+visto:
+- rotacao
+- insercao
+
+> tipos de rotacoes:
+rotacao simples: mesmo sinais
+rotacao dupla: sinais diferente
+
+- inicia rotacao no nodo mais perto da folha desbalanceada
+- toda vez que uma rotacao eh feita depois de uma isnsercao, a arvore volta
+tamanho original

@@ -1,0 +1,30 @@
+analise dos tratamentos!
+resposta da melhor cura!
+
+1) HIPOTESES
+HO: NAO HA DIFERENCIA ENTRE OS TRATAMENTOS
+HA: HÁ DIFERENCA EM PELO MENOS UM PAR DE TRATAMENTOS
+
+ALPHA = 5%
+P_VALOR DA TABELA ANOVA: ABAIXO DE ALPHA, OU SEJA,
+REJEITANDO HO!!!
+
+2) ESTATISTICA DE TESTE DE TUKEY (TESTE DE TRATAMENTOS MULTIPLOS)
+
+D.M.S. = q * SQRT(QMRes/r) = 3,77*SQRT(23/5) = 8,09
+
+G.L. = 12
+TRATAMENTOS: 3
+
+|A-B| = 9*
+|A-C| = 3
+|B-C| = 12*
+
+
+T	| MEDIAS	| DIFERENCAS
+C		80		x
+A		77		x
+B		68			y
+
+B difere, mas tem a menor media. Ele eh o pior tratamento.
+A e C sao os melhores tratamentos, sem diferencia significativa.

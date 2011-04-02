@@ -1,0 +1,5 @@
+8534606943 ; 004.65  A772 2a. ed ; Arquitetura de redes de computadores OSI e TCP/IP / organização e coordenação Tereza Cristina Melo de Brito Carvalho ; São Paulo : Brisa : Makron, 1997 ; http://200.17.203.155/index.php?codigo_sophia=17637 ;
+8536306149 ; 004.6 F727 3a. ed ; Comunicação de dados e redes de computadores / Behrouz A. Forouzan: tradução Glayson Eduardo de Figueiredo, Pollyanna Miranda de Abreu; consultoria, supervisão e revisão técnica Antonio Pertence Júnior ; [Porto Alegre] : Bookman, 2006 ; http://200.17.203.155/index.php?codigo_sophia=222843 
+8535204407 ; 004.6 H415 ; Aprenda em 24 horas : redes / Matt Hayden ; Rio de Janeiro : Campus, c1999  ; http://200.17.203.155/index.php?codigo_sophia=83247 
+1562761293 ; 004.6 D431 3a ed ; Como funcionam as redes / Frank J. Derfler Júnior , Les Freed : ilustrado por Michael Troller ; São Paulo : Quark, c1993  ; http://200.17.203.155/index.php?codigo_sophia=115578 
+

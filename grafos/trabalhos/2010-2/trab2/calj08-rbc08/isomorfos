@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# Shell Script para executar o programa JAVA do programa "isomorfos"
+
+if [ $# -ne 1 ]
+then
+	echo "Erro. Modo de uso: ./isomorfos <arquivo>";
+	exit 1
+fi
+
+# executa a classe isomorfos, definido o classpath (-cp) como ./bin
+java -cp bin Isomorfismo $1

@@ -1,0 +1,267 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Relatório</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+
+<h1>Relatório do Trabalho de Redes 2 - 2010-2</h2>
+
+<!--
+Gerar sumário
+sed -n  -r "s/.*<a name=\"([^\"]+)\">([^<]+)<\/a>.*/<li><a href=\"#\1\">\2<\/a><\/li>/gp" relatorio/relatorio.html
+-->
+
+<h2>Sumário</h2>
+
+<ul>
+<li><a href="#intro">Introdução</a>
+<ul>
+<li><a href="#trab_desc">Descrição do Trabalho</a></li>
+<li><a href="#autor">Autor</a></li>
+<li><a href="#lang">Linguagem Utilizada na Implementação</a></li>
+<li><a href="#gui">Tipo de Interface Gráfica</a></li>
+<li><a href="#exec">Forma de execução</a></li>
+</li></ul>
+<li><a href="#estr_dir">Estrutura de Arquivos e Diretórios</a></li>
+<li><a href="#estados">Estados dos Hosts</a></li>
+<li><a href="#protocolo">Protocolo da Aplicação</a></li>
+<li><a href="#func">Funcionamento do Programa</a></li>
+<li><a href="#log">Arquivos de Log</a></li>
+</ul>
+
+<h2><a name="intro">Introdução</a></h2>
+
+<h3><a name="trab_desc">Descrição do Trabalho</a></h3>
+
+<p>O trabalho consiste em um <strong>Monitor de Múltiplos Hosts</strong>, cuja especificação pode ser vista <a href="http://www.inf.ufpr.br/elias/redes/tpRedesII2010-2.html">neste link</a></p>
+
+<h3><a name="autor">Autor</a></h3>
+<p>Roberto Beraldo Chaiben - rbc08 - GRR 20084213</p>
+
+<p>Optei por fazer o trabalho sozinho pois, além de a turma ter um número ímpar de alunos,
+sempre há conflitos de horários, o que dificulta haver tempo livre para ambos da dupla 
+sentarem juntos para desenvolver o programa. Porém, mesmo assim, procurei sempre trocar ideias
+com outras duplas, comentar sobre problemas e facilidades que enfrentei durante o desenvolvimento
+do trabalho.</p>
+
+
+
+<h3><a name="lang">Linguagem Utilizada na Implementação</a></h3>
+
+<p>A linguagem utilizada para implementar o trabalho foi a linguagem <strong>Python</strong></p>
+
+<p>Optei por essa linguagem não devido a determinadas facilidades que ela oferece, mas por ser uma
+linguagem que, até então, eu não conhecia. Achei que seria uma boa oportunidade para aprender uma
+linguagem nova e, principalmente porque Python é uma linguagem em ascensão.</p>
+
+
+
+<h3><a name="gui">Tipo de Interface Gráfica</a></h3>
+
+<p>A interface gráfica foi feita em HTML. O programa, quando identifica um evento,
+automaticamente atualiza o arquivo de log de eventos. O programa em Python é
+responsável por escrever, periodicamente, um arquivo HTML estático, que possui os
+estados dos hosts monitorados, além do log de eventos. Como o HTML é estático, ele
+precisa se auto-atualizar, o que é feito com a meta-tag <strong>refresh</strong>.</p>
+
+<p>Esse tipo de interface havia sido feita provisoriamente, apenas para testar o programa.
+A intenção era fazer uma interface desktop, em GTK, e que permitisse, além de passar uma
+lista inicial de hosts, inserir novos hosts por meio da janela, e acompanhar os estados e
+o log de eventos. Porém, por falta de tempo e a presença de outros compromissos acadêmicos,
+optei por manter a interface inicial, com algum aprimoramentos, uma vez que encontrei dificuldades
+na atualização automática da interface GTK.</p>
+
+
+<h3><a name="exec">Forma de execução</a></h3>
+
+<p>Os dois arquivos executáveis são <strong>cliente.py</strong> e <strong>monitor.py</strong></p>
+
+<p><strong>monitor.py</strong> recebe um parâmetro de linha de comando, que é a porta em que a aplicação rodará, conforme o exemplo:</p>
+
+<p><code class="bash">./monitor.py 4242</code></p>
+
+<p><strong>cliente.py</strong> recebe dois parâmetros de linha de comando, que são, respectivamente,
+o nome do host onde o monitor está rodando e a porta em que a aplicação rodará.</p>
+<p>A lista de hosts é lida da entrada padrão. É possível fornecer a lista manualmente, um a um,
+após a execução do programa. Mas é preferível - e mais prático - passar um arquivo com um host por linha,
+como mostrado a seguir:</p>
+
+<p><code class="bash">./cliente.py dalmore 4242 &lt; hosts.txt</code></p>
+
+<p>A execução de <strong>cliente.py</strong> abre automaticamente o navegador
+<strong>chromium-browser</strong>. Se o navegador não for aberto, verifique se
+a máquina possui esse navegador e se o X.Org Server está habilitado (SSH sem X.Org
+Server devem ser evitados). É possível modificar o navegador utilizado; para isso,
+basta editar o comando presente em <strong>config.py</strong>, linha 20, na constante
+<strong>GUI_CMD</strong>.</p>
+
+
+
+<hr />
+
+
+<h2><a name="estr_dir">Estrutura de Arquivos e Diretórios</a></h2>
+
+<p>Os arquivos com os códigos-fontes estão no diretório <strong><code>src</code></strong>.
+<p>Os links apontam para os arquivos fontes com extensão .txt, visualizáveis no navegador</p>
+
+<ul>
+	<li><strong><code><a href="../txt">src</a></code></strong>: diretório com os códigos-fontes
+		<ul>
+			<li><strong><code><a href="../txt/cliente.py.txt">cliente.py</a></code></strong>: implementação do cliente</li>
+			<li><strong><code><a href="../txt/config.py.txt">config.py</a></code></strong>: definição de variáveis e constantes utilizadas no trabalho</li>
+			<li><strong><code><a href="../txt/monitor.py.txt">monitor.py</a></code></strong>: implementação do monitor (servidor)</li>
+		</ul>
+		<ul>
+			<li><strong><code><a href="../txt/lib">lib</a></code></strong>: diretório com as classes utilizadas</li>
+			<ul>
+				<li><strong><code><a href="../txt/lib/DNS.py.txt">DNS.py</a></code></strong>: classe com implementações de funções de DNS</li>
+				<li><strong><code><a href="../txt/lib/FileHandler.py.txt">FileHandler.py</a></code></strong>: classe para manipulação de arquivos</li>
+				<li><strong><code><a href="../txt/lib/GUI.py.txt">GUI.py</a></code></strong>: classe para criação da interface gráfica</li>
+				<li><strong><code><a href="../txt/lib/Host.py.txt">Host.py</a></code></strong>: classe que representa um host monitorado</li>
+				<li><strong><code><a href="../txt/lib/HostWatcher.py.txt">HostWatcher.py</a></code></strong>: Classe que herda <strong>threading.Thread</strong> e
+				é responsável por monitorar um host. Cada instância dessa classe é executada em uma thread dedicada</li>
+				<li><strong><code><a href="../txt/lib/Log.py.txt">Log.py</a></code></strong>: classe para geração de logs</li>
+				<li><strong><code><a href="../txt/lib/Pacote.py.txt">Pacote.py</a></code></strong>: classe que representa o pacote de dados da aplicação</li>
+				<li><strong><code><a href="../txt/lib/Ping.py.txt">Ping.py</a></code></strong>: classe com a implementação da função PING. Na verdade, a classe apenas executa o
+				comando <strong>ping</strong> no <strong>bash</strong> e retorna seu resultado.</li>
+				<li><strong><code><a href="../txt/lib/Protocol.py.txt">Protocol.py</a></code></strong>: classe que implementa o protocolo da aplicação</li>
+			</ul>
+		</ul>
+	</li>
+</ul>
+
+
+<hr />
+
+
+<h2><a name="estados">Estados dos Hosts</a></h2>
+
+Os hosts monitorados podem estar em um dos três seguintes estados:
+
+<ul>
+	<li><strong><span style="color: #666;">Desconhecido</span></strong>: Quando não é possível
+	resolver o DNS do host ou ele não responde a solicitações de PING</li>
+
+	<li><strong><span style="color: green;">Sem Falha ou Ativo</span></strong>:
+	Host que responde corretamente ao PING</li>
+	
+	<li><strong><span style="color: red;">Falho ou Inativo</span></strong>: Host
+	que deixou de responder PING</li>
+</ul>
+
+<p>Inicialmente, todos os hosts são considerados
+<strong>desconhecidos</strong>.</p>
+
+<p>Caso não seja possível resolver o DNS de um host, ele permanece
+<strong>desconhecido</strong>. Caso o DNS seja resolvido e o host responda ao
+PING, ele passa ao estado <strong>ativo</strong>. Se o DNS for resolvido, mas o
+host não responder ao PING, ele continua como <strong>desconhecido</strong>.</p>
+
+
+<hr />
+
+
+
+<h2><a name="protocolo">Protocolo da Aplicação</a></h2>
+
+<p>O protocolo da aplicação possui a seguinte estrutura:</p>
+
+<table border="1" cellspacing="3" cellpadding="5">
+	<caption>Estrutura da mensagem do  protocolo a aplicação (nome (tamanho))</caption>
+	<tr>
+		<td>Código (1)</td>
+		<td>IP do host (15)</td>
+		<td>Nome do Host (50)</td>
+		<td>Estado do Host (1)</td>
+		<td>Dados (variável)</td>
+	</tr>
+</table>
+<p style="font-weigth: bold;">* Os tamanhos dos campos estão definidos em número de caracteres</p>
+
+
+<h3>Código</h3>
+
+<p>Identifica o tipo da mensagem. Pode armazenar os seguintes valores:</p>
+
+<ul>
+	<li>0: lista de hosts. Isso informa que o conteúdo do campo "dados" é uma lista de hosts a serem monitorados pelo servidor.</li>
+	<li>1: mudança de estado. Informa o cliente de que houve uma mudança de estado em um host. Nome, IP e estado do host são passados no campo "dados"</li>
+</ul>
+
+
+<h3>IP do Host</h3>
+
+<p>Usado apenas em mensagens do tipo 1. Informa o IP do host que sofreu um evento.</p>
+
+<h3>Nome do Host</h3>
+
+<p>Usado apenas em mensagens do tipo 1. Informa o nome do host que sofreu um evento.</p>
+
+<h3>Estado do Host</h3>
+
+<p>Usado apenas em mensagens do tipo 1. Informa o novo estado do host.</p>
+
+<h3>Dados</h3>
+
+<p>Usado apenas em mensagens do tipo 0. Armazena uma lista de hosts a serem monitorados</p>
+
+<br />
+<br />
+
+<p>Para enviar os dados pelo socket, é usada serialização de dados, com o 
+módulo <strong>pickle</strong>, do Python. É enviada uma instância da classe
+<strong><code>Pacote</code></strong>, serializada, que é desserializada
+no cliente.</p>
+
+
+<hr />
+
+
+<h2><a name="func">Funcionamento do Programa</a></h2>
+
+<p>O programa funciona, resumidamente, da seguinte forma:</p>
+
+<ol>
+	<li>O <strong>cliente</strong> lê a lista de hosts a monitorar, a partir da entrada padrão</li>
+	<li>É montada uma mensagem do protocolo contendo essa lista no campo <strong>dados</strong></li>
+	<li>O objeto <code>Pacote</code> criado é serializdo e enviado ao <strong>monitor</strong></li>
+	<li>O <strong>monitor</strong> recebe a mensagem, desserializa-a e monta uma lista de hosts</li>
+	<li>Para cada host é aberta uma thread, que é uma instância da classe <strong>HostWatcher</strong></li>
+	<li>Cada thread tenta resolver o DNS do host monitorado por ela
+		<ul>
+			<li>Se conseguir resolver o DNS, faz PING (4 no máximo a cada iteração) e modifica o estado do host, conforme descrito anteriormente neste Relatório;</li>
+			<li>Caso contrário, mantém o host como <strong>desconhecido</strong>, tentando resolver o DNS novamente em iterações futuras</li>
+		</ul></li>
+	<li>Caso ocorra algum evento (mudança de estado de host), essa informação é enviada ao <strong>cliente</strong> e inserida no <strong>log</strong> de eventos, que será exibido na interface do cliente..</li>
+	<li>O <strong>monitor</strong> aguarda por um tempo antes de iniciar a próxima iteração e verificar os estados dos hosts novamente</li>
+</ol>
+
+
+<hr />
+
+
+<h2><a name="log">Arquivos de Log</a></h2>
+
+<p>Os arquivos de log possuem a seguinte sintaxe:</p>
+
+<p><code class="bash">[YYYY-MM-DD hh:mm:ss] Informação</code></p>
+
+<p>A primeira coluna - <strong>[YYYY-MM-DD hh:mm:ss]</strong> - contém a data e
+a hora, entre colchetes, conforme a <a href="http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=26780"
+target="_blank">ISO 8601</a>.</p>
+
+<p>A segunda coluna exibe a informação do log, gerada naquele instante.</p>
+
+
+<p>Os links para os arquivos de log estão em <a href="http://www.inf.ufpr.br/rbc08/redes2">http://www.inf.ufpr.br/rbc08/redes2</a></p>
+
+
+
+
+</body>
+</html>

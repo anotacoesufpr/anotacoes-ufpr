@@ -1,0 +1,30 @@
+body
+{
+	font-size: 14pt;
+	margin: 20px;
+}
+
+h1
+{
+	font-weigth: bold;
+}
+
+h2
+{
+	font-size: 20pt;
+	margin: 25px 0 10px 10px;
+}
+
+h3
+{
+	font-size: 16pt;
+	margin: 25px 0 10px 30px;
+}
+
+
+code.bash
+{
+	background: #ccc;
+	padding: 5px;
+	margin: 15px;
+}

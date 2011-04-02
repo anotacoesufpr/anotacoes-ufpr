@@ -1,0 +1,24 @@
+Após fazer o "clone" do diretório remoto, você terá a versão corrente do repositório.
+
+Para adicioanr arquivos ao repositório:
+$ git add arq[ arq2 arq3 ...]
+
+Após adicionar, é necessário fazero commit:
+$ git commit -m "Mensagem de atualização"
+
+Atualizar o repositório remoto
+$ git push origin master
+
+Para atualizar seu diretório com os arquivos mais recentes do repositório:
+$ git pull
+
+
+Mais detalhes:
+A video-aula de git
+http://vimeo.com/20299469
+
+git no windows
+http://nathanj.github.com/gitguide/tour.html
+
+git para quem conhece svn
+https://git.wiki.kernel.org/index.php/GitSvnCrashCourse

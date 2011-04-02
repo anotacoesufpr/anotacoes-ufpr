@@ -1,0 +1,7 @@
+É necessário instalar o ABNTex para compilar o trabalho.
+
+Em sistemas Linux baseados em Debian:
+
+# apt-get install abntex
+
+Have fun :)

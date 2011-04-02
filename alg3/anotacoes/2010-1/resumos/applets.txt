@@ -1,0 +1,23 @@
+applets das arvores (animacoes)
+- binary tree
+http://www.cs.jhu.edu/~goodrich/dsa/trees/btree.html
+
+- red-black tree (insercao e busca)
+http://gauss.ececs.uc.edu/RedBlack/redblack.html
+
+- red-black tree (insercao, busca e remocao)
+http://www.cse.yorku.ca/~aaw/Sotirios/RedBlackTree.html
+
+- avl tree
+http://www.site.uottawa.ca/~stan/csi2514/applets/avl/BT.html
+
+- b tree
+http://slady.net/java/bt/view.php
+
+- b+ tree
+http://www.seanster.com/BplusTree/BplusTree.html
+
+
+- 2-3-4 tree
+http://www.cse.ohio-state.edu/~bondhugu/acads/234-tree/index.shtml
+

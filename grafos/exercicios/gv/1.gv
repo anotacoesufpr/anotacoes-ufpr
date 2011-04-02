@@ -1,0 +1,7 @@
+graph g1
+{
+	A -- E
+	B -- D
+	C -- F
+	X
+}

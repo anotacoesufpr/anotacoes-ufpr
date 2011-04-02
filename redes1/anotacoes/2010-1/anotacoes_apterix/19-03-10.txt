@@ -1,0 +1,37 @@
+-> Controle Logico de Enlace (LLC)
+	-> 4 tarefas
+	1. Enquadramento
+	2. Sequencializacao
+	3. Controle de Fluxo
+	4. Deteccao de Erros
+
+-> ENQUADRAMENTO
+	-> Demarcar inicio e fim de cada mensagem
+		1a tecnica: inicio e fim por sequencia de bits
+		2a tecnica: inicio determina quantos bytes tem a mensagem
+
+-> SEQUENCIALIZACAO
+	-> Marca a ordem das mensagens no cabecalho
+	Cria um contador... sempre+1, nao importa se 1 ou + arquivos
+	... ateh 255.
+
+-> CONTROLE DE FLUX
+	-> Para-e-espera (eficiente para redes semi-duplex)
+	origem envia, destino recebe e devolve uma resposta
+	- timeout: se nao for recebido dentro de um tempo, pede mensagem
+	novamente
+
+	-> Janelas Deslizantes
+	Envia pacotes de mensagens e destino espera para responder quais
+	foram recebidas com sucesso. A que o destino notificar (e as
+	(anteriores) serao consideradas recebidas.
+	
+	tecnicas:
+	- repeticao seletiva (retorna apenas o que esta errado)
+		+ eficiente para rede com poucos erros
+	- volta um NAO (retorna janela inteira)
+		+ eficiente para rede com muitos erros
+
+	> em ambos os casos de der timedout, retorna toda a janela
+	> janelas de tamanho variaveis
+	> recepetor responde Y ou N e qual o tamanho da jenela

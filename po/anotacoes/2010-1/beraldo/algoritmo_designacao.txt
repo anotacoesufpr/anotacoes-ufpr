@@ -1,0 +1,21 @@
+algoritmo da designação
+
+1. subrtrair de cada linha seu nmenor valor, a seguir o mesmo com as outras
+
+2. designar origens para destinos nas celulas nulas: dar preferencia a linha ou coluna que titver apenas um zero disponivel. Se a designacao se completa, fim, senao 3 
+
+3. Cobrir os zsros da tabela com o menor numero de linhas possiveis:
+	3.1 Marcar linhas sem designacao
+	3.2 Marcar colunas com zeros nas linhas nas linhas marcadas
+	3.3 Marcar linha com designacao nas colunas marcadas
+	3.4 Voltar a marcar as colunas com zero nas linhas marcadas até que náo seja possivel marcra novas linahs ou colunas
+	3.5Riscar as linhas nao marcadas e colunas marcadas
+
+4. Obter o menor valor dos numeros nao cobertos
+	4.1 SUbtrrair este menor val;or de todos os numeros nao conbertos
+	4.2 Adiciona-lo nas interseccoes das linhas
+	4.3 Os demias ficam iguais
+
+5. Voltar ao passo 2
+
+

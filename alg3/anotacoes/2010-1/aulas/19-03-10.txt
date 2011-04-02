@@ -1,0 +1,35 @@
+Valor do balanceamento dos nos apos a rotacao:
+
+Insercao chave K em arvore AVL. T.
+
+1.
+- Insercao do nodo P com chave K na arvore Binaria
+- guarda o acestral + proximo (a) que pode ficar desbalanceado
+2.
+- Atualiza o bal(n) para todos os nodos no caminho de a (inclusive)
+ateh p (exclusive)
+
+Se chave K < chave(n)
+	bal(n) = bal(n) + 1
+Se nao
+	bal(n) = bal(n) -1
+3.
+Se bal(a) = 2
+	Se bal (esquerdo(a)) = 1
+		RotDir(a); bal(a)=0; bal(esquerdo(a))=0;
+	Se nao
+	fa=esquerdo(a)
+	na==direita(fa)
+Se bal(na) = 1
+	bal(na)=0
+	bal(fa)=0
+	bal(a)=-1
+Se bal(na) = -1
+	bal(na)=0
+	bal(fa)=1
+	bal(a)=0
+RotEsq(fa)
+RotDir(a)
+
+h(T_avl) <= 1,44 log(n)
+

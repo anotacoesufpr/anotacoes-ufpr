@@ -1,0 +1,20 @@
+FLUXOGRAMA PARA TESTE DE HIPOTESES
+
+(stop)> se responde sim a pergunta, para! se nao tem essa marcacao, continua!
+
+1 MÉDIA? se nao ---->  2 MÉDIAS? se nao ->|
+(stop)                 (stop)		  |
+					  |
+				---------------------
+				|		    |
+			DADOS PAREADOS?        DADOS NAO PAREADOS!
+			(stop	)			|
+							|
+							|
+						TESTE PARA VARIANCIAS OBRIGATORIO!
+							|
+							|
+						------------------
+						|		 |
+				      VARIANCIAS IGUAIS?    VARIANCIAS DIFERENTES?
+					(stop)			(stop)

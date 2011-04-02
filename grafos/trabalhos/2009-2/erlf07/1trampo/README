@@ -1,0 +1,85 @@
+Universidade Federal do Parana
+CI065 - Algoritmos e teoria dos grafos - 2009/2
+Trabalho Pratico de Programacao - Clique Maxima
+Prof. André Luiz Pires Guedes
+
+GRR20052411 LOIRTO ALVES DOS SANTOS
+GRR20034170 ARAMIS STACH HAIDUSKI FERNANDES
+GRR20070069 EDSON RAMIRO LUCAS FILHO
+
+1. Makefile
+2. O Algoritmo de Clique Maxima
+3. Detalhes
+4. Conclusao
+
+
+Introducao
+
+1. Makefile
+
+    Para compilar o plugin e executa-lo, assumindo que voce esta
+    dentro do diretorio em que o pacote foi discompactado, execute:
+
+        $ make
+
+    O Makefile gera um arquivo chamado ashf03-erlf07-las05.so.
+    Este arquivo devera ser copiado para o diretorio de plugins
+    do programa GRAFO.
+
+    Para remover os arquivos objetos gerados execute.
+
+        $ make clean
+
+2. O Algoritmo de Clique Maxima
+
+    Procurando efeciencia na busca de uma Clique Maxima, propomos
+    neste algoritmo pegar o conjunto dos Vertices com maior grau
+    no grafo, verificar se eles podem formar uma clique, e se sim,
+    verificar se eles sao, de fato, uma clique.
+
+    Em uma notacao de alto nivel temos:
+
+        K = numero de vertices na clique do grafo G (da maior para a menor)
+		K-1 = grau dos vertices que compoe uma K-clique
+        U = conjunto de vertices do grafo G
+        v = um vertice do grafo G, onde, U = {v0,v1, ..., vN}
+        P = conjunto de vertices com grau maior ou igual a K
+
+        U = {v}, onde v tem o maior grau (k)
+        PARA  n = K-1  ATE  1  faça
+            SE  v[n] E VIZINHO DE TODOS OS VERTICES EM U ENTAO
+                U = U + {v[n]}
+
+    Ou seja, pegamos os conjunto de grau maior ou igual a k, variando
+    k do maior para o menor, e para cada conjunto deste verificamos
+    se e' possivel formar uma clique, pois, se temos somente vertices
+    com grau maior ou igual a K-1, entao, temos uma K-clique.
+
+    Caso o conjunto U possua uma quantidade menor de elementos do que a
+    quantidade minima necessaria para formar uma K-clique, deixamos de
+	verificar se o conjunto eh de fato uma clique.
+
+    Geramos uma lista com os elementos eleitos que podem formar uma clique e
+    procuramos nesta lista os k elementos conexos que resultam na clique.
+
+    Apos acharmos os vertices da clique, pintamo-os, assim como as suas arestas.
+
+3. Detalhes
+
+    Tentamos usar as estruturas fornecidas pelo GRAFO como lista, pilha e fila,
+    mas precisavamos de um vetor com indices para facilitar o nosso trabalho.
+
+4. Conclusao
+
+    Um algoritmo que procura a clique maxima em um grafo envolve combinacao
+    de elementos em um conjunto. Tentamos minimizar o custo do algoritmo
+    verificando se e' possivel fazer uma clique com os vertices escolhidos,
+    economizando o tempo para fazer a combinacao.
+
+	O algoritmo, apesar de eficiente, deixa de encontrar a maior clique em
+	grafos especificos, ja que nao eh um algoritmo recursivo. Mesmo assim,
+	a maioria dos grafos sao cobertos.
+	Exemplos de grafos especificos sao os grafos que possuem uma clique que
+	envolve os vertices de menor indice e outra clique maior que envolve os
+	vertices com indices maiores.
+

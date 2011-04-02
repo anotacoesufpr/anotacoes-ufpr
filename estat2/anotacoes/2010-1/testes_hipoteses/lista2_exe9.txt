@@ -1,0 +1,38 @@
+PROD|  ALIVIO          | TOTAL
+    |    S      N      |
+--------------------------------
+H   |    16(14)24(26)  | 40
+CMP |    12(14)28(26)  | 40
+--------------------------------
+         28    52      | 80
+#############################################
+PROD|  ALIVIO          | TOTAL
+    |    S      N      |  
+--------------------------------
+Q   |    45(41)5(9)    | 50    90%
+CMP |    36(40)14(10)  | 50    12%
+--------------------------------
+         81    19      | 80
+#############################################
+
+1) HIPOTESES
+HO: NAO HA ASSOCIACAO ENTRE TIPO DE PRODUTO DE ALIVIO
+HA: HA ASSOCIACAO ENTRE TIPO DE PRODUTO DE ALIVIO
+
+2) REGIAO DE DECISAO
+
+6,63 (UNILATERAL AA DIREITA)
+
+3) ACHAR AS FREQUENCIAS (NUMEROS ENTRE PARENTESES)
+
+G.L. = 1, POIS A TABELA EH POR 2X2.. OU SEJA, SEMPRE SERA G.L.=1
+
+KIQUADRADO1 = SOMATORIA(0ij-Eij)^2 / Eij = 
+
+= (16-14)^2/14 + (24-26)^2/26 + (12-14)^2/14 + (28-26)^2/26 = 0,8791
+
+KIQUADRADO2 = 
+
+= (74-41)²/41 + (5-9)^2/9 + (36-40)^2/40 + (14-10)^2/10 = 4,17
+
+EM AMBOS OS CASOS NAO REJEITAMOS H0!!!!

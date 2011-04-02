@@ -1,0 +1,16 @@
+Fcalculado = QMTrat/QMRes
+
+
+
+O FCalculado eh comparado com o Ftabelado
+
+SE Fcalculado > FTabelado, rejeitamos H0
+ou
+SE P_VALOR < ALPHA, REJEITAMOS H0
+
+
+wiki:
+Em estatística, e especificamente no campo dos testes de hipóteses, o valor p,
+ou também valor-p ou ainda P-valor, é a probabilidade  de que a nossa amostra
+podia ter sido tirada de uma população sendo testada assumindo que a hipótese
+nula seja verdadeira.

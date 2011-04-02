@@ -1,0 +1,48 @@
+Remove(Apontador raiz, Registro reg)
+
+	x = RemoveArvBin(raiz,reg)
+	/* retorna apontador para o nodo removido */
+
+	se x->cor == preto
+		se x == esq(pai(x))
+			balanceia(raiz, esquerda(x))
+		se nao
+			balanceia(raiz,direita(x))
+
+balanceia(Apontador raiz, Apontador p)
+enquanto p != raiz e p->cor == preto
+{
+	se p == esq(pai(p))
+	{
+		d = direita(pai(p))
+		se d->cor == vermelho
+		{ /* primeiro caso */
+			d->cor = preto
+			pai(p)->cor = vermelho
+			RotEsq(pai(p))
+			d= direita(pai(p))
+		}
+		se (esquerdo(d)->cor == preto e direita(d)->cor == preto)
+		{ /* segundo caso */
+			d->cor = vermelho
+			p=pai(p)
+		}
+		se nao
+		{
+			se esquerdo(d)->cor == vermelho
+			{ / *terceiro caso */	
+				d->cor = vermelho
+				esquerdo(d)->cor = preto
+				RotDir(d)
+			}
+			/* quarto caso */
+			d=direita(pai(p))
+			d->cor =pai(p)->cor
+			pai(p)->cor = preto
+			direita(d)->cor = preto
+			RotEsq(pai(p))
+		}
+	}
+	Se nao 
+		p->cor = preto
+}

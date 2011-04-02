@@ -1,0 +1,73 @@
+EXERCICIOS
+
+1) SE 5% DAS LAMPADAS DE UMA MARCA SAO DEFEITUROSAS, ACHE A PROBABILIDADE DE
+QUE, NUMA AMOSTRA DE 100 LAMPADAS:
+
+X~B(100,0.05)
+a) NAO HAJA NENHUMA DEFEITUOSA
+p(x=0) = (n ) p^x . q^(n-x)
+	 (x )
+= 0.0059
+
+b) HAJA 3 DEFEITUOSAS
+p(x=3) = (100) . 0.05^3 . 0.95 ^(100-0) = 0.1395
+	 (3  )
+
+c) HAJA MAIS DO QUE UMA BOA
+p(x<=98) = 1 - p(x>98) = 1 - [p(x=99) + p(x=100)]
+= 1 - [(100) . 0.05^99 . 0.05^1 + (100) . (0.05)^100 . (0.95)^0]
+= 0.9999
+
+E(X)? E(X)=n.p = 100 x 0.05 = 5
+V(X)? V(X) = 100 x 0.05 x 0.95 = 4.75
+
+***********************************************************************
+2) SE UM BANCO RECEBE, EM MEDIA, 6 CHEQUES SEM COBERTURA POR DIA, QUAL EH A
+PROBABILIDADE DE, NUM DIA QUALQUER, RECEBER 4 CHEQUES SEM COBERTURA?
+X~P(6)
+P(x=4) = [e^(-6) . 6^4]/4!
+= 0.1339
+
+P(x>=4)? P(x>=4) = 1- p(x<4) 1-p(x=0) + ... + p(x=3) =
+= 
+
+
+3) O TEMPO DE MONTAGEM DE UMA MESA PARA PC EH UMA V.A. NORMAL COM mi=55 min e 
+sigma=12 min . QUAIS AS PROBABILIDADES DA MESA SER MONTADA:
+
+x~N(55,12)
+
+a) EM MENOS DE 45 MINUTOS
+(x-mi)/sigma = (45-55)/12 = -0.83
+Portanto, pela tabela, probabilidade = 0,2033
+        __
+       /  \
+      /    \
+     /*     \
+    /**      \
+   /***       \
+---****        ---
+--------------------------
+      |
+    -0.83
+
+b) ENTRE 45 E 60 MINUTOS
+(60-55)/12=0.42
+
+p(-0.83<x<60) = 0.6628 - 0.2033 = 0.4595
+        __
+       /  \
+      /    \
+     /*    *\
+    /**    **\
+   /***    ***\
+---****    ****---
+--------------------------
+      |    |
+    -0.83  0.42
+
+
+c) ENTRE 45 E 75 MINUTOS
+
+(75-55)/12 = 1.67
+p(-0.83<z<1.67) = 0.9525-0.2093 = 0.7492

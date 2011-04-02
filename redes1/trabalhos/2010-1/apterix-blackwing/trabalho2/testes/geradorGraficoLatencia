@@ -1,0 +1,11 @@
+set   autoscale
+set title "Latência da Rede"
+set xlabel "Pacotes (media de uma amostra de 70 pacotes)"
+set ylabel "latência"
+set key right bottom
+set term png size 1500, 600
+set output "graficoLatencia.png"
+plot "saida1ms" using 1:2 title '1ms' with lines, \
+"saida10ms" using 1:2 title '10ms' with lines, \
+"saida100ms" using 1:2 title '100ms' with lines, \
+"saida1000ms" using 1:2 title '1000ms' with lines

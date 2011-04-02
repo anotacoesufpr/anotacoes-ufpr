@@ -1,0 +1,37 @@
+
+DADOS DO EXERCICIO 10 DA LISTA2:
+----------------------------------------------------------------
+Y = BETA0 + BETA1*X
+
+	REG: 27%		RES: 73%
+CINTURA = -9,19 + 0,26*ALTURA + E (~normal(o,variancia))
+					^
+					|-----> ANALISE GRAFICA
+						(ERRO NATURAL, ALEATORIO, RUIDO ETC)
+-----------------------------------------------------------------
+HO: Bi=0
+HA: Bi!=0
+
+ALPHA=5%
+		P_VALOR
+BETA0 -6,19.....0,3 -> maior que 5%
+BETA1 0,26......0,00276 -> menor que 5%
+
+NAO REJEITA H0!!!!
+
+A) MODELO NAO SIGNIFICATIVO
+
+B) NAO, POIS OS PRESSUPOSTO DEVE SER VERIFICADO (~normal(o,variancia))
+
+R^2 NAO PEDIU, MAS PODERIAMOS CALCULAR:
+R^2 = (79,67)/(79,67 + 215,77) = 0,27
+
+R^2 IDEAL EH ACIMA DE 70%!!!
+R^2 EH QUANTO O MODELO CONSEGUE EXPLICAR!!! A DIFERENCA DELE COM 100 EH O ERRO DA FORMULA!!!
+
+3) SUBSTITUNDO EM:
+CINTURA = -9,19 + 0,26*ALTURA
+
+ALTURA = 66,93
+
+CINTURA = 28,47

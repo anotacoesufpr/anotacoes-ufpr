@@ -1,0 +1,129 @@
+CI215	- 	Sistemas Operacionais
+
+Trabalho 1
+
+Data de Entrega		18/06/2010
+
+
+			Terapia de Tumores
+
+OBJETIVOS 
+
+O objetivo do trabalho é resolver um problema simplificado relacionado
+a computação da terapia de tumores utilizando programação Multi-threads. 
+
+A entrada do problema é um arquivo contendo coordenadas de um número 
+potencialmente grande de células. Cada linha do arquivo contém 3 números 
+em ponto flutuante, que são as coordenadas X, Y e Z do núcleo de uma 
+determinada célula. 
+
+Considerando esta entrada é necessário calcular as distâncias entre
+todas as células.  Sendo Cj=(Xj,Yj,Zj) e Ck=(Xk,Yk,|k) a coordenada 
+de duas células a distância entre as células é dada por:
+
+	d(Cj,Ck)= SQRT ((Xj-Xk)^2 + (Yj-Yk)^2  + (Zj-Zk)^2 )
+
+O número de distâncias entre todos os pares de células evidente é 
+muito grande, n*(n-1)/2, e inviável para instâncias onde n é
+grande. Felizmente o que o programa precisa computar é apenas 
+a contagem do número de vezes que cada distância ocorre. Como o
+número de distâncias repetidas é potencialmente grande, podemos
+resolver o problema.
+ 
+Para ilustrar, suponha que as celulas estão localizadas nos cantos
+de um cube com lados de tamanho 1. Observando de um canto existem
+3 células a distância sqrt(1), 3 células  a distância sqrt(2) e 1
+célula com distância srqt(3). Considerando os demais cantos, a
+saída do programa deveria ser:
+
+Distância		Contagem
+1.00000000000000	   12
+1.41421356237310   	   12 
+1.73205080756888	    4
+
+A entrada do programa (descrevendo as coordenadas) seria a seguinte:
+
+0 0 0
+1 0 0
+1 1 0
+0 1 0
+0 0 1
+1 0 1
+1 1 1
+0 1 1
+
+Uma aplicação deste problema deve considerar que temos algo como
+700 mil células, o que potencialmente torna impossível alocar um 
+vetor para guardar todas as distâncias e então percorrer o array
+contando todas as distâncias. 
+
+Isto significa que você deve contar as distâncias enquanto elas
+são encontradas pelo algoritmo. Considerando também que o número
+de diferentes distâncias não é conhecido previamente e pode ser
+potencialmente grande, será necessário projetar uma estrutura de
+dados que permita armazenar a contagem de distâncias.
+
+
+ARQUITETURA
+
+Você deve considerar que para resolver este problema você tem
+a disposição uma máquina com múltiplos núcleos que deve ser
+programada utilizando Linguagem C e a biblioteca de Threads
+(pthreads).
+
+O problema implicada em uma arquitetura básica com dois pools
+de threads. O primeiro pool é responsável por contar as distâncias
+e armazena-las em um buffer temporário limitado. O segundo pool
+é responsável por esvaziar o buffer de distâncias encontradas realizando
+a contagem das distâncias encontradas. 
+
+Esta arquitetura básica implica em várias sincronizações necessárias
+(por exemplo desconsiderar as distâncias já calculadas, realizar 
+balanceamento de carga, evitar pontos de conteção desnecessários, etc).
+
+A arquitetura é avaliada por sua elegência, eficiência e criatividade.
+
+EXPERIMENTOS E RELATÓRIO
+
+Os experimentos devem apresentar execuções do programa
+com diferentes parâmetros para o número de threads dos pools e
+outros parâmetros considerados relevantes.
+ 
+Também é desejável resultados de experimentos realizados com 
+versões iniciais do seu programa, supostamente mais lentas.
+Experimentos com diferentes cargas (conjunto distintos de arquivos
+a serem copiados) também são desejáveis.
+ 
+A idéia é que os experimentem mostrem como
+as decisões de projeto melhoraram o desempenho do
+algoritmo. Você deve tentar demonstrar que teu programa
+é realmente eficiênte.
+
+ENTREGA FINAL
+
+Na data da entrega deve ser entregue o relatório final (escrito
+em Latex) contendo:
+
+	1. Introdução	
+	2. Arquitetura do Sistema
+	3. Experimentos
+	4. Conclusão
+
+Ainda no dia da entrega será realizado um teste de funcionamento
+e  desempenho do sistema. Será oferecido um conjunto de dados e
+um ambiente de testes para o dia da avaliação.
+
+A não execução, ou execução com erros, potencialmente mata o paciente
+que tem o tumo. Assim nestes casos a nota do  trabalho é AUTOMATICAMENTE
+(0) ZERO. Um tempo de execução máximo (baseado na versão sequencial do programa)
+também será adotado. Ultrapassar este tempo implica tratar o tumor 
+tarde demais e também em implicar em nota AUTOMATICAMENTE (0) ZERO. 
+
+REFERENCIA
+
+Kay A. Robbins, S. Robbins, Unix Systems Programming: Communication,
+Concurrency, and Threads.
+
+
+
+

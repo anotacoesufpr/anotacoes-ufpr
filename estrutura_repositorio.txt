@@ -1,0 +1,31 @@
+Na tentativa de padronizar a organização do repositório, fiz esse artigo.
+
+A raíz do repositório terá as matérias. Por exemplo:
+
+/redes/
+/sbasico/
+/estat2/
+/adm/
+/tga/
+/alg3/
+/itc/
+...
+
+Cada diretório terá uma lista de diretórios padrões. Se não tiver, siga essa orientação e crie-os.
+Exemplos:
+
+/redes/ terá:
+
+/redes/trabalhos/2010-1/ #trabalhos de 2010-1
+/redes/anotacoes/2010-1/ #anotacoes ou aulas de 2010-1, nao sobrescreva outros arquivos
+/redes/provas/2010-1/ #provas digitalizadas
+
+Se eu quiser criar um diretório com o meu trabalho redes de 2010-1 eu farei o seguinte:
+cd /redes/trabalhos/2010-1/
+mkdir login1-login2 #nome da dupla
+cp -a ~/meu/trab/esta/aqui/* login1-login2/ #copio meu trabalho
+
+##
+# Procure não substituir arquivos ou fazer merge. Arquivos com anotacoes muito longas podem
+# ficar bizarros, especialmente porque as pessoas pensam e escrevem diferente.
+##

@@ -1,0 +1,12 @@
+graph g2
+{
+	Adaltina
+	Brandelina -- "Misto Frio"
+	Brandelina -- "X-Salada"
+	Clodina -- Bauru
+	Clodina -- "X-Salada"
+	Dejaina -- "Misto Quente"
+	Dejaina -- "Misto Frio"
+	Edina -- "Misto Quente"
+	Edina -- Bauru
+}

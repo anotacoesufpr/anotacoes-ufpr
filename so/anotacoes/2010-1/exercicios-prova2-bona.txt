@@ -1,0 +1,72 @@
+1. Quais as vantagens e desvantagens de guardar o nome do programa
+criador junto aos atributos do arquivo?
+
+2. Na semântica de sistema de arquivos do Unix o que acontece quando um
+arquivo que está aberto é removido?
+
+3. No NFS (Network File System) o que é o "Silly Rename"? Porque surgem
+os arquivos .nfsXXXXXX ?
+
+4. Discuta os fatores envolvidos na escolha do tamanho de bloco utilizado 
+por um filesystem.
+
+5. Sobre métodos de alocação de espaço, responder:
+	a) Como funciona a alocação de espaço contígua? Que problemas
+	apresenta?
+	b) Como funciona a alocação de espaço por encadeamento (linked
+	allocation). Quais os problemas apresentados por este método?
+	c) Como funciona a FAT (File-Allocation Table) usado pelo MS-DOS,
+	qual a diferença em relação à alocação por encadeamento simples?
+	d) Mostre como ficaria a tabela FAT para um arquivo composto
+	pelos seguintes blocos: 220, 340, 500, 600.
+	e) Em um sistema de arquivos usando uma FAT o que acontece se
+	ocorrer a corrupção total da tabela de alocação de arquivos?
+	f) Como funciona a alocação de espaço indexada? Que problemas
+	da alocação usando encadeamento ela tenta resolver?
+	f) Dentro da alocação indexada quais são os mecanismos usados
+	para guardar os índices?
+	g) O que são i-nodes? Em qual mecanimos de alocação indexada 
+	eles se enquadram? 
+
+6. Considere um sistema com i-nodes com 15 ponteiros. Nestes i-nodes
+os 12 primeiros são usados para alocação direta; o 13  ponteiro para
+alocação simples indireta; o 14 para alocação dupla indireta e o 15 para
+alocação tripla-indireta.  Considere ainda que cada bloco tem 512Kb. Como
+ficaria a estrutura de inodes para armazenar um arquivo de 129024 bytes
+(252 blocos)?
+
+7. Qual a diferença de simbolic links e hard links? E como é a implentação
+de cada um? Como é feito o controle de remoção de arquivo em cada caso?
+
+8. Considere um sistema onde o espaço livre é gerênciado por uma lista
+de espaço livre. Suponha que o ponteiro para a lista de espaços-livres foi
+perdido. Esta lista pode ser reconstruída? Explique sua resposta.
+
+9. Quais são os métodos para gerênciamento de espaço livre?
+
+10. Quais as estapas de um checkagem de consistência de um file system?
+
+11. Como funcionam os sistema de arquivos baseados em Journaling? Quais
+suas vantagem? O que tentam garantir?
+
+12. Explique os seguintes algoritmos de escalonamento de requisições de
+disco: FCSF, SSTF (Shortest-Seek First), SCAN, C-SCAN e LOOK.
+
+13. Quais sao os algoritmos de escalonamentos disponíveis atualmente
+do kernel Linux? Descreva cada um deles.
+
+14. Compare RAID0, RAID1, RAID5 e RAID6.
+
+15. Suponha que você possui 4 discos rígidos de 750GB. Quanto
+espaço disponível você obteria usando RAID5 e quanto espaço
+você obteria com RAID6? Quantos discos poderiam falhar em cada
+um destes casos? 
+
+16. Virtualização: 
+
+17. Explique a diferença de um SO de Tempo Real e um SO convencional.
+
+18. Diferencie Hard Realtime e Soft Realtime tasks 
+
+19. Vou cobrar de novo a sincronização de processos!
+ 

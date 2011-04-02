@@ -1,0 +1,50 @@
+PROCESSAMENTO DE CADEIA DE CARACTERES
+
+crecimento de strings:
+texto: T[1..n]
+padrao: P[1..m]
+
+objetivo: encontrar ocorrencias de P em T
+
+categorias:
+1) sem pre-processamento em P e T
+algoritmo de forca bruta
+
+2) pre-processamento no padrao
+rabin-karp (rk), kruth-maus-prett (kmp) { trie e patricia
+
+rk:
+kmp: padroes repetitivos
+
+arquivo invertido { vocabulario, ocorrencias
+
+passos:
+1) busca no vocabulario
+2) obtencao de lista de ocorrencias
+3) tratamento das listas de ocorrencias
+
+Texto 1  16
+exemplo 7
+tem 22
+palavras 26
+
+trie:
+
+	.
+			\
+/		\
+e		p	b
+exemplo 7	palavras \
+		26	  e
+			m   x
+			tem  texto
+			22   1   16
+
+--
+
+rk: padroes em inteiros
+
+padroes grandes:
+mesma estrategia utilizando (modulo q)
+
+q -> escolhido um primo tal que q*base cabe em uma palavra

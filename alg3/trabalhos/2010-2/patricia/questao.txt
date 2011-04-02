@@ -1,0 +1,66 @@
+Pergunta: Com base nas arvores Patricia geradas no item (1) e (2), analise e 
+compare as estruturas com relação ao custo dos comandos de inserção e
+busca (em termos de nodos visitados para executar o comando) e em
+termos de espaco de armazenamento.    Voce pode opcionalmente escrever
+um comando "c" (custo)  que imprima o tamanho da estrutura de dados
+corrente e analisar o resultado
+
+Resposta:
+Foi implementada uma funcao chamada custo (conforme foi nomeado na
+especificação do trabalho) que gera algumas informações:
+tamanho da estrutura de dados alocada e número de visita nos nodos em relação
+a função de busca.
+
+Para exemplificar o custo de cada árvore, fiz o seguinte teste:
+-i 00001
+-i 00010
+-i 00011
+-i 00100
+-i 00101
+-i 00110
+-i 00111
+-i 01000
+-i 01001
+-i 01010
+-i 01011
+-i 01100
+-i 01101
+-i 01110
+-i 01111
+-i 10000
+-i 10001
+-i 10010
+-i 10011
+-i 10100
+-i 10101
+-i 10110
+-i 10111
+-i 11000
+-i 11001
+-i 11010
+-i 11011
+-i 11100
+-i 11101
+-i 11110
+-i 11111
+c
+t
+c
+
+Comparando os resultados:
+Árvore Patricia:
+1488 bytes alocados, 62 visitas realizadas
+Árvore Patriz:
+1512 bytes alocados, 63 visitas realizadas
+
+A Patriz teve menos de 2% em bytes alocados e também menos de 2%
+para o número de visitas realizadas
+
+Em função das buscas recursivas serem parecidas, chega-se a conclusão que
+a Patricia não é tão mais eficiente quanto a Patriz e vice-versa.
+
+Devido a estrutura da Patriz poder ter um maior número de nodos, pode ser que
+a busca tenha um desempenho sensivelmente inferior (por caminhar por mais nodos),
+mas não creio que não há diferença relevante quanto a busca; Contudo a estrutura
+da Patricia ocupa menos espaço, que pode ser um fator desejado no caso de grande
+quantidade de inclusão de dados.

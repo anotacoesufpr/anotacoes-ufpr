@@ -1,0 +1,201 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{hyperref}
+
+
+\title{Trabalho 1 de Pesquisa Operacional - Situação 7}
+\author{Roberto Beraldo Chaiben - GRR 20084213 \\ Carlos Augusto Ligmanowski Júnior - GRR 20081238}
+\date{17/05/2010}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\section{Tabela de Transporte}
+
+\begin{tabular}{ | c | c | c | c | c | c | }
+
+
+\hline
+ & 1o. quadrimestre & 2o. q. & 3o. q. & Artificial & Capacidade \\
+\hline
+1o. quadrimestre & & & & & \\
+normal           & 4    & 20   & BigM & 0 & 200 \\
+extra            & BigM & BigM & BigM & 0 & 0 \\
+terceirizado     & 10   & BigM & BigM & 0 & 200 \\
+estocagem        & 2    & BigM & BigM & 0 & 250 \\
+\hline
+2o. quadrimestre & & & & & \\
+normal       & BigM & 4    & 20   & 0 & 200 \\
+extra        & BigM & BigM & BigM & 0 & 0 \\
+terceirizado & BigM & 10   & BigM & 0 & 50 \\
+estocagem    & BigM & 2    & BigM & 0 & 200 \\
+\hline
+3o. quadrimestre & & & & & \\
+normal       & BigM & BigM & 4  & 0 & 200 \\
+extra        & BigM & BigM & 6  & 0 & 40 \\
+terceirizado & BigM & BigM & 10 & 0 & 50 \\
+estocagem    & BigM & BigM & 2  & 0 & 200 \\
+\hline
+Demanda & 200-50 = 150 * & 300 & 500 & 640 & \\
+\hline
+
+\end{tabular} \\
+
+\vspace{1cm}
+
+*  50 = estoque inicial \\
+
+
+total\_capacidade = 940 + x + y +z \\
+total\_demanda = 950 \\
+
+
+Como demanda\_total = capacidade\_total para se fazer o Algoritmo de Transporte: \\
+Demanda artificial = 1590 - 950 = 640
+
+
+\section{Modificações}
+
+Usando os dados fornecidos pelo enunciado do problema, não há solução factível, 
+uma vez que, mesmo a empresa operando no máximo de sua capacidade, ela não consegue
+atender à demanda total.
+
+A fim de corrigir esse problema, foram feitas as seguintes modificações:
+
+\begin{itemize}
+
+	\item Desconsideração do estoque final de 200 unidades;
+	
+	\item Aumento da capacidade de subcontratação dos quadrimestres 2 e 3 de 50 para 75.
+
+\end{itemize}
+
+
+
+
+\section{Modelagem}
+
+
+
+
+\subsection{Variáveis de decisão}
+
+$n_1$ = produção normal no 1o. quadrimestre \\
+$n_2$ = produção normal no 2o. Quadrimestre \\
+$n_3$ = produção normal no 3o. Quadrimestre \\
+$e_3$ = produção extra no 3o. Quadrimestre \\
+$s_1$ = produção terceirizada (subcontratação) no 1o. Quadrimestre \\
+$s_2$ = produção terceirizada (subcontratação) no 2o. Quadrimestre \\
+$s_3$ = produção terceirizada (subcontratação) no 3o. Quadrimestre \\
+$z_1$ = produção para estocar no 1o. Quadrimestre \\
+$z_2$ = produção para estocar no 2o. Quadrimestre \\
+$z_3$ = produção para estocar no 3o. Quadrimestre \\
+$a_1$ = quantidade atraso do 1o Quadrimestre no 2o Quadrimestre \\
+$a_2$ = quantidade atraso do 2o Quadrimestre no 3o Quadrimestre \\
+
+
+\subsection{Função objetivo}
+MIN z = $4n_1$ + $4n_2$ + $4n_3$ + $6e_3$ + $10s_1$ + $10s_2$ + $10s_3$ + $2z_1$ + $2z_2$ + $2z_3$ + $20a_1$ + $20a_2$;
+
+
+
+\subsection{Restrições}
+
+\# Capacidade de produção normal \\
+$n_1$ $\le$ 200; \\
+$n_2$ $\le$ 200; \\
+$n_3$ $\le$ 200; 
+
+\vspace{1cm}
+
+\# Capacidade de produção extra \\
+$e_3$ $\le$ 40;
+
+\vspace{1cm}
+
+
+\# Subcontratação por quadrimestre \\
+$s_1$ $\le$ 200; \\
+$s_2$ $\le$ 75; \\
+$s_3$ $\le$ 75; 
+
+\vspace{1cm}
+
+\# Restrições de estoque \\
+$z_1$ $\le$ 250; \\
+$z_2$ $\le$ 200; \\
+$z_3$ $\le$ 200;
+
+\vspace{1cm}
+
+\# Demanda \\
+$n_1$ + $s_1$ $=$ 150 + $z_1$ - $a_1$; \textit{\textbf{\# 200 - 50 (50 = estoque inicial)}} \\
+$n_2$ + $s_2$ + $z_1$ $=$ 300 + $z_2$ + $a_1$ - $a_2$; \\
+$n_3$ + $e_3$ + $s_3$ + $z_2$ $=$ 500 + $a_2$ + $z_3$;
+
+\vspace{1cm}
+
+\# No máximo atrasa o que tem de demanda \\
+$a_1$ $\le$ 150; \\
+$a_2$ $\le$ 300;
+
+
+\section{Soluções}
+
+$n_1$ = 200 \\
+$n_2$ = 200 \\
+$n_3$ = 200 \\
+$e_3$ = 40 \\
+$s_1$ = 100 \\
+$s_2$ = 75 \\
+$s_3$ = 75 \\
+$z_1$ = 210 \\
+$z_2$ = 185 \\
+$z_3$ = 200 \\
+$a_1$ = 0 \\
+$a_2$ = 0 \\
+
+
+\vspace{1cm}
+
+Para a geração da solução, foi usado o programa GLPK (GNU Linear Programming Kit)\footnote{http://www.gnu.org/software/glpk/}
+
+
+\section{Tabela de Decisões para cada Quadrimestre}
+
+\begin{tabular}{| p{3cm} | p{10cm} |}
+
+\hline
+1o. Quadrimestre & Produzir 200 unidades como produção normal e 100, como subcontratada  \\
+\hline
+2o. Quadrimestre & Produzir 200 unidades como produção normal e 75, como produção subcontratada \\
+\hline
+3o. Quadrimestre & Produzir 200 unidades como produção normal, 40, como produção extra e 75, como produção subcontratada \\
+\hline
+
+\end{tabular}
+
+
+
+\section{Análise da solução}
+
+A solução é factível, uma vez que, no primeiro quadrimestre, precisa-se de 200 unidades. Como já se possui 50
+unidades em estoque, basta produzir 150, como produção normal, que possui o menor custo. Como ainda é possível 
+produzir mais, produz-se e estoca-se para o quadrimestre seguinte.
+
+No segundo quadrimestre, produz-se, além das 200 unidades da produção normal, 75 em produção subcontratada, gerando menor custo.
+
+No terceiro quadrimestre, precisa-se de 500 unidades, pois o estoque final foi desconsiderado.  Produz-se
+200 em produção normal, 40 em produção extra e 75 em subcontratada.
+
+
+
+
+
+
+\end{document}

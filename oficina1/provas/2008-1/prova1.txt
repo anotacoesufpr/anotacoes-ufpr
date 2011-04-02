@@ -1,0 +1,85 @@
+PROVA 1 - 24/ABRIL/2008
+
+Disciplina de Oficina de Programação CI-066
+Curso de Bacharelado em Informática
+Professor Luciano    
+
+Obs:
+- Leia atentamente toda a prova antes de começar a resolver as questões.
+- A prova é sem consulta, podendo usar apenas o terminal e os manuais
+  online do sistema.
+- A interpretação, abstração e adaptação das questões faz parte da prova.
+- Lembre-se de consultar o manual on-line do sistema no caso de dúvida.
+- A prova vale 100 pontos. A duração da prova é de 80 minutos. Administre
+  o seu tempo: 20 minutos para cada questão. 
+  
+
+IMPORTANTE:
+	
+- Antes de começar leia atentamente as próximas observações.
+- Crie um diretório chamado ci066_prova1 na sua área com o comando:
+  mkdir ci066_prova1 ~
+- Troque as permissões deste diretório e da sua HOME com os comandos:
+  chmod 705 ~
+  chmod 705 ~/ci066_prova1
+- Se você não fizer os passos anteriores você não terá sua prova
+  avaliada/corrigida.
+- Ao escrever cada uma das respostas nos seus respectivos arquivos,
+  como solicitado em cada questão abaixo, o sistema do professor 
+  automaticamente faz uma cópia deste arquivo, incluindo suas alterações.
+- Ao final da prova assine a folha de presença e verifique com o 
+  professor se suas respostas foram copiadas.
+- O professor irá considerar apenas a última atualização de cada um
+  dos arquivos de resposta. Isso significa que você pode alterar estes
+  arquivos o quanto quiser até o final da prova. Apenas a última versão
+  deles é que será avaliada.
+
+
+QUESTÕES:
+
+1. (30 pontos) Usando apenas um comando do SHELL encontre a partir do 
+diretório media/mac que está no diretório HOME do usuário JddA, todos
+os arquivos maiores que 1 megabyte, que possuem terminação ".txt" e que
+possuem a palavra aluno no seu conteúdo, não no nome do arquivo. O 
+resultado desta busca deve ser colocado no arquivo /temp/resultado.txt
+Explique a sua resposta. 
+OBS: A resposta desta questão deve ser escrita em um arquivo texto 
+chamado resposta1.txt no seu diretório ci066_prova1. 
+Troque as permissões deste arquivo com o comando:
+chmod 604 ~/ci066_prova1/resposta1.txt
+
+
+2. (30 pontos) Qual a linha de comando que você usaria para criar um 
+arquivo na sua área que contenha o nome de todos os usuários do 
+sistema que possuem: o sobrenome Zaets, logins apenas com letras
+sem nenhum número e com diretório HOME no subdiretório /home/alunos.
+Explique a sua resposta.
+OBS: A resposta desta questão deve ser escrita em um arquivo texto 
+chamado resposta2.txt no seu diretório ci066_prova1
+Troque as permissões deste arquivo com o  comando:
+chmod 604 ~/ci066_prova1/resposta2.txt
+
+
+3. (30 pontos) Dado um arquivo chamado notas.txt com 72 linhas,
+sendo que cada uma das linhas contém 25 colunas separadas por ",". 
+Qual a linha de comando que você usuaria para gerar dois arquivos,
+um no diretório /usr/teste com as linhas pares do arquivo notas.txt 
+e outro no seu diretório HOME com um número inteiro que é o total 
+de linhas pares encontradas neste arquivo notas.txt.
+Explique sua resposta. 
+OBS: A resposta desta questão deve ser escrita em um arquivo texto 
+chamado resposta3.txt no seu diretório ci066_prova1
+Troque as permissões deste arquivo com o comando:
+chmod 604 ~/ci066_prova1/resposta3.txt
+
+
+4. (10 pontos) Escreva 3 linhas de comando que você utiliza no 
+dia-a-dia que fazem uso dos conceitos de: expressões regulares para 
+filtragem da saída padrão de comandos; PIPE para redirecionar a
+saída padrão de um comando para a entrada padrão de outro; e 
+redirecionamento de saída padrão para arquivos.
+Explique sua resposta.
+OBS: A resposta desta questão deve ser escrita em um arquivo texto 
+chamado resposta4.txt no seu diretório ci066_prova1
+Troque as permissões deste arquivo com o comando:
+chmod 604 ~/ci066_prova1/resposta4.txt

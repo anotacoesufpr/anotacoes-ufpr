@@ -1,0 +1,65 @@
+Sistemas de Transporte Digital
+
+-> Uma caracteristica das transmissoes eletricas eh a atenuacao
+-> Quanto mais alta a frequencia do sinal maior a atenuacao
+-> Sistemas analogicos usam amplificadores para lidar com a atenuacao. Eles
+devem ser colocados a cada 6 ou 7 km.
+-> Embora amplificadores reforcem o sinal, eles tambem reforcam o ruido
+-> Algumas vezes o ruido amplificado pode comprometer o sinal
+-> Isso eh um problema ainda maior quando o sinal transmitido eh constituido
+de dados digitais, nos quais a tolerancia de ruidos eh muito baixa
+-> Para lidar com este problema, a transmissao foi digitalizada
+-> Em sistemas digitais a atenuacao eh resolvida por repetidoras e nao por
+amplificadoras
+-> Uma repetidora regenera o sinal digital com exatidao, compara com o sinal
+recebido e soh entao passa adiante. Reduzindo a chance de erros.
+-> Primeiro o sistema de transporte digital foi o sistema T1
+-> Criado pela AT&T
+-> Usado para transporte digital de voz
+-> Usa TDM para multiplexar 24 canais de voz sobre um unico canal digital
+-> Usa quadro de 193bits -> 8 bits por canal + 1 bit de controle
+-> Cada canal de voz tem uma taxa de 64kbps
+-> Quando um canal de voz eh multiplexado como sinal digital ele eh chamado
+"sinal digital de nivel 0 " (DS-0)
+-> O conceito das linhas T1 evoluiu e hoje eh conhecido como "Hierarquia
+Digital Norte-Americana" (NADH)
+-> Linhas T1 podem ser combinadas para aumentar a capacidade de transmissao
+
+-----------------------------------------------------------------------
+SINAL DIGITAL |  T  |  TAXA DE TRANSMISSAO  |  CANAIS DS-0  |  LINHAS T1 EQUI.
+-----------------------------------------------------------------------
+DS-0          |  -  | 0.064                 | 1             | -
+-----------------------------------------------------------------------
+DS-1          |  t1 | 1.544                 | 24            | 1
+-----------------------------------------------------------------------
+DS-1C         | t1c | 3.152                 | 48            | 2
+-----------------------------------------------------------------------
+DS-2          |  t2 | 6.312                 | 96            | 4
+-----------------------------------------------------------------------
+DS-3          |  t3 | 44.736                | 672           | 28
+-----------------------------------------------------------------------
+DS-4          |  t4 | 274.176               | 4032          | 168
+-----------------------------------------------------------------------
+
+- SISTEMA E1
+-> 20 usuarios multipleados em 1 canal digital
+-----------------------------------------------------------------------
+    T         |  TAXA DE TRANSMISSAO  |  CANAIS DS-0  |  LINHAS T1 EQUI.
+-----------------------------------------------------------------------
+--            | 0.064                 | 1             | -
+-----------------------------------------------------------------------
+E1            | 2.048                 | 30            | 1
+----------------------------------------------------------------------
+E2            | 8.448                 | 120           | 4
+-----------------------------------------------------------------------
+E3            | 34.368                | 480           | 16
+-----------------------------------------------------------------------
+E4            | 139.264               | 1920          | 64
+--------------------------------------------------------------------
+E5            | 565.198               | 7680          | 256
+-----------------------------------------------------------------------
+
+-> Linha E e T usam condificacao AMI mas nao sao compativeis entre si
+-> Multiplexacao
+	E-> DIMF
+	T-> FSK (FM)

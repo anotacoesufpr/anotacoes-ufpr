@@ -1,0 +1,202 @@
+------------------------------------------------
+É natural comparar os paradigmas imperativo e funcional. As linguagens que seguem o
+paradigma imperativo se baseiam diretamente no modelo de computação de von Neumann, o que
+torna a programação excessivamente trabalhosa, fazendo com que os programadores tenham que
+se preocupar com detalhes da arquitetura da máquina que são irrelevantes no contexto do
+problema que pretendem resolver computacionalmente. Por outro lado, consegue-se programas
+que executam muito eficientemente.
+
+Já nas linguagens que seguem o paradigma funcional, existe o que é chamado de
+transparência referencial de variáveis, i.e., todas as inevitáveis referências a variáveis
+são controladas pela linguagem de modo transparente ao programador, que pode se concentrar
+no problema que tem para resolver, em vez de ter que se preocupar com detalhes do modelo
+von Neumann de computação.  Resulta disso muito menos esforço dispendido em programação,
+mas também programas muito menos eficientes.
+------------------------------------------------
+Explique, em poucas palavras, o que é unificação e Backtracking.
+R: Unificação é quando o prolog consegue casar um fato e retornar verdadeiro.
+Backtracking é processo de busca de uma nova solução.
+
+    * Backtracking (ou retrocesso) : mecanismo usado pelo Prolog para encontrar
+    * fatos ou regras adicionais que satisfaçam um objetivo;
+------------------------------------------------
+Cite uma semelhança e uma diferença entre aspectos da pragmática
+de programação nos paradigmas Imperativista e Lógico-Matemático.
+Forneceça explicação para ambas.
+
+R: Uma diferença:
+Imperativista: Programas centrados no conceito de um estado (modelado por variáveis)
+e ações (comandos) que manipulam o estado. Algoritmo sequencial, baseado em dados e
+instrucoes. O programador mostra como resolver o problema no imperativista. No
+lógico, o programador formula uma base de fatos que resolve o problema. Em outras
+palavaras, no imperativista, o programador faz a ação e no lógico, não.	
+
+Lógico: Baseado em deduções e abstrações. Com um conjunto de fatos conhecidos e regras
+feitas por deduções, formula-se uma base de consultas.
+
+Uma semelhança:
+A programação em lógica usa artifícios da estrutura de chamadas procedurais para
+tornar o código mais eficiente e claro, assim como o modelo imperativista. 
+------------------------------------------------
+a) predicados
+predicados expressam relacoes entre termos e sempre resultam em um valor verdade
+
+b)	exemplo de um fato em prolog:
+pai(joa,jose).
+pegou(maria, ligeirinho, centro).
+
+c) exemplo de regra em prolog:
+tem_hepatite(X):-
+	tem_febre(X),
+	esta_amarelo(X).
+(se tem hepatite, tem febre & esta amarelo)
+------------------------------------------------
+fatos:
+homem(jose).
+homem(mario).
+homem(alberto).
+homem(fabricio).
+
+adicionando fatos:
+assertz(homem(rogerio)).
+
+listanto fatos:
+listing(homem).
+
+removendo fatos:
+retract(homem(jose)).
+
+removendo todos os fatos:
+retractall(homem(_)).
+
+se a adicao ou remocao funciona, a resposta sera yes.
+se nao, no.
+------------------------------------------------
+comopondo fatos:
+
+homem(joao).
+homem(jose).
+homem(mario).
+homem(alberto).
+homem(fabricio).
+homem(jonatas).
+homem(marcos).
+
+mulher(claudia).
+mulher(silvia).
+mulher(clara).
+mulher(maria).
+mulher(marcia).
+mulher(angela).
+
+pai(joao,jose).
+pai(joao,maria).
+mae(silvia,jose).
+mae(silvia,maria).
+pai(alberto,joao).
+pai(fabricio,alberto).
+pai(jonatas,fabricio).
+
+regra:
+
+irmao(X,Y):-
+	homem(X),
+	pai(Z,X),
+	pai(Z,Y),
+	mae(Z1,X),
+	mae(Z1,Y).
+
+Se for irmao, X deve ser homem, pai deve ser pai de X e Y e a mesma ideia para mae.	
+
+Se fizermos a chamada:
+irmao(jose,joao).
+A resposta sera nao, pois joao eh filho de alberto.
+
+Mas para a chamada:
+irmao(jose,maria).
+Sera Sim, pois ambos sao filhos de joao e de silvia.
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+------------------------------------------------
+Como copiar uma lista:
+copia([],[]).
+copia([L1|L2],[L1|L4]) :-
+	copia([L2],[L4]).
+------------------------------------------------
+Como multiplicar por 2 uma lista:
+dobra([],[])
+dobra([L1|L2],[L3|L4]) :-
+	L3 is L1*2,
+	dobra([L2],[L4]).
+------------------------------------------------
+(a) Explique porque:
+1+3 != 3+1
+
+R: Porque são sintaticamente diferentes.
+
+Como comparar semanticamente?
+1+3 =:= 3+1
+
+A comparação entre números é feita por:
+    '=:='/2: sucesso na igualdade entre números, falha caso contrário
+    '=\='/2: sucesso quandos os números são diferentes, falha caso contrário
+    '>'/2 (analogamente para '<', '=<', '>='): sucesso na comparação correta, falha caso
+contrário 
+------------------------------------------------
+Calcule o número de ocorrências de um elemento em uma lista.
+
+ocorrencias(X,[],0).
+
+ocorrencias(X,[X|L2],Z1) :-
+        ocorrencias(X,L2,Z2),
+        Z1 is Z2+1.
+
+ocorrencias(X,[L1|L2],Z1) :-
+        ocorrencias(X,L2,Z1).
+
+------------------------------------------------
+Procurar em uma lista todas as palavras que precedem uma determinada
+PALAVRA e criar uma sublista com elas.
+
+todasAntes(_,[],[]).
+todasAntes(X,[X|_],[]).
+todasAntes(X,[Y|L1],[Y|L2]) :-
+        todasAntes(X,L1,L2).
+------------------------------------------------
+Mesma coisa de (6), mas para as palavras sucessoras.
+todosDepois(_,[],[]).
+todasDepois(X,[X|L2],L2).
+todasDepois(X,[Y|L2],SUB) :-
+        todasDepois(X,L2,SUB).
+
+------------------------------------------------
+Algoritmo de inversao
+concatena([],L,L).
+concatena([X|R],L,[X|C]) :-
+	concatena(R,L,C).
+
+inverte([],[]).
+inverte([X|L],I) :-
+	inverte(L,LI),
+	concatena(LI,[X],I).
+------------------------------------------------
+

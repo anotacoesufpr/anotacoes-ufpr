@@ -1,0 +1,304 @@
+uses flavours;
+
+load elevadorgraf.p;
+
+vars chamadas, arvore, graf, andar_atual;
+
+    [] -> chamadas;
+    0 -> andar_atual;
+
+;;; Apenas para caracterizar acoes de usuarios do elevador:
+flavour movente;
+
+    ;;; Variaveis -> mesmo esquema da pessoa
+    ivars nome andar meu_elevador dentro=0;
+
+    defmethod chegae;
+        pr('Eu, '); pr(self<-nome); pr(', entrei na cabine.\n');
+        syssleep(100);
+    enddefmethod;
+
+    defmethod chama_elev;
+        pr('Eu, '); pr(self<-nome); pr(', chamei o elevador.\n');
+    enddefmethod;
+
+    defmethod saidaki;
+        pr('Eu, '); pr(self<-nome); pr(', sai da cabine.\n');
+        syssleep(100);
+    enddefmethod;
+
+    defmethod aperta;
+        pr('Eu, '); pr(self<-nome); pr(', apertei o botao para ir ao andar ');
+        pr(self<-andar); pr('.\n');
+    enddefmethod;
+
+    defmethod saia_do_predio;
+        [^nome ^andar 0 ^dentro] :: chamadas -> chamadas;
+        self <- chama_elev;
+    enddefmethod;
+
+endflavour;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Moradores:
+flavour pessoa isa movente;
+
+    defmethod vai_pra_casa;
+        [^nome 0 ^andar ^dentro] :: chamadas -> chamadas;
+        self <- chama_elev;
+    enddefmethod;
+
+endflavour;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Funcionarios:
+flavour funcionario isa movente;
+
+    defmethod limpe_o_andar(num);
+        [^nome 0 ^num ^dentro] :: chamadas -> chamadas;
+        self <- chama_elev;
+    enddefmethod;
+
+endflavour;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Elevadores:
+flavour elevador;
+
+    ivars nome, altura, andar;
+
+    defmethod construir;
+
+        vars i;
+
+        ;;; Criando os andares do predio:
+        if altura > 0 then
+            [0] -> arvore;
+            for i from 1 to altura do
+                ;;; Essa concatenacao gera uma lista com 2 elementos, um int e
+                ;;; uma lista de ints (estrutura recursiva);
+                [^i [^^arvore]] -> arvore;
+            endfor;
+        else
+            [] -> arvore;
+        endif;
+
+
+    enddefmethod;
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;; Movimentos do elevador ;;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    defmethod inicia;
+        pr('Eu, '); pr(self<-nome);
+        pr(', dei inicio ao atendimento de chamadas e requisicoes.\n');
+    enddefmethod;
+
+    defmethod finaliza;
+        pr('Eu, '); pr(self<-nome);
+        pr(', terminei de atender as requisicoes.\n');
+    enddefmethod;
+
+    defmethod abre_porta;
+        pr('Eu, ');pr(self<-nome);pr(', abri a porta.\n');
+    enddefmethod;
+
+    defmethod fecha_porta;
+        pr('Eu, ');pr(self<-nome);pr(', fechei a porta.\n');
+    enddefmethod;
+
+    defmethod para;
+        pr('Eu, ');pr(self<-nome);pr(', parei no andar ');
+        pr(andar_atual);pr(' e abri a porta.\n');
+    enddefmethod;
+
+    defmethod se_move(sentido);
+            pr('Eu, ');pr(self<-nome);pr(', deixei o andar ');
+            pr(andar_atual);pr(' e ');
+
+        if (sentido == 1) then
+            pr('subi.\n');
+        endif;
+
+        if (sentido == -1) then
+            pr('desci.\n');
+        endif;
+    enddefmethod;
+
+    defmethod passa_batido;
+        syssleep(33);
+        pr('Eu, '); pr(self<-nome);
+        pr(', passei direto pelo andar ');pr(andar_atual);
+
+        if sentido == 1 then
+            pr(' na subida.\n');
+        else
+            pr(' na descida.\n');
+        endif;
+    enddefmethod;
+
+    ;;;;;;;;;;;;;;;;;;;;;
+    ;;; /Movimentos ;;;;;
+    ;;;;;;;;;;;;;;;;;;;;;
+
+    defmethod atenda_chamadas_e_requisicoes;
+        vars sentido, parada, reqs;
+        lvars arvore_graf,andar_graf,i,lista;
+        lvars lista_ord=[];
+
+        self <- inicia;
+
+       ;;; Cria a hierarquia de andares
+       ['andar_0'] -> arvore_graf;
+       for i from 1 to altura do
+           'andar_' >< i -> andar_graf;
+           [ ^andar_graf  ^arvore_graf] -> arvore_graf;
+       endfor;
+
+       ;;; Pega as coordenadas dos andares
+       monta_lista_coord(arvore_graf) -> lista;
+
+       ;;; Ordena a lista com as coordenadas
+       for i from 0 to altura do
+           for item in lista do
+               consword('andar_' >< i) -> andar_graf;
+               if andar_graf == item(1) then
+                   [^^lista_ord ^item] -> lista_ord;
+               endif;
+           endfor;
+       endfor;
+
+       ;;; Desenha na tela
+       redesenha_arvore(arvore_graf);
+        while true then
+
+            ;;; Assume q o elevador esta descendo
+            -1 -> sentido;
+            0 -> parada;
+
+            for reqs in chamadas do
+
+                ;;; Elevador [-1] desce ou [1] sobe
+
+                ;;; Se alguem apertou para descer(pq esta em casa), ou
+                if (reqs(2) > andar_atual and reqs(4) == 0) or
+
+                   ;;; se alguem esta na cabine e quer ir para casa
+                   (reqs(4) == 1 and reqs(3) > andar_atual)
+                then
+                    ;;; Entao o elevador tem que subir para buscar
+                    1 -> sentido;
+
+                endif;
+
+                ;;; Elevador deve parar? [0] não, [1] sim
+                if
+                    ;;; Alguém precisa descer neste andar, ou
+                    (reqs(3) == andar_atual and reqs(4) = 1) or
+
+                    ;;; se alguém precisa entrar neste andar
+                    (reqs(2) == andar_atual and reqs(4) = 0)
+                then
+                    ;;; Entao o elevador tem q parar
+                    1 -> parada;
+                endif;
+
+                ;;;se_move(sentido);
+
+            endfor;
+
+            if parada == 1 then
+
+                ;;; Imprime a mensagem de parada:
+                lista_ord(andar_atual+1) -> lista;
+                video_reverso(lista(1),(lista(2))(1),(lista(2))(2),(lista(2))(3),(lista(2))(4));
+                self <- para;
+
+                ;;; Verifica quem sai e quem fica
+                for reqs in chamadas do
+
+                    ;;; Quem esta na cabine -> desce
+                    if reqs(3) = andar_atual and reqs(4) = 1 then
+                        valof(reqs(1)) <- saidaki;
+                        delete(reqs, chamadas) -> chamadas;
+                    endif;
+
+                    ;;; Nao tah na cabine, entao sobe
+                    if reqs(2) = andar_atual and reqs(4) = 0 then
+                        valof(reqs(1)) <- chegae;
+                        valof(reqs(1)) <- aperta;
+
+                        ;;; Coloca o cara na cabine:
+                        1 -> reqs(4);
+                    endif;
+
+                endfor;
+
+                if length(chamadas) = 0 then quitloop; endif;
+
+                self <- fecha_porta;
+                lista_ord(andar_atual+1) -> lista;
+                video_normal(lista(1),(lista(2))(1),(lista(2))(2),(lista(2))(3),(lista(2))(4));
+                self <- se_move(sentido);
+
+            else
+                lista_ord(andar_atual+1) -> lista;
+                video_reverso(lista(1),(lista(2))(1),(lista(2))(2),(lista(2))(3),(lista(2))(4));
+                self <- passa_batido;
+                lista_ord(andar_atual+1) -> lista;
+                video_normal(lista(1),(lista(2))(1),(lista(2))(2),(lista(2))(3),(lista(2))(4));
+            endif;
+
+            lista_ord(andar_atual+1) -> lista;
+            video_normal(lista(1),(lista(2))(1),(lista(2))(2),(lista(2))(3),(lista(2))(4));
+            if length(chamadas) = 0 then quitloop; endif;
+
+            ;;; Altera o sentido e o andar atual do elevador
+            andar_atual + sentido -> andar_atual;
+            if andar_atual < 0 then 0 -> andar_atual; endif;
+            if andar_atual > altura then altura -> andar_atual; endif;
+
+        endwhile;
+
+        self <- finaliza;
+
+    enddefmethod;
+
+endflavour;
+
+vars e1 p1 p2 p3 p4 f1 f2 f3;
+make_instance([ elevador nome e1 altura 8 andar 0 ]) -> e1;
+make_instance([ pessoa nome p1 andar 3 meu_elevador e1 ]) -> p1;
+make_instance([ pessoa nome p2 andar 3 meu_elevador e1 ]) -> p2;
+make_instance([ pessoa nome p3 andar 6 meu_elevador e1 ]) -> p3;
+make_instance([ pessoa nome p4 andar 7 meu_elevador e1 ]) -> p4;
+make_instance([ funcionario nome f1 andar 5 meu_elevador e1 ]) -> f1;
+make_instance([ funcionario nome f2 andar 4 meu_elevador e1 ]) -> f2;
+make_instance([ funcionario nome f3 andar 0 meu_elevador e1 ]) -> f3;
+p1 <- saia_do_predio;
+p2 <- vai_pra_casa;
+p3 <- saia_do_predio;
+p4 <- vai_pra_casa;
+f1 <- limpe_o_andar(7);
+f2 <- saia_do_predio;
+f3 <- limpe_o_andar(6);
+e1 <- atenda_chamadas_e_requisicoes;
+
+
+/* Segundo teste sugerido:
+vars e1 p1 p2 p3 p4 f1 ;
+make_instance([ elevador nome e1 altura 8 andar 5 ]) -> e1;
+make_instance([ pessoa nome p1 andar 3 meu_elevador e1 ]) -> p1;
+make_instance([ pessoa nome p2 andar 3 meu_elevador e1 ]) -> p2;
+make_instance([ pessoa nome p3 andar 3 meu_elevador e1 ]) -> p3;
+make_instance([ pessoa nome p4 andar 7 meu_elevador e1 ]) -> p4;
+make_instance([ funcionario nome f1 andar 4 meu_elevador e1 ]) -> f1;
+/*
+p1 <- saia_do_predio;
+p2 <- saia_do_predio;
+p3 <- saia_do_predio;
+p4 <- vai_pra_casa;
+f1 <- limpe_o_andar(7);
+e1 <- atenda_chamadas_e_requisicoes;
+*/

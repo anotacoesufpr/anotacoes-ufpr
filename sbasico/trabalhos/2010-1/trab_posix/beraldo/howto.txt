@@ -1,0 +1,67 @@
+Lista de arquivos modificados:
+
+	arch/x86/kernel/syscall_table_32.S
+	include/asm-generic/unistd.h
+	include/linux/syscalls.h
+	Makefile
+
+Arquivos/diretórios criados:
+
+	mysyscall -> diretório onde haverá o arquivo fonte, o header file e o akefile da implementação da syscall
+	mysyscall/mysyscall.c -> arquivo fonte da syscall
+	mysyscall/mMakefile -> arquivo para compilação da syscall;
+
+
+Modificação em syscall_table_32.S
+
+	Add a line to the end of this file (Let's assume that the name of our system call is mycall).
+	Add ".long sys_mycall" at the end of the list.
+
+
+
+Modificacem unistd.h
+
+	Adicionar a linha "#define __NR_mycall <Last_System_Call_Num + 1>" no fim do arquivo
+
+
+Modificacoes em syscalls.h
+
+	Adicionar no fim do arquivo o cabeçalho da syscall com asmlinkage no inicio da linha
+
+
+Modificações no Makefile
+
+	Adicionar na linha onde há "core-y +=" (653 no Makefile utilizado) o nome do diretório onde ficará o fonte da syscall (mysyscall, nesse caso)
+
+
+Ceriação do Diretório da syscall
+
+	Criar um diretório na raiz do kernel (/linux) com o nome da syscall (mysyscall, nesse caso)
+
+
+Criar msyscall.c
+
+	Fonte da syscall, incluindo o hearder file "linux/linkage.h"
+
+
+Criação do Makefile para a syscall
+
+	Em mysyscall, inserir um Makefile com este ocnteúdo:
+
+	obj-y := mysyscall.o 
+
+
+Gerar arquivos parateste
+
+Recompilar kernel
+
+
+
+
+Referencias:
+
+http://tldp.org/HOWTO/html_single/Implement-Sys-Call-Linux-2.6-i386/
+http://www.csee.umbc.edu/courses/undergraduate/CMSC421/fall02/burt/projects/howto_add_systemcall.html
+http://courses.cs.vt.edu/~cs3204/spring2004/Projects/2/InstructionsToAddSystemCallToLinux_rev00.pdf
+http://gerencievocemesmo.com.br/site/?p=281
+

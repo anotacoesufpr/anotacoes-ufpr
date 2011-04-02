@@ -1,0 +1,113 @@
+#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+
+# GRAFO ESCORPIAO:
+# Alunos:
+# Aramis S. H. Fernandes - ashf03 - GRR20034170
+# Edson R. L. Filho - erlf07 - GRR2007
+# Loirto A. dos Santos - las05 - GRR2005
+
+# Programa que recebe um arquivo da entrada padrao e retorna se o arquivo
+# contem a representacao matricial de um grafo escorpiao.
+
+# Um grafo escorpiao eh aquele que possui as seguintes caracteristicas:
+# - possui 1 vertice de grau = |V(G)| - 2
+# - o unico vertice que nao eh vizinho deste ultimo possui grau 1, e esta
+# ligado num verrtice de grau 2.
+
+# Para as chamadas de sistema:
+import sys
+
+# E as re's, q nao poderiam faltar:
+from re import *
+
+# Testando a passagem de parametros:
+if (len(sys.argv) != 2):
+	print "Passou errado os parametros"
+	sys.exit(1)
+
+# Se nao sair no teste acima, continua o programa
+try:
+	# Tentando abrir o arquivo:
+	MatAdj = open(sys.argv[1],'r')
+
+except:
+	print "%s: arquivo inacessivel." % sys.argv[1]
+	sys.exit(1)
+
+else:
+	# Transforma numa lista:
+	MatAdj = MatAdj.readlines()
+
+	# Se for um grafo com menos de 3 vertices, jah sai:
+	if (len(MatAdj) < 3):
+		print "0 - Nao eh escorpiao"
+		sys.exit(0)
+
+	# Testa se ha apenas 1 quebra de linha:
+	for i,j in enumerate(MatAdj):
+		# Quando ha +d1 '\n'
+		if (j.strip() == ''):
+			print "Representacao invalida do grafo.(linha vazia)"
+			sys.exit(1)
+
+		# Detectando vertice ligado a si mesmo:
+		elif (j[i] == "1"):
+			print "Representacao invalida do grafo.(vert em si mesmo)"
+			sys.exit(1)
+
+		# Detectando linha menor ou maior na matriz:
+		elif (len(j.strip()) != len(MatAdj)):
+			print "Representacao invalida do grafo.(matriz quad)"
+			sys.exit(1)
+
+		# Matriz de adjacencia composta APENAS por 0 e 1
+		elif search('[^01]+?',j.strip()):
+			print "Representacao invalida do grafo.(somente 0 e 1)"
+			sys.exit(1)
+
+		# Se estiver correto, elimina as quebras de linha
+		else:
+			MatAdj[i]=j.strip()
+
+	# Fim do for com enumerate, se o programa chegou neste ponto, entao
+	# a matriz de adjacencia eh valida.
+	print "Representacao OK"
+
+# Fim do try:
+
+# Arquivo aberto, matriz valida.
+# Agora eh preciso verificar se existe o cara de grau 2 e o de grau =
+# |V(G)|-2
+
+# Procuramos o grau = |V(G)-2| e o de grau = 2
+
+# Esse aqui eh int:
+grau_b = (len(MatAdj) - 2)
+
+#
+l_graus = [ i.count('1') for i in MatAdj]
+
+# Procura o cara com maior grau
+if not grau_b in l_graus:
+	print "0 - Nao eh escorpiao (grau tam-2)"
+	sys.exit(0)
+
+# Procura o cara de grau 2
+elif not 2 in l_graus:
+	print "0 - Nao eh escorpiao !(grau = 2)"
+	sys.exit(0)
+
+
+else:
+	# Deve ter no maximo 2 vertices com o grau tam-2 (tam = 3 e 4)
+	if (l_graus.count(grau_b) > 2):
+		print "0 - Mais d 1 cara com grau %d" % grau_b
+		sys.arq(0)
+
+	# index_b guarda o indice do vertice com grau = tam-2, e vertice_b guarda a
+	# linha do vertice:
+	index_b = l_graus.index(grau_b)
+	vertice_b = MatAdj[index_b]
+
+	print "Vertice b: %s" % vertice_b
